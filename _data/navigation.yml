@@ -12,6 +12,9 @@ main:
   - title: "Resources"
     url: /resources/
 
+  - title: "Store"
+    url: /store/
+
   - title: "Media"
     url: /media/
     

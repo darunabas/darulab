@@ -60,7 +60,8 @@ tags: []
 </style>
 <div class="tab">
   <button class="tablinks active" onclick="openTab(event, 'home')">Barnabas</button>
-  <button class="tablinks" onclick="openTab(event, 'tab1')">Rong</button>
+  <button class="tablinks" onclick="openTab(event, 'tab0')">Rong</button>
+  <button class="tablinks" onclick="openTab(event, 'tab1')">Jacqueline</button>
   <button class="tablinks" onclick="openTab(event, 'tab2')">Brena</button>
   <button class="tablinks" onclick="openTab(event, 'tab3')">Paul</button>
   <button class="tablinks" onclick="openTab(event, 'tab4')">Lauren</button>
@@ -83,10 +84,24 @@ tags: []
   </script>
 </div>
 
+<div id="tab0" class="tabcontent">
+  <script>
+    var xhr00 = new XMLHttpRequest();
+    var url00 = "/_pages/Rong.html";
+    xhr00.open("GET", url00, true);
+    xhr00.onreadystatechange = function() {
+      if (xhr00.readyState === 4 && xhr00.status === 200) {
+        document.getElementById("tab0").innerHTML = xhr00.responseText;
+      }
+    };
+    xhr00.send();
+  </script>
+</div>
+
 <div id="tab1" class="tabcontent">
   <script>
     var xhr0 = new XMLHttpRequest();
-    var url0 = "/_pages/Rong.html";
+    var url0 = "/_pages/Jacqueline.html";
     xhr0.open("GET", url0, true);
     xhr0.onreadystatechange = function() {
       if (xhr0.readyState === 4 && xhr0.status === 200) {
