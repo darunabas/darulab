@@ -2,4 +2,9 @@
 
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
+{% if jekyll.environment == "development" %}
+<!-- local preview only: Google Photos blocks images requested from a localhost page -->
+<meta name="referrer" content="no-referrer">
+{% endif %}
+
 <!-- end custom head snippets -->

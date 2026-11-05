@@ -1,30 +1,34 @@
 images: 
-  - image: /assets/images/stanford1.png
-    link: https://www.stanford.edu/
-    slide_title: "Stanford campus"
+  - image: /assets/images/slide_science_2026.jpg
+    link: https://doi.org/10.1126/science.adv6172
+    slide_title: "Global patterns of plant diversity"
+    slide_text: "Daru, Nichodemus & Henao-Diaz 2026, <em>Science</em>"
+  - image: /assets/images/slide_gross_2026.jpg
+    link: https://doi.org/10.1038/s41467-026-73236-4
+    slide_title: "Diet specialization in butterfly caterpillars"
+    slide_text: "Gross, Kawahara & Daru 2026, <em>Nature Communications</em> · Photo: Ivar Leidus, CC BY-SA 4.0 (mirrored)"
+  - image: /assets/images/slide_markley_2026.jpg
+    link: https://doi.org/10.1111/jbi.70198
+    slide_title: "Arctic plants since the last ice age"
+    slide_text: "Markley & Daru 2026, <em>Journal of Biogeography</em>"
+  - image: /assets/images/slide_puleo_2026.jpg
+    link: https://doi.org/10.1016/j.tree.2026.05.012
+    slide_title: "Herbaria and pollination under global change"
+    slide_text: "Puleo, Fukami & Daru 2026, <em>Trends in Ecology & Evolution</em>"
+  - image: /assets/images/slide_kesler_2026.jpg
+    link: https://doi.org/10.64898/2026.01.09.697399
+    slide_title: "Origins of modern marine biodiversity"
+    slide_text: "Kesler, Gross & Daru 2026, bioRxiv preprint"
+  - image: /assets/images/slide_liu_2025.jpg
+    link: https://doi.org/10.64898/2025.12.16.693042
+    slide_title: "Mapping biogeographic transition zones"
+    slide_text: "Liu, Gross & Daru 2025, bioRxiv preprint"
+  - image: /assets/images/slide_benzecry_2024.jpg
+    link: https://doi.org/10.1038/s41467-024-53860-8
+    slide_title: "The future of floristic regions"
+    slide_text: "Minev-Benzecry & Daru 2024, <em>Nature Communications</em>"
   - image: https://lh3.googleusercontent.com/pw/AIL4fc-pAUgcOQxb3e1xR74lRCyFcl5nYmozEXN2D5ImV2mFlIEW2QrvnIT_-XLkgBHAJCmCZeEUuV9vi8mWlrgY_67tRkyGPI5b5Na46XtU_G3qxfONzfLgyIN6J_LIxOwuKfXsebiQRp1fLmM4sT3-KVnGgw=w2940-h672-s-no?authuser=0
     link: https://doi.org/10.1038/s41559-023-02047-3
-  - image: /assets/images/header.JPG
-    link: https://www.stanford.edu/
-    slide_text: "doi:10.1111/jbi.12619"
-    slide_title: "Miombo woodland biome"
-  - image: /assets/images/stanford2.png
-    link: https://www.stanford.edu/
-  - image: /assets/images/Seagrass.png
-    link: https://doi.org/10.1038/s41477-023-01445-6
-    slide_text: "doi:10.1038/s41477-023-01445-6"
-    slide_title: "Seagrasses and climate change"
-  - image: /assets/images/Fynbos.JPG
-    link: https://www.stanford.edu/
-    slide_text: "doi:10.1111/jbi.12619"
-    slide_title: "Fynbos, Cape Floristic Region"
-  - image: /assets/images/protea.png
-    link: https://doi.org/10.1002/aps3.1232
-    slide_text: "doi:10.1002/aps3.1232"
-    slide_title: "Protea flowering phenology"
-  - image: /assets/images/stanford3.png
-    link: https://www.stanford.edu/
-    slide_title: "Stanford Main Quad"
   - image: /assets/images/alaska2.png
     slide_title: "Point Barrow `Nuvuk`, Alaska"
   - image: /assets/images/homogenize.png

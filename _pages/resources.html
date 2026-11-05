@@ -62,6 +62,7 @@ tags: []
   <button class="tablinks active" onclick="openTab(event, 'home')">Surface sterlization</button>
   <button class="tablinks" onclick="openTab(event, 'tab1')">Sherlock HPC</button>
   <button class="tablinks" onclick="openTab(event, 'tab2')">GPS</button>
+  <button class="tablinks" onclick="openTab(event, 'tab3')">phyloregion R package</button>
 </div>
 
 <div id="home" class="tabcontent" style="display:block;">
@@ -103,6 +104,20 @@ tags: []
       }
     };
     xhr2.send();
+  </script>
+</div>
+
+<div id="tab3" class="tabcontent">
+  <script>
+    var xhr3 = new XMLHttpRequest();
+    var url3 = "/_pages/phyloregion_resource.html";
+    xhr3.open("GET", url3, true);
+    xhr3.onreadystatechange = function() {
+      if (xhr3.readyState === 4 && xhr3.status === 200) {
+        document.getElementById("tab3").innerHTML = xhr3.responseText;
+      }
+    };
+    xhr3.send();
   </script>
 </div>
 
