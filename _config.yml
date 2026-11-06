@@ -13,12 +13,12 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "D a r u&nbsp;&nbsp;L a b <br>Stanford University"
+title: "Daru Lab, Stanford University"
 repository: darunabas/darunabas.github.io
 email:
 description:
 url: https://darulab.org/
-twitter_username: Barnabas Daru
+twitter_username: Barnabas_Daru
 github_username: darunabas
 minimal_mistakes_skin: dark
 search: # true
@@ -47,14 +47,15 @@ social:
   name                   : # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
    - "https://github.com/darunabas"
-   - "https://twitter.com/Barnabas_Daru"
+   - "https://x.com/Barnabas_Daru"
 
 
 # Analytics
 analytics:
-  provider               : "google-universal" # false (default), "google", "google-universal", "custom"
+  provider               : false # set to "google-gtag" once tracking_id below holds the GA4 Measurement ID (G-XXXXXXXXXX)
   google:
-    tracking_id          : "202522270"
+    tracking_id          : "" # GA4 property 202522270: Admin > Data streams > Web > Measurement ID
+    anonymize_ip         : true
 
 # Google AdSense
 google_ad_client         :

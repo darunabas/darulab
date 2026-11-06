@@ -74,3 +74,39 @@ a {
 @import "minimal-mistakes"; // main partials
 //.greedy-nav a { color: #8C1515; }
 .masthead_menu { color: #8C1515; }
+
+/* Header lockup: "Daru Lab" sized to the exact width of "Stanford University" (fine-tuned by a script in masthead.html) */
+.site-title .st-wrap { display: inline-flex !important; flex-direction: column; align-items: flex-start; width: auto !important; font-size: 0.85em !important; line-height: 1 !important; margin: 0 !important; }
+.site-title .st-wrap span { line-height: 1 !important; margin: 0 !important; width: auto !important; display: block !important; white-space: nowrap; }
+.site-title .st-lab { font-size: 2.09em !important; letter-spacing: 0; }
+.site-title .st-uni { font-size: 1em !important; }
+
+/* Round "song inspired by this paper" icon next to PDF buttons (Publications, Projects) */
+.pub-song { display:inline-block !important; width:2.3em; height:2.3em; line-height:2.3em !important; padding:0 !important; text-align:center; border-radius:50% !important; }
+
+/* Sidebar links: icons only, on one row */
+.author__urls.social-icons { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; row-gap: 8px; }
+.author__urls.social-icons li { margin: 0; padding: 0; }
+.author__urls.social-icons li a { display: inline-flex; align-items: center; padding: 0; font-size: 1.5em; }
+.author__urls.social-icons .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.author__urls.social-icons i.fa-fw { width: auto; margin: 0; }
+.author__urls .author__icon-img { height: 1.15em; width: auto; display: block; }
+.author__urls.social-icons li.author__project { flex-basis: 100%; }
+.author__urls.social-icons li.author__project:first-of-type, .author__urls.social-icons li.author__project { margin-top: 2px; }
+.author__urls.social-icons li.author__project a { font-size: 1em; gap: 6px; }
+.author__urls.social-icons li.author__project .label { margin: 0 !important; padding: 0 !important; }
+.author__urls.social-icons li.author__project .label { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+.author__urls.social-icons li.author__project .author__icon-img { width: 1.4em; height: 1.4em; object-fit: contain; }
+
+/* Small screens: show the sidebar links inline under the lab name (no "Follow" pop-up) */
+@media (max-width: 1023px) {
+  .author__urls-wrapper > .btn { display: none !important; }
+  .author__urls-wrapper { display: block; width: 100%; margin-top: 8px; }
+  .author__urls.social-icons { display: flex !important; position: static; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+  .author__urls.social-icons:before, .author__urls.social-icons:after { display: none !important; }
+  .author__urls.social-icons li.author__project { flex-basis: auto; margin-top: 0; }
+}
+
+
+/* GreenMaps logo: white ring with a thin outline, as on greenmaps.net */
+.author__urls .author__icon-img[src*="greenmaps-icon"] { border-radius: 50%; box-shadow: 0 0 0 2px #fff, 0 0 0 3px #d9dcd6; }

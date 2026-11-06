@@ -8,7 +8,8 @@
           <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt="{{ site.masthead_title | default: site.title }}"></a>
         {% endunless %}
         <a class="site-title" href="{{ '/' | relative_url }}">
-          {{ site.masthead_title | default: site.title }}
+          <span class="st-wrap" aria-hidden="true"><span class="st-lab">Daru Lab</span><span class="st-uni">Stanford University</span></span><span class="visually-hidden">Daru Lab, Stanford University</span>
+          <script>(function(){function fit(){var l=document.querySelector('.st-lab'),u=document.querySelector('.st-uni');if(!l||!u)return;l.style.removeProperty('font-size');var w=l.getBoundingClientRect().width,r=u.getBoundingClientRect().width/w;if(w&&isFinite(r))l.style.setProperty('font-size',(parseFloat(getComputedStyle(l).fontSize)*r)+'px','important');}if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);window.addEventListener('load',fit);window.addEventListener('resize',fit);fit();})();</script>
           {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
         </a>
         <ul class="visible-links">

@@ -6,7 +6,7 @@
 <ul>
     <li>Individual and Group Scratch Space: You have access to 100TB of scratch space for storing temporary data. Please note that files on SCRATCH and GROUP_SCRATCH are automatically purged 90 days after their last content modification. So, make sure to move your data before that time to avoid loss.</li>
     <li>Home Directory: Each lab member has 15GB of space in their home directory.</li>
-    <li>GROUP_HOME: This is a shared resource with 1.0TB of space. Before using GROUP_HOME, please contact me for approval.</li>
+    <li>GROUP_HOME: This is a shared resource with 1.0TB of space. Before using GROUP_HOME, please contact Barnabas for approval.</li>
     <li>Partitions: The partitions available to Daru lab members are the "normal" and "hns" partitions. Each partition has a maximum walltime of 2 days for running jobs.</li>
 </ul>
 
@@ -27,21 +27,24 @@ ssh &lt;user&gt;@login.sherlock.stanford.edu
     <p>On Sherlock, you can access several partitions, but the ones commonly used in the Daru lab are the "hns" and "normal" partitions. Use your user-specific scratch directory to run your jobs. This is also where you can temporarily store large data files, but remember that files on SCRATCH and GROUP_SCRATCH are automatically purged 90 days after their last content modification.</p>
     <p>To transfer files from your local computer to the cluster, you can use <code>sftp</code>, or you can download data directly on the cluster if it is hosted online somewhere.</p>
     <pre><code># On your local computer
-# Transfer files or dirs from your local computer to the scratch space
+# Transfer files or dirs from your local computer to your scratch directory
 sftp &lt;user&gt;@dtn.sherlock.stanford.edu
+cd /scratch/users/&lt;user&gt;
 put /pathtofile/on/your/computer/file.csv
     </code></pre>
 
     <h4>Submit Jobs to the Cluster Using SLURM</h4>
-    <p>The Sherlock cluster uses the SLURM job submission system to manage shared resources on the cluster. When you log in, you will start at the "head" node, which is like a waiting area. Remember not to run any jobs on this node. Instead, you can submit your jobs via SCRATCH using a "job script" to reserve resources for your job and send it to run on a "compute node".</p>
+    <p>The Sherlock cluster uses the SLURM job submission system to manage shared resources on the cluster. When you log in, you will start on a "login" (head) node, which is like a waiting area. Remember not to run any jobs on this node. Instead, you can submit your jobs via SCRATCH using a "job script" to reserve resources for your job and send it to run on a "compute node".</p>
     <p>To keep things organized, create a directory called "Batch" for your job submissions. This way, you can easily keep track of your tasks.</p>
-    <pre><code># In the SCRATCH node
-mkdir ~/Batch{1..10}
+    <pre><code># On a login node, in your scratch directory
+cd $SCRATCH
+mkdir Batch{1..10}
     </code></pre>
 
     <h4>Example Job Submission</h4>
     <p>The bash script below tells the scheduler the resources we need, which partition to use ("hns"), and how the job and output files should be named. The command below reserves 16 cores and executes the <code>R CMD BATCH</code> command to run the R script <code>calibration.R</code> in the Batch* folder. The file is named <code>script.sbatch</code> and is placed one directory outside where the R scripts are located in the "Batch/" directory.</p>
-    <pre><code># Open file with vi text editor on the head node
+    <pre><code># On a login node, in your scratch directory
+cd $SCRATCH
 vi script.sbatch
     </code></pre>
     <pre><code>#!/usr/bin/bash
@@ -56,11 +59,12 @@ cd ${1}
 R CMD BATCH --no-save --no-restore calibration.R output.out
     </code></pre>
     <p>Submit the job to the scheduling queue.</p>
-    <pre><code># On the scratch node
+    <pre><code># On a login node, from your scratch directory
+cd $SCRATCH
 for DIR in Batch*; do sbatch script.sbatch $DIR; done
     </code></pre>
     <p>Check whether it has started yet.</p>
-    <pre><code># On the scratch node
+    <pre><code># On a login node
 sacct
     </code></pre>
 
@@ -69,6 +73,4 @@ sacct
     <p>To request a 30-minute interactive session, use the following command:</p>
     <pre><code>sdev</code></pre>
     <p>This will allow you to start a quick and interactive session on the Sherlock cluster for shorter tasks or testing purposes.</p>
-</body>
-</html>
 

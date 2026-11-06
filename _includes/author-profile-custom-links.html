@@ -16,16 +16,28 @@
 
 {% if author.googlescholar %}
 <li>
-  <a target="_blank" rel="noopener noreferrer" href="https://scholar.google.com/citations?user={{ author.googlescholar }}">
-    <i class="ai ai-google-scholar fa-fw" aria-hidden="true"></i> Google Scholar
+  <a target="_blank" rel="noopener noreferrer" href="https://scholar.google.com/citations?user={{ author.googlescholar }}" title="Google Scholar">
+    <i class="fab fa-fw fa-google-scholar" aria-hidden="true"></i><span class="label">Google Scholar</span>
   </a>
 </li>
 {% endif %}
 
 {% if author.orcid %}
 <li>
-  <a target="_blank" rel="noopener noreferrer" href="https://orcid.org/{{ author.orcid }}">
-    <i class="ai ai-orcid fa-fw" aria-hidden="true"></i> ORCiD
+  <a target="_blank" rel="noopener noreferrer" href="https://orcid.org/{{ author.orcid }}" title="ORCiD">
+    <i class="fab fa-fw fa-orcid" aria-hidden="true"></i><span class="label">ORCiD</span>
   </a>
 </li>
 {% endif %}
+
+<li class="author__project">
+  <a target="_blank" rel="noopener" href="https://greenmaps.net" title="GreenMaps: predicted native ranges of the world's plants">
+    <img class="author__icon-img" src="/assets/images/greenmaps-icon.png" alt="" aria-hidden="true"><span class="label">GreenMaps</span>
+  </a>
+</li>
+
+<li class="author__project">
+  <a target="_blank" rel="noopener" href="https://phyloregion.com" title="phyloregion R package">
+    <img class="author__icon-img" src="/assets/images/phyloregion-icon.png" alt="" aria-hidden="true"><span class="label">phyloregion</span>
+  </a>
+</li>

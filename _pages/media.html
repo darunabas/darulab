@@ -178,7 +178,6 @@ tags: []
   <button class="tablinks active" onclick="openTab(event, 'home')">News Articles</button>
   <button class="tablinks" onclick="openTab(event, 'tab1')">Photos</button>
   <button class="tablinks" onclick="openTab(event, 'tab2')">Videos</button>
-  <button class="tablinks" onclick="openTab(event, 'tab3')">Podcast</button>
   <button class="tablinks" onclick="openTab(event, 'tab4')">Music</button>
 </div>
 <div id="home" class="tabcontent" style="display:block;">
@@ -446,20 +445,6 @@ tags: []
       }
     };
     xhr2.send();
-  </script>
-</div>
-
-<div id="tab3" class="tabcontent">
-  <script>
-    var xhr3 = new XMLHttpRequest();
-    var url3 = "/_pages/Podcast.html";
-    xhr3.open("GET", url3, true);
-    xhr3.onreadystatechange = function() {
-      if (xhr3.readyState === 4 && xhr3.status === 200) {
-        document.getElementById("tab3").innerHTML = xhr3.responseText;
-      }
-    };
-    xhr3.send();
   </script>
 </div>
 

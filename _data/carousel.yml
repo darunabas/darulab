@@ -18,20 +18,22 @@ images:
   - image: /assets/images/slide_kesler_2026.jpg
     link: https://doi.org/10.64898/2026.01.09.697399
     slide_title: "Origins of modern marine biodiversity"
-    slide_text: "Kesler, Gross & Daru 2026, bioRxiv preprint"
+    slide_text: "Kesler, Gross & Daru 2026, <em>bioRxiv</em> preprint"
   - image: /assets/images/slide_liu_2025.jpg
     link: https://doi.org/10.64898/2025.12.16.693042
     slide_title: "Mapping biogeographic transition zones"
-    slide_text: "Liu, Gross & Daru 2025, bioRxiv preprint"
+    slide_text: "Liu, Gross & Daru 2025, <em>bioRxiv</em> preprint"
   - image: /assets/images/slide_benzecry_2024.jpg
     link: https://doi.org/10.1038/s41467-024-53860-8
     slide_title: "The future of floristic regions"
     slide_text: "Minev-Benzecry & Daru 2024, <em>Nature Communications</em>"
   - image: https://lh3.googleusercontent.com/pw/AIL4fc-pAUgcOQxb3e1xR74lRCyFcl5nYmozEXN2D5ImV2mFlIEW2QrvnIT_-XLkgBHAJCmCZeEUuV9vi8mWlrgY_67tRkyGPI5b5Na46XtU_G3qxfONzfLgyIN6J_LIxOwuKfXsebiQRp1fLmM4sT3-KVnGgw=w2940-h672-s-no?authuser=0
     link: https://doi.org/10.1038/s41559-023-02047-3
+    slide_title: "Unvouchered records miss global biodiversity patterns"
+    slide_text: "Daru & Rodriguez 2023, <em>Nature Ecology &amp; Evolution</em>"
   - image: /assets/images/alaska2.png
-    slide_title: "Point Barrow `Nuvuk`, Alaska"
+    slide_title: "Point Barrow (Nuvuk), Alaska"
   - image: /assets/images/homogenize.png
     link: https://doi.org/10.1038/s41467-021-27186-8
-    slide_text: "doi:10.1038/s41467-021-27186-8"
+    slide_text: "Daru et al. 2021, <em>Nature Communications</em>"
     slide_title: "Homogenization of plant communities"
