@@ -52,9 +52,9 @@ social:
 
 # Analytics
 analytics:
-  provider               : false # set to "google-gtag" once tracking_id below holds the GA4 Measurement ID (G-XXXXXXXXXX)
+  provider               : "google-gtag"
   google:
-    tracking_id          : "" # GA4 property 202522270: Admin > Data streams > Web > Measurement ID
+    tracking_id          : "G-XZ54GQJJXW" # GA4 property 202522270
     anonymize_ip         : true
 
 # Google AdSense
