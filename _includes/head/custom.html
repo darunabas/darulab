@@ -7,4 +7,18 @@
 <meta name="referrer" content="no-referrer">
 {% endif %}
 
+<script>
+/* Fluid motion guard (see assets/js/fluid.js): hide reveal targets only when JS runs,
+   IntersectionObserver exists and motion is allowed; show everything again if fluid.js never loads. */
+(function (r) {
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!still && 'IntersectionObserver' in window) {
+    r.classList.add('fluid-motion');
+    setTimeout(function () { if (!window.__fluidReady) r.classList.remove('fluid-motion'); }, 3000);
+  }
+  /* Page dissolve: skip the theme's intro fade when a view transition is already fading the page in */
+  window.addEventListener('pagereveal', function (e) { if (e.viewTransition) r.classList.add('vt-nav'); });
+})(document.documentElement);
+</script>
+
 <!-- end custom head snippets -->

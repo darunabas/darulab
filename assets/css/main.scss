@@ -110,3 +110,208 @@ a {
 
 /* GreenMaps logo: white ring with a thin outline, as on greenmaps.net */
 .author__urls .author__icon-img[src*="greenmaps-icon"] { border-radius: 50%; box-shadow: 0 0 0 2px #fff, 0 0 0 3px #d9dcd6; }
+
+
+/* =========================================================================
+   Fluid "dissolve" layer (site-wide). Behavior: assets/js/fluid.js;
+   early guard + page-reveal hook: _includes/head/custom.html.
+   Every motion is an opacity crossfade; hovers only fade color, border or shadow.
+   ========================================================================== */
+
+:root { --fluid-accent: #8C1515; --fluid-line: rgba(46,45,41,.12); }
+
+@keyframes fluid-fade-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fluid-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+/* Dissolve between pages (cross-document View Transitions; no effect where unsupported) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: fluid-fade-out .3s ease both; }
+::view-transition-new(root) { animation: fluid-fade-in .3s ease both; }
+/* The masthead is the same on every page: give it its own layer so it holds steady while the page dissolves */
+.masthead { view-transition-name: fluid-masthead; }
+::view-transition-group(fluid-masthead) { animation-duration: 0s; }
+::view-transition-old(fluid-masthead) { display: none; }
+::view-transition-new(fluid-masthead) { animation: none; }
+/* The theme's own intro fade would double up with the dissolve, so skip it on those navigations */
+.vt-nav .masthead, .vt-nav #main, .vt-nav .page__hero, .vt-nav .page__hero--overlay,
+.vt-nav .page__footer, .vt-nav .breadcrumbs { -webkit-animation: none; animation: none; }
+
+/* Scroll reveal: hidden only while html.fluid-motion is set (JS on + motion allowed) */
+.fluid-motion [data-reveal]:not(.is-in),
+.fluid-motion [data-reveal-children] > :not(.is-in):not(.tab):not([data-filter-bar]):not(.fluid-sentinel) { opacity: 0; }
+.fluid-motion [data-reveal].is-in:not(.is-settled),
+.fluid-motion [data-reveal-children] > .is-in:not(.is-settled) { opacity: 1; transition: opacity .6s ease; }
+
+/* Filter and tab crossfade (JS toggles these on the panels) */
+.fluid-fade { transition: opacity .2s ease; }
+.fluid-fade:not(.fluid-out) { transition-duration: .3s; }
+.fluid-out { opacity: 0 !important; }
+
+/* Sticky filter bars and tab rows, just under the fixed masthead */
+.fluid-sentinel { height: 0; }
+[data-filter-bar], .page__content .tab { position: -webkit-sticky; position: sticky; top: var(--fluid-sticky-top, 160px); z-index: 15; transition: box-shadow .3s ease; }
+[data-filter-bar].is-stuck, .page__content .tab.is-stuck { box-shadow: 0 8px 14px -12px rgba(46,45,41,.45); }
+/* Same tint as before, made opaque so content doesn't show through while stuck */
+.page__content .tab { background-color: #f5dede; }
+.page__content .tab button { transition: background-color .3s ease, color .3s ease; }
+.page__content .tab button:hover:not(.active) { background-color: rgba(140,21,21,.14); }
+.page__content .tab button:focus-visible { outline: 2px solid var(--fluid-accent); outline-offset: -3px; }
+
+/* Phones: tab rows and filter bars become one swipeable row */
+@media (max-width: 47.99em) {
+  html [data-filter-bar], .page__content .tab { display: flex; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  [data-filter-bar]::-webkit-scrollbar, .page__content .tab::-webkit-scrollbar { display: none; }
+  [data-filter-bar] { -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+                              mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%); padding-left: 6px; padding-right: 6px; }
+  [data-filter-bar] > *, .page__content .tab button { float: none; flex: 0 0 auto; white-space: nowrap; }
+}
+
+/* Media photos: a soft fade on hover instead of the zoom */
+.page__content .collage-item img, .page__content .thumbnail-img { transition: opacity .3s ease; }
+.page__content .collage-item:hover img, .page__content .thumbnail-img:hover { transform: none; opacity: .85; }
+.lightbox[style*="flex"] { animation: fluid-fade-in .25s ease both; }
+
+/* ---- Publications ---- */
+.pub-year-nav { display: flex; flex-wrap: wrap; gap: 6px; margin: 1em 0 1.5em; padding: 8px 0; background: rgba(255,255,255,.94); }
+@supports ((-webkit-backdrop-filter: blur(6px)) or (backdrop-filter: blur(6px))) {
+  .pub-year-nav { background: rgba(255,255,255,.82); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+}
+.pub-year-btn { border: 1.5px solid var(--fluid-accent); background: #fff; color: var(--fluid-accent); border-radius: 16px; padding: 3px 12px; font-size: .85em; cursor: pointer;
+  transition: background-color .3s ease, color .3s ease; }
+.pub-year-btn span { opacity: .7; font-size: .85em; }
+.pub-year-btn:hover { background: rgba(140,21,21,.1); }
+.pub-year-btn.active, .pub-year-btn.active:hover { background: var(--fluid-accent); color: #fff; }
+.pub-year-btn:focus-visible { outline: 2px solid var(--fluid-accent); outline-offset: 2px; }
+.pub-year { scroll-margin-top: calc(var(--fluid-sticky-top, 160px) + var(--fluid-bar-h, 48px) + 12px); }
+
+/* Light card per paper; hover fades the border and shadow in */
+.pub-year > p { position: relative; margin: 0 0 .9em; padding: .85em 1.1em; border: 1px solid var(--fluid-line); border-radius: 10px; background: #fff;
+  transition: box-shadow .3s ease, border-color .3s ease; }
+.pub-year > p:hover, .pub-year > p:focus-within { z-index: 2; border-color: rgba(140,21,21,.35); box-shadow: 0 10px 24px -14px rgba(46,45,41,.35); }
+/* Paper titles: the underline fades in (overrides the inline "text-decoration: none") */
+.pub-year > p > a { text-decoration: underline !important; text-decoration-color: transparent !important; text-decoration-thickness: 1.5px; text-underline-offset: 3px;
+  transition: text-decoration-color .3s ease, color .3s ease; }
+.pub-year > p > a:hover, .pub-year > p > a:focus-visible { text-decoration-color: var(--fluid-accent) !important; color: var(--fluid-accent) !important; }
+.pub-year > p > a:focus-visible { outline: 2px solid var(--fluid-accent); outline-offset: 2px; border-radius: 2px; }
+/* PDF and song buttons: a soft glow, no movement */
+.pub-year .btn { transition: box-shadow .3s ease, filter .3s ease; }
+.pub-year .btn:hover, .pub-year .btn:focus-visible { box-shadow: 0 6px 14px -6px rgba(140,21,21,.7); filter: brightness(1.1); }
+.pub-year .btn:focus-visible { outline: 2px solid var(--fluid-accent); outline-offset: 2px; }
+
+/* Reduced motion: no transitions, nothing hidden, no page dissolve */
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+  .fluid-motion [data-reveal], .fluid-motion [data-reveal-children] > * { opacity: 1 !important; }
+  .fluid-fade, .fluid-out, [data-filter-bar], [data-filter-bar] *, .page__content .tab, .page__content .tab *,
+  .pub-year, .pub-year *, .page__content .collage-item img, .lightbox { transition: none !important; animation: none !important; }
+  .fluid-out { opacity: 1 !important; }
+}
+@media print {
+  [data-filter-bar] { display: none; }
+  .fluid-motion [data-reveal], .fluid-motion [data-reveal-children] > * { opacity: 1 !important; }
+  .pub-year > p { border: 0; padding: 0; box-shadow: none; }
+}
+
+/* ---- Binder (index-divider) tabs: shared component ----
+   Used by every page with openTab() tabs (People, Projects, Media, Resources): add class "tab--binder"
+   to the .tab row; assets/js/fluid.js does the rest (labels, ARIA, layout). One row spans the card:
+   each tab has its full label (--full, measured) and a body (--w) that slides under its right-hand
+   neighbor, so only --exposed of it peeks out. The selected tab is exposed by its whole label; the
+   others share the remaining width evenly. Tabs to the right sit on top (z-index from --z). The
+   selected tab keeps its place and shape, turns white and fuses with the card. The tab silhouette is
+   a ::before trapezoid (perspective tilt), so borders and the seam shadow survive (clip-path would
+   cut them off). */
+.page__content .tab--binder {
+  --binder-line: rgba(140, 21, 21, .8);
+  --binder-tuck: 10px;
+  display: flex; flex-wrap: nowrap; align-items: flex-end; overflow: visible;
+  /* inset so the first and last tabs (slant and shadow included) stand on the card top line */
+  padding: 10px 10px 0 10px; background: #fff; border-radius: 0;
+  box-shadow: inset 0 -2px 0 var(--binder-line);
+}
+.page__content .tab--binder.is-stuck { box-shadow: inset 0 -2px 0 var(--binder-line), 0 8px 14px -12px rgba(46,45,41,.45); }
+.page__content .tab--binder .tablinks {
+  --tint: #f4dcdc;
+  position: relative; z-index: var(--z, 1); float: none; flex: 0 0 auto; box-sizing: border-box;
+  width: var(--w, auto);
+  margin: 0 calc(var(--exposed, 3em) - var(--w, 0px)) 2px 0;
+  padding: 8px 10px 6px var(--binder-pad-l, 11px); overflow: visible; white-space: nowrap; text-align: left;
+  background: transparent; color: #2E2D29; border: 0; border-radius: 0; box-shadow: none;
+  transition: width .35s ease, margin .35s ease, padding .35s ease, color .3s ease;
+}
+/* label wrapper (added by fluid.js): clips the text, never ellipsizes, without clipping the tab shadow */
+.page__content .tab--binder .binder-label { display: block; overflow: hidden; text-overflow: clip; white-space: nowrap; }
+.page__content .tab--binder .tablinks::before {
+  content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 0; bottom: 0;
+  background: var(--tint);
+  border: 1.5px solid rgba(140, 21, 21, .5); border-bottom: 0; border-radius: 9px 9px 0 0;
+  /* seam shadow cast onto the tab beneath, plus a light top-left edge highlight */
+  box-shadow: -6px 0 8px -5px rgba(46, 45, 41, .35), inset 1px 1px 0 rgba(255, 255, 255, .75);
+  -webkit-transform: perspective(70px) rotateX(9deg); transform: perspective(70px) rotateX(9deg);
+  -webkit-transform-origin: 50% 100%; transform-origin: 50% 100%;
+  transition: background-color .3s ease, border-color .3s ease;
+}
+.page__content .tab--binder .tablinks:nth-child(3n+2) { --tint: #f1d5d5; }
+.page__content .tab--binder .tablinks:nth-child(3n+3) { --tint: #f6e2e2; }
+.page__content .tab--binder .tablinks:first-child::before { box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .75); }
+.page__content .tab--binder .tablinks:hover:not(.active) { background: transparent; } /* no box from the generic tab hover */
+.page__content .tab--binder .tablinks:hover:not(.active)::before { background-color: #ecc5c5; }
+/* Selected tab: same baseline, size and silhouette as the others; it comes forward by color only and
+   keeps its place in the cascade (still tucked under its right-hand neighbor). ::after fuses it with
+   the card: it hides the card's top line under the exposed part of the tab and draws a small concave
+   fillet where the tab's left side meets that line, so tab and card read as one outline. */
+.page__content .tab--binder .tablinks.active,
+.page__content .tab--binder .tablinks.active:hover {
+  color: var(--fluid-accent); background: transparent; padding-bottom: 7px;
+  -webkit-animation: fluid-binder-front .3s ease both; animation: fluid-binder-front .3s ease both;
+}
+.page__content .tab--binder .tablinks.active::before {
+  background: #fff; border: 2px solid var(--binder-line); border-bottom: 0;
+  box-shadow: -6px 0 9px -5px rgba(46, 45, 41, .35), inset 1px 1px 0 rgba(255, 255, 255, .75);
+}
+.page__content .tab--binder .tablinks.active::after {
+  --r: 5px;
+  content: ""; position: absolute; z-index: -1; bottom: -2px; height: calc(var(--r) + 2px);
+  left: calc(-1 * var(--r)); width: calc(var(--exposed, 3em) + var(--r));
+  background:
+    radial-gradient(circle at 0 0, transparent var(--r), var(--binder-line) var(--r), var(--binder-line) calc(var(--r) + 2px), #fff calc(var(--r) + 2px)) 0 0 / calc(var(--r) + 2px) 100% no-repeat,
+    linear-gradient(#fff, #fff) calc(var(--r) + 2px) 0 / calc(100% - var(--r) - 2px) 100% no-repeat;
+}
+/* first tab: same fillet as the others (the strip is inset, so its foot lands on the top line) */
+/* last tab: nothing covers it, so the join runs across its whole width with a mirrored fillet on the right */
+.page__content .tab--binder .tablinks.active:last-child::after {
+  width: calc(100% + 2 * var(--r));
+  background:
+    radial-gradient(circle at 0 0, transparent var(--r), var(--binder-line) var(--r), var(--binder-line) calc(var(--r) + 2px), #fff calc(var(--r) + 2px)) 0 0 / calc(var(--r) + 2px) 100% no-repeat,
+    radial-gradient(circle at 100% 0, transparent var(--r), var(--binder-line) var(--r), var(--binder-line) calc(var(--r) + 2px), #fff calc(var(--r) + 2px)) 100% 0 / calc(var(--r) + 2px) 100% no-repeat,
+    linear-gradient(#fff, #fff) calc(var(--r) + 2px) 0 / calc(100% - 2 * var(--r) - 4px) 100% no-repeat;
+}
+/* the card's top line runs straight; its square top corners meet the sides without a jog */
+.tab--binder ~ .tabcontent { border-radius: 0 0 10px 10px; }
+/* keyboard focus follows the label, never a box around the tab; no ring on mouse click */
+.page__content .tab--binder .tablinks:focus { outline: none; }
+.page__content .tab--binder .tablinks:focus-visible { outline: none; }
+.page__content .tab--binder .tablinks:focus-visible .binder-label { outline: 2px solid var(--fluid-accent); outline-offset: 1px; border-radius: 4px; }
+@keyframes fluid-binder-front { from { opacity: .6; } to { opacity: 1; } }
+/* Measuring pass (fluid.js): natural width of every label */
+.page__content .tab--binder.is-measuring .tablinks { width: auto !important; margin-right: 0 !important; transition: none !important; }
+@media (max-width: 47.99em) {
+  .page__content .tab--binder { --binder-tuck: 6px; flex-wrap: nowrap; overflow: visible; padding-left: 8px; padding-right: 8px; }
+  .page__content .tab--binder { --binder-pad-l: 8px; }
+  .page__content .tab--binder .tablinks { font-size: 12.5px; padding: 7px 6px 5px var(--binder-pad-l); }
+  .page__content .tab--binder .tablinks.active { padding-bottom: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page__content .tab--binder .tablinks, .page__content .tab--binder .tablinks::before { transition: none !important; -webkit-animation: none !important; animation: none !important; }
+}
+
+/* Profile cards: bio text wraps around the round portrait, then runs full width below it */
+.tab--people ~ .tabcontent::after { content: ""; display: block; clear: both; }
+.tab--people ~ .tabcontent img.img-responsive[style*="border-radius:50%"] {
+  float: left; box-sizing: border-box; width: clamp(120px, 42%, 300px) !important; height: auto !important; aspect-ratio: 1;
+  padding: 0 !important; margin: 0 16px 14px 0; border-radius: 50%; object-fit: cover;
+  shape-outside: circle(50% at 50% 50%) border-box; shape-margin: 14px;
+}
+.tab--people ~ .tabcontent p[style*="margin-right: 50px"] { margin-right: 0 !important; }
+

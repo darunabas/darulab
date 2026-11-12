@@ -17,15 +17,7 @@ tags: []
 
 See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" target="_blank" style="color: black; text-decoration: none;">Web of Science</a>; <a href="https://scholar.google.com/citations?hl=en&user=I8fP-c4AAAAJ&view_op=list_works&sortby=pubdate" target="_blank" style="color: black; text-decoration: none;">Google Scholar</a>; <a href="https://orcid.org/0000-0002-2115-0257" target="_blank" style="color: black; text-decoration: none;">ORCID</a>
 
-<style>
-.pub-year-nav { display:flex; flex-wrap:wrap; gap:6px; margin:1em 0 1.5em; }
-.pub-year-btn { border:1.5px solid #8C1515; background:#fff; color:#8C1515; border-radius:16px; padding:3px 12px; font-size:0.85em; cursor:pointer; }
-.pub-year-btn span { opacity:0.7; font-size:0.85em; }
-.pub-year-btn:hover, .pub-year-btn.active { background:#8C1515; color:#fff; }
-.pub-year { scroll-margin-top: 80px; }
-</style>
-
-<div class="pub-year-nav" role="group" aria-label="Filter publications by year">
+<div class="pub-year-nav" role="group" aria-label="Filter publications by year" data-filter-bar data-filter-key="year" data-filter-panels=".pub-year">
   <button type="button" class="pub-year-btn active" data-year="all">All</button>
   <button type="button" class="pub-year-btn" data-year="2026">2026 <span>(6)</span></button>
   <button type="button" class="pub-year-btn" data-year="2025">2025 <span>(5)</span></button>
@@ -45,7 +37,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </div>
 
 
-<div class="pub-year" id="y2026" data-year="2026">
+<div class="pub-year" id="y2026" data-year="2026" data-reveal-children>
 <h2>2026</h2>
 
 <p>
@@ -122,7 +114,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2025" data-year="2025">
+<div class="pub-year" id="y2025" data-year="2025" data-reveal-children>
 <h2>2025</h2>
 
 <p>
@@ -188,7 +180,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2024" data-year="2024">
+<div class="pub-year" id="y2024" data-year="2024" data-reveal-children>
 <h2>2024</h2>
 
 <p>
@@ -229,7 +221,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2023" data-year="2023">
+<div class="pub-year" id="y2023" data-year="2023" data-reveal-children>
 <h2>2023</h2>
 
 <p>
@@ -270,7 +262,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2022" data-year="2022">
+<div class="pub-year" id="y2022" data-year="2022" data-reveal-children>
 <h2>2022</h2>
 
 <p>
@@ -286,7 +278,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2021" data-year="2021">
+<div class="pub-year" id="y2021" data-year="2021" data-reveal-children>
 <h2>2021</h2>
 
 <p>
@@ -350,7 +342,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2020" data-year="2020">
+<div class="pub-year" id="y2020" data-year="2020" data-reveal-children>
 <h2>2020</h2>
 
 <p>
@@ -390,7 +382,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2019" data-year="2019">
+<div class="pub-year" id="y2019" data-year="2019" data-reveal-children>
 <h2>2019</h2>
 
 <p>
@@ -430,7 +422,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2018" data-year="2018">
+<div class="pub-year" id="y2018" data-year="2018" data-reveal-children>
 <h2>2018</h2>
 
 <p>
@@ -482,7 +474,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2017" data-year="2017">
+<div class="pub-year" id="y2017" data-year="2017" data-reveal-children>
 <h2>2017</h2>
 
 <p>
@@ -558,7 +550,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2016" data-year="2016">
+<div class="pub-year" id="y2016" data-year="2016" data-reveal-children>
 <h2>2016</h2>
 
 <p>
@@ -634,7 +626,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2015" data-year="2015">
+<div class="pub-year" id="y2015" data-year="2015" data-reveal-children>
 <h2>2015</h2>
 
 <p>
@@ -684,7 +676,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2014" data-year="2014">
+<div class="pub-year" id="y2014" data-year="2014" data-reveal-children>
 <h2>2014</h2>
 
 <p>
@@ -748,7 +740,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2013" data-year="2013">
+<div class="pub-year" id="y2013" data-year="2013" data-reveal-children>
 <h2>2013</h2>
 
 <p>
@@ -812,7 +804,7 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </p>
 </div>
 
-<div class="pub-year" id="y2012" data-year="2012">
+<div class="pub-year" id="y2012" data-year="2012" data-reveal-children>
 <h2>2012</h2>
 
 <p>
@@ -853,19 +845,5 @@ See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" t
 </div>
 
 
-<script>
-(function () {
-  var btns = document.querySelectorAll('.pub-year-btn');
-  var secs = document.querySelectorAll('.pub-year');
-  function show(year, push) {
-    secs.forEach(function (s) { s.style.display = (year === 'all' || s.dataset.year === year) ? '' : 'none'; });
-    btns.forEach(function (b) { b.classList.toggle('active', b.dataset.year === year); });
-    if (push) history.replaceState(null, '', year === 'all' ? location.pathname : '#' + year);
-  }
-  btns.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.year, true); }); });
-  var h = location.hash.replace('#', '');
-  if (/^\d{4}$/.test(h) && document.getElementById('y' + h)) show(h, false);
-})();
-</script>
 <script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
 <script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>

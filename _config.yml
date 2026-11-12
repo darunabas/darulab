@@ -115,6 +115,7 @@ exclude:
   - config
   - Gemfile
   - Gruntfile.js
+  - bin # local tooling (Bundler binstubs, preview shim); not part of the site
   - gulpfile.js
   - LICENSE
   - log

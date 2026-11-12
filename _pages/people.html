@@ -58,20 +58,20 @@ tags: []
   border-radius: 0 10px 10px 10px;
 }
 </style>
-<div class="tab">
-  <button class="tablinks active" onclick="openTab(event, 'home')">Barnabas</button>
-  <button class="tablinks" onclick="openTab(event, 'tab0')">Rong</button>
-  <button class="tablinks" onclick="openTab(event, 'tab1')">Jacqueline</button>
-  <button class="tablinks" onclick="openTab(event, 'tab2')">Brena</button>
-  <button class="tablinks" onclick="openTab(event, 'tab3')">Paul</button>
-  <button class="tablinks" onclick="openTab(event, 'tab4')">Lauren</button>
-  <button class="tablinks" onclick="openTab(event, 'tab5')">Joseph</button>
-  <button class="tablinks" onclick="openTab(event, 'tab6')">Laís</button>
-  <button class="tablinks" onclick="openTab(event, 'tab8')">You</button>
-  <button class="tablinks" onclick="openTab(event, 'tab9')">Lab Alumni</button>
+<div class="tab tab--binder tab--people" role="tablist" aria-label="Lab members">
+  <button class="tablinks active" onclick="openTab(event, 'home')" role="tab" id="tabbtn-home" aria-controls="home" aria-selected="true" title="Barnabas Daru" aria-label="Barnabas Daru" data-full-name="Barnabas Daru">Barnabas</button>
+  <button class="tablinks" onclick="openTab(event, 'tab0')" role="tab" id="tabbtn-tab0" aria-controls="tab0" aria-selected="false" title="Rong Liu" aria-label="Rong Liu" data-full-name="Rong Liu">Rong</button>
+  <button class="tablinks" onclick="openTab(event, 'tab1')" role="tab" id="tabbtn-tab1" aria-controls="tab1" aria-selected="false" title="Jacqueline Pena" aria-label="Jacqueline Pena" data-full-name="Jacqueline Pena">Jacqueline</button>
+  <button class="tablinks" onclick="openTab(event, 'tab2')" role="tab" id="tabbtn-tab2" aria-controls="tab2" aria-selected="false" title="Brena Cedraz" aria-label="Brena Cedraz" data-full-name="Brena Cedraz">Brena</button>
+  <button class="tablinks" onclick="openTab(event, 'tab3')" role="tab" id="tabbtn-tab3" aria-controls="tab3" aria-selected="false" title="Paul Markley" aria-label="Paul Markley" data-full-name="Paul Markley">Paul</button>
+  <button class="tablinks" onclick="openTab(event, 'tab4')" role="tab" id="tabbtn-tab4" aria-controls="tab4" aria-selected="false" title="Lauren Puleo" aria-label="Lauren Puleo" data-full-name="Lauren Puleo">Lauren</button>
+  <button class="tablinks" onclick="openTab(event, 'tab5')" role="tab" id="tabbtn-tab5" aria-controls="tab5" aria-selected="false" title="Joseph Kesler" aria-label="Joseph Kesler" data-full-name="Joseph Kesler">Joseph</button>
+  <button class="tablinks" onclick="openTab(event, 'tab6')" role="tab" id="tabbtn-tab6" aria-controls="tab6" aria-selected="false" title="Laís de Souza" aria-label="Laís de Souza" data-full-name="Laís de Souza">Laís</button>
+  <button class="tablinks" onclick="openTab(event, 'tab8')" role="tab" id="tabbtn-tab8" aria-controls="tab8" aria-selected="false" title="You" aria-label="You" data-full-name="You">You</button>
+  <button class="tablinks" onclick="openTab(event, 'tab9')" role="tab" id="tabbtn-tab9" aria-controls="tab9" aria-selected="false" title="Lab Alumni" aria-label="Lab Alumni" data-full-name="Lab Alumni">Lab Alumni</button>
 </div>
 
-<div id="home" class="tabcontent" style="display:block;">
+<div id="home" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-home" style="display:block;">
   <script>
     var xhr = new XMLHttpRequest();
     var url = "/_pages/Barnabas.html";
@@ -85,7 +85,7 @@ tags: []
   </script>
 </div>
 
-<div id="tab0" class="tabcontent">
+<div id="tab0" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab0">
   <script>
     var xhr00 = new XMLHttpRequest();
     var url00 = "/_pages/Rong.html";
@@ -99,7 +99,7 @@ tags: []
   </script>
 </div>
 
-<div id="tab1" class="tabcontent">
+<div id="tab1" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab1">
   <script>
     var xhr0 = new XMLHttpRequest();
     var url0 = "/_pages/Jacqueline.html";
@@ -113,7 +113,7 @@ tags: []
   </script>
 </div>
 
-<div id="tab2" class="tabcontent">
+<div id="tab2" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab2">
   <script>
     var xhr1 = new XMLHttpRequest();
     var url1 = "/_pages/Brena.html";
@@ -127,7 +127,7 @@ tags: []
   </script>
 </div>
 
-<div id="tab3" class="tabcontent">
+<div id="tab3" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab3">
   <script>
     var xhr2 = new XMLHttpRequest();
     var url2 = "/_pages/Paul.html";
@@ -141,7 +141,7 @@ tags: []
   </script>
 </div>
 
-<div id="tab4" class="tabcontent">
+<div id="tab4" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab4">
   <script>
     var xhr3 = new XMLHttpRequest();
     var url3 = "/_pages/Lauren.html";
@@ -155,7 +155,7 @@ tags: []
   </script>
 </div>
 
-<div id="tab5" class="tabcontent">
+<div id="tab5" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab5">
   <script>
     var xhr4 = new XMLHttpRequest();
     var url4 = "/_pages/JoeKesler.html";
@@ -169,7 +169,7 @@ tags: []
   </script>
 </div>
 
-<div id="tab6" class="tabcontent">
+<div id="tab6" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab6">
   <script>
     var xhr6 = new XMLHttpRequest();
     var url6 = "/_pages/Lais.html";
@@ -183,15 +183,15 @@ tags: []
   </script>
 </div>
 
-<div id="tab8" class="tabcontent">
+<div id="tab8" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab8">
   <h3>This could be you!</h3>
   <img src="/assets/images/you.png" alt="Barnabas-Daru" class="img-responsive" style="float:left; padding-right:10px; border-radius:50%; width:300px; height:300px; object-fit:cover;">
   <p>We're currently looking for candidates at all levels to join our team at the Daru lab. If you're interested in joining us, please get in touch by emailing us at <a href="mailto:bdaru@stanford.edu">bdaru[at]stanford.edu</a>.</p>
   </div>
 
-<div id="tab9" class="tabcontent">
+<div id="tab9" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab9">
   <h3>Former lab members</h3>
-  <div style="display:flex; flex-wrap:wrap; justify-content:center;">
+  <div style="display:flex; flex-wrap:wrap; justify-content:center;" data-reveal-children>
     <div style="width:250px; margin:10px;">
         <img src="https://lh3.googleusercontent.com/pw/AP1GczNrSHnvQa9mHnIPX5GJ_WTvozIp1pC7SJQuqHndq-Y1H2p7dqFA8dJC4uXm5SrxrHdJQjceS03vrOJ1rLXOYnfoVqVYvgRe1Cn5tTXJC2kxbiFO9TbQdRxE2X7H0CW-r2EyvZUHSr3wDdGkrlzPP7EHtQ=w1596-h1596-s-no-gm?authuser=1" alt="Collin Gross" style="width:100%;" class="img-responsive">
 <h4 style="margin-top: 0;">Collin Gross</h4>
