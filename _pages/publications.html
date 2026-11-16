@@ -17,833 +17,769 @@ tags: []
 
 See more: <a href="https://www.webofscience.com/wos/author/record/B-4051-2011" target="_blank" style="color: black; text-decoration: none;">Web of Science</a>; <a href="https://scholar.google.com/citations?hl=en&user=I8fP-c4AAAAJ&view_op=list_works&sortby=pubdate" target="_blank" style="color: black; text-decoration: none;">Google Scholar</a>; <a href="https://orcid.org/0000-0002-2115-0257" target="_blank" style="color: black; text-decoration: none;">ORCID</a>
 
-<div class="pub-year-nav" role="group" aria-label="Filter publications by year" data-filter-bar data-filter-key="year" data-filter-panels=".pub-year">
-  <button type="button" class="pub-year-btn active" data-year="all">All</button>
-  <button type="button" class="pub-year-btn" data-year="2026">2026 <span>(6)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2025">2025 <span>(5)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2024">2024 <span>(3)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2023">2023 <span>(3)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2022">2022 <span>(1)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2021">2021 <span>(5)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2020">2020 <span>(3)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2019">2019 <span>(3)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2018">2018 <span>(4)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2017">2017 <span>(6)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2016">2016 <span>(6)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2015">2015 <span>(4)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2014">2014 <span>(5)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2013">2013 <span>(5)</span></button>
-  <button type="button" class="pub-year-btn" data-year="2012">2012 <span>(3)</span></button>
+<style>
+.pub-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: .8em 0 .4em; }
+.pub-toolbar input { flex: 1; min-width: 220px; border: 1.5px solid var(--fluid-line, #e4e0d8); border-radius: 20px; padding: 7px 14px; font-size: .9em; }
+.pub-toolbar input:focus { outline: none; border-color: #8C1515; }
+.pub-toolbar .pub-year-nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 !important; padding: 0 !important; position: static !important; box-shadow: none !important; background: none !important; }
+.pub-year-btn span { display: none; }
+.pub-earlier { position: relative; }
+.pub-earlier-btn { border: 1.5px solid #8C1515; background: #fff; color: #8C1515; border-radius: 16px; padding: 4px 13px; font-size: .85em; cursor: pointer; }
+.pub-earlier-menu { position: absolute; z-index: 20; top: calc(100% + 6px); left: 0; display: grid; grid-template-columns: repeat(3, auto); gap: 6px; background: #fff; border: 1px solid var(--fluid-line, #e4e0d8); border-radius: 12px; padding: 8px; box-shadow: 0 10px 24px -10px rgba(46,45,41,.35); }
+.pub-earlier-menu[hidden] { display: none; }
+.pub-earlier.has-active .pub-earlier-btn { background: #8C1515; color: #fff; }
+h2.pub-sec { font-size: 1em; letter-spacing: .08em; text-transform: uppercase; color: #8C1515; border: 0; display: flex; align-items: center; gap: 10px; margin: 1.2em 0 .6em; }
+h2.pub-sec:after { content: ""; flex: 1; height: 1px; background: var(--fluid-line, #e4e0d8); }
+.pub-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: .8em 0 .6em; }
+.pub-tools input { flex: 1; min-width: 200px; border: 1.5px solid var(--fluid-line, #e4e0d8); border-radius: 20px; padding: 7px 14px; font-size: .9em; }
+.pub-tools input:focus { outline: none; border-color: #8C1515; }
+.pub-song-btn { border: 1.5px solid #8C1515; background: #fff; color: #8C1515; border-radius: 16px; padding: 4px 13px; font-size: .85em; cursor: pointer; transition: background-color .3s ease, color .3s ease; }
+.pub-song-btn.on { background: #8C1515; color: #fff; }
+.pub-count { font-size: .8em; color: #8a857a; }
+.pub-feat { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 .4em; }
+.pub-feat a { display: block; border-radius: 12px; padding: 12px 14px; background: linear-gradient(135deg, #fbf6f2, #f3efe6); border: 1px solid var(--fluid-line, #e4e0d8); color: #2e2d29 !important; text-decoration: none !important; transition: box-shadow .3s ease, border-color .3s ease; }
+.pub-feat a:hover { border-color: rgba(140,21,21,.35); box-shadow: 0 10px 24px -14px rgba(46,45,41,.35); }
+.pub-feat small { color: #8C1515; font-weight: 700; letter-spacing: .05em; font-size: .68em; text-transform: uppercase; }
+.pub-feat span { display: block; font-weight: 650; font-size: .88em; margin-top: 4px; line-height: 1.3; }
+.page__content p.pub-legend, .pub-legend { font-size: .75em !important; color: #8a857a; margin: 1.2em 0 -1em !important; text-align: right; }
+.pub-legend u, .pub-auth u { text-decoration: none; border-bottom: 2px solid rgba(140,21,21,.35); }
+.pub-year > h2 { font-size: 1em; letter-spacing: .08em; color: #8C1515; border: 0; display: flex; align-items: center; gap: 10px; margin: 1.6em 0 .7em; }
+.pub-year > h2:after { content: ""; flex: 1; height: 1px; background: var(--fluid-line, #e4e0d8); }
+.pub { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; padding: 14px 16px; border: 1px solid var(--fluid-line, #e4e0d8); border-radius: 12px; margin-bottom: 10px; background: #fff; transition: box-shadow .3s ease, border-color .3s ease; }
+.pub:hover { border-color: rgba(140,21,21,.35); box-shadow: 0 10px 24px -14px rgba(46,45,41,.35); }
+.pub[hidden] { display: none; }
+.pub-num { font-size: 1.35em; font-weight: 700; color: #d9d2c4; text-align: right; line-height: 1.15; }
+.pub-title { font-size: 1.02em; font-weight: 650; line-height: 1.32; margin: 0 0 .3em; }
+.pub-title a { color: #2e2d29 !important; text-decoration: none !important; }
+.pub-title a:hover { color: #8C1515 !important; }
+.pub-auth { font-size: .82em; color: #5a5852; line-height: 1.5; }
+.pub-auth strong { color: #2e2d29; }
+.pub-more { border: 0; background: none; color: #8C1515; font-weight: 600; cursor: pointer; padding: 0; font-size: 1em; }
+.pub-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin-top: .6em; font-size: .8em; }
+.pub-jr { background: rgba(140,21,21,.08); color: #8C1515; font-weight: 700; font-style: italic; border-radius: 12px; padding: 2px 10px; }
+.pub-vol { color: #5a5852; }
+.pub-badges { position: absolute !important; left: 0; top: 0; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; }
+.pub-meta { position: relative; }
+.pub-stat { display: inline-flex; align-items: center; gap: 4px; color: #8a857a !important; text-decoration: none !important; font-size: .95em; }
+.pub-stat:hover { color: #8C1515 !important; }
+.pub-stat i { font-size: .9em; }
+.pub-act { margin-left: auto; display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.pub-act a { display: inline-flex; align-items: center; gap: 5px; border: 1px solid rgba(140,21,21,.4); color: #8C1515 !important; border-radius: 14px; padding: 1px 10px; text-decoration: none !important; font-weight: 600; transition: background-color .3s ease; }
+.pub-act a:hover { background: rgba(140,21,21,.08); }
+.pub-act a.song { background: #8C1515; color: #fff !important; border-color: #8C1515; }
+.pub-empty { color: #8a857a; font-size: .9em; padding: 1em 0; }
+@media (max-width: 47.99em) {
+  .pub { grid-template-columns: 1fr; gap: 4px; }
+  .pub-num { text-align: left; font-size: .95em; }
+  .pub-act { margin-left: 0; }
+  .pub-feat { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="pub-toolbar">
+  <input type="search" id="pubSearch" placeholder="Search titles, authors, journals…" aria-label="Search publications">
+  <div class="pub-year-nav" role="group" aria-label="Filter publications by year" data-filter-bar data-filter-key="year" data-filter-panels=".pub-year">
+    <button type="button" class="pub-year-btn active" data-year="all">All</button><button type="button" class="pub-year-btn" data-year="2026">2026 <span>(6)</span></button><button type="button" class="pub-year-btn" data-year="2025">2025 <span>(5)</span></button><button type="button" class="pub-year-btn" data-year="2024">2024 <span>(3)</span></button>
+    <span class="pub-earlier"><button type="button" class="pub-earlier-btn" aria-expanded="false">Earlier <i class="fas fa-caret-down" aria-hidden="true"></i></button><span class="pub-earlier-menu" hidden><button type="button" class="pub-year-btn" data-year="2023">2023 <span>(3)</span></button><button type="button" class="pub-year-btn" data-year="2022">2022 <span>(1)</span></button><button type="button" class="pub-year-btn" data-year="2021">2021 <span>(5)</span></button><button type="button" class="pub-year-btn" data-year="2020">2020 <span>(3)</span></button><button type="button" class="pub-year-btn" data-year="2019">2019 <span>(3)</span></button><button type="button" class="pub-year-btn" data-year="2018">2018 <span>(4)</span></button><button type="button" class="pub-year-btn" data-year="2017">2017 <span>(6)</span></button><button type="button" class="pub-year-btn" data-year="2016">2016 <span>(6)</span></button><button type="button" class="pub-year-btn" data-year="2015">2015 <span>(4)</span></button><button type="button" class="pub-year-btn" data-year="2014">2014 <span>(5)</span></button><button type="button" class="pub-year-btn" data-year="2013">2013 <span>(5)</span></button><button type="button" class="pub-year-btn" data-year="2012">2012 <span>(3)</span></button></span></span>
+  </div>
+  <button type="button" class="pub-song-btn" id="pubSongBtn" aria-pressed="false"><i class="fas fa-music" aria-hidden="true"></i> With a song</button>
+</div>
+<h2 class="pub-sec">Featured</h2>
+<div class="pub-feat" aria-label="Featured publications">
+  <a href="https://doi.org/10.1126/science.adv6172" target="_blank" rel="noopener"><small>Science · 2026</small><span>Biogeographic processes underlying global patterns of plant diversity</span></a>
+  <a href="https://doi.org/10.1073/pnas.2519347123" target="_blank" rel="noopener"><small>PNAS · 2026</small><span>From data to decisions: toward a biodiversity monitoring standards framework</span></a>
+  <a href="https://doi.org/10.1038/s41467-026-73236-4" target="_blank" rel="noopener"><small>Nature Communications · 2026</small><span>Climate and regional plant richness drive diet specialization in butterfly caterpillars</span></a>
 </div>
 
 
+
+<div class="pub-legend"><u>Underlined</u> = Daru Lab trainee</div>
 <div class="pub-year" id="y2026" data-year="2026" data-reveal-children>
 <h2>2026</h2>
 
-<p>
-  62- <strong>Daru BH</strong>, Nichodemus CO & Henao-Diaz LF (2026) <a href="https://doi.org/10.1126/science.adv6172" target="_blank" style="color: black; text-decoration: none;">Biogeographic processes underlying global patterns of plant diversity.</a> <em><strong>Science</strong></em> 392: 845–849.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1126/science.adv6172" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1126/science.adv6172" data-link-target="_blank"></a>
-  <a href="https://www.science.org/doi/pdf/10.1126/science.adv6172" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-  <a href="https://open.spotify.com/album/13igdfIuzLE6gwLllsDkPO" class="btn btn--small btn--primary pub-song" style="background-color:#8C1515; color:#ffffff" target="_blank" rel="noopener" title="Listen to &ldquo;Plant Cradle&rdquo;, a song inspired by this paper" aria-label="Listen to Plant Cradle, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i></a>
-</span>
-</p>
+<article class="pub" data-song="1">
+  <div class="pub-num">62</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1126/science.adv6172" target="_blank" rel="noopener">Biogeographic processes underlying global patterns of plant diversity</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Nichodemus CO & Henao-Diaz LF</div>
+    <div class="pub-meta"><span class="pub-jr">Science</span><span class="pub-vol">392: 845–849</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1126/science.adv6172" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1126/science.adv6172" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.science.org/doi/pdf/10.1126/science.adv6172" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1126/science.adv6172" target="_blank" rel="noopener">DOI</a><a class="song" href="https://open.spotify.com/album/13igdfIuzLE6gwLllsDkPO" target="_blank" rel="noopener" title="Listen to &ldquo;Plant Cradle&rdquo;, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i> Song</a></span></div>
+  </div>
+</article>
 
-<p>
-  61- Puleo LH, Fukami T & <strong>Daru BH</strong> (2026) <a href="https://doi.org/10.1016/j.tree.2026.05.012" target="_blank" style="color: black; text-decoration: none;">Herbaria unlock tripartite pollination responses to anthropogenic change.</a> <em><strong>Trends in Ecology & Evolution</strong></em> 41: 690–694.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1016/j.tree.2026.05.012" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1016/j.tree.2026.05.012" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/61_Puleo_et_al_2026_TREE.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">61</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1016/j.tree.2026.05.012" target="_blank" rel="noopener">Herbaria unlock tripartite pollination responses to anthropogenic change</a></h3>
+    <div class="pub-auth"><u>Puleo LH</u>, Fukami T & <strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Trends in Ecology & Evolution</span><span class="pub-vol">41: 690–694</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1016/j.tree.2026.05.012" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1016/j.tree.2026.05.012" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/61_Puleo_et_al_2026_TREE.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1016/j.tree.2026.05.012" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  60- Gross CP, Kawahara AY & <strong>Daru BH</strong> (2026) <a href="https://doi.org/10.1038/s41467-026-73236-4" target="_blank" style="color: black; text-decoration: none;">Climate and regional plant richness drive diet specialization in butterfly caterpillars.</a> <em><strong>Nature Communications</strong></em> 17: 7127.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1038/s41467-026-73236-4" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1038/s41467-026-73236-4" data-link-target="_blank"></a>
-  <a href="https://www.nature.com/articles/s41467-026-73236-4.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">60</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1038/s41467-026-73236-4" target="_blank" rel="noopener">Climate and regional plant richness drive diet specialization in butterfly caterpillars</a></h3>
+    <div class="pub-auth"><u>Gross CP</u>, Kawahara AY & <strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Nature Communications</span><span class="pub-vol">17: 7127</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1038/s41467-026-73236-4" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1038/s41467-026-73236-4" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.nature.com/articles/s41467-026-73236-4.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1038/s41467-026-73236-4" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  59- Markley PT & <strong>Daru BH</strong> (2026) <a href="https://doi.org/10.1111/jbi.70198" target="_blank" style="color: black; text-decoration: none;">Late Quaternary climate-driven shifts in arctic plant distributions.</a> <em><strong>Journal of Biogeography</strong></em> 53: e70198.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/jbi.70198" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/jbi.70198" data-link-target="_blank"></a>
-  <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/jbi.70198" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">59</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/jbi.70198" target="_blank" rel="noopener">Late Quaternary climate-driven shifts in arctic plant distributions</a></h3>
+    <div class="pub-auth"><u>Markley PT</u> & <strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Journal of Biogeography</span><span class="pub-vol">53: e70198</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/jbi.70198" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/jbi.70198" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/jbi.70198" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/jbi.70198" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  58- Gonzalez A, August T, Bailey S, Bobiwash K, Boersch-Supan PH, Burgess ND, <strong>Daru BH</strong>, Elphick CS, Freckleton R, Frick WF, Hughes AC, Isaac NJB, Jones JPG, Lambertini M, Mac Aodha O, Madhavapeddy A, Milner-Gulland EJ, Purvis A, Salafsky N, Sutherland WJ, Tanshi I, Vijay V, Woodard SH & Williams DR (2026) <a href="https://doi.org/10.1073/pnas.2519347123" target="_blank" style="color: black; text-decoration: none;">From data to decisions: toward a biodiversity monitoring standards framework.</a> <em><strong>Proceedings of the National Academy of Sciences USA</strong></em> 123: e2519347123.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1073/pnas.2519347123" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1073/pnas.2519347123" data-link-target="_blank"></a>
-  <a href="https://www.pnas.org/doi/pdf/10.1073/pnas.2519347123" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">58</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1073/pnas.2519347123" target="_blank" rel="noopener">From data to decisions: toward a biodiversity monitoring standards framework</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short">Gonzalez A, August T, Bailey S, Bobiwash K, Boersch-Supan PH, Burgess ND, <strong>Daru BH</strong> … <button type="button" class="pub-more">+ 17 more</button></span><span class="pub-auth-full" hidden>Gonzalez A, August T, Bailey S, Bobiwash K, Boersch-Supan PH, Burgess ND, <strong>Daru BH</strong>, Elphick CS, Freckleton R, Frick WF, Hughes AC, Isaac NJB, Jones JPG, Lambertini M, Mac Aodha O, Madhavapeddy A, Milner-Gulland EJ, Purvis A, Salafsky N, Sutherland WJ, Tanshi I, Vijay V, Woodard SH & Williams DR</span></div>
+    <div class="pub-meta"><span class="pub-jr">Proceedings of the National Academy of Sciences USA</span><span class="pub-vol">123: e2519347123</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1073/pnas.2519347123" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1073/pnas.2519347123" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.pnas.org/doi/pdf/10.1073/pnas.2519347123" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1073/pnas.2519347123" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  57- Sutherland WJ, Burgess ND, Goetz SJ, Jones JPG, Soltis PS, Tilman D, Allen JM, Andrianandrasana HT, August T, Bawa K, Bailey S, Birch T, Boersch-Supan PH, Cavender-Bares J, Blaxter M, Chaplin-Kramer R, <strong>Daru BH</strong>, De Palma A, Eisenberg C, Elphick CS, Freckleton R, Frick WF, Gonzalez A, Greenspoon L, Grozinger CM, Hankins DL, Hazell J, Isaac NJB, Lambertini M, Lewin HA, Mac Aodha O, Madhavapeddy A, Milner-Gulland EJ, Milo R, O’Dwyer J, Purvis A, Salafsky N, Tallis H, Tanshi I, Vijay V, Wikelski M, Williams DR, Woodard SH & Robinson GE (2026) <a href="https://doi.org/10.1073/pnas.2519345123" target="_blank" style="color: black; text-decoration: none;">Nine changes needed to deliver a radical transformation in biodiversity measurement.</a> <em><strong>Proceedings of the National Academy of Sciences USA</strong></em> 123: e2519345123.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1073/pnas.2519345123" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1073/pnas.2519345123" data-link-target="_blank"></a>
-  <a href="https://www.pnas.org/doi/pdf/10.1073/pnas.2519345123" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">57</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1073/pnas.2519345123" target="_blank" rel="noopener">Nine changes needed to deliver a radical transformation in biodiversity measurement</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short">Sutherland WJ, Burgess ND, Goetz SJ, Jones JPG, Soltis PS, Tilman D, Allen JM, Andrianandrasana HT, August T, Bawa K, Bailey S, Birch T, Boersch-Supan PH, Cavender-Bares J, Blaxter M, Chaplin-Kramer R, <strong>Daru BH</strong> … <button type="button" class="pub-more">+ 27 more</button></span><span class="pub-auth-full" hidden>Sutherland WJ, Burgess ND, Goetz SJ, Jones JPG, Soltis PS, Tilman D, Allen JM, Andrianandrasana HT, August T, Bawa K, Bailey S, Birch T, Boersch-Supan PH, Cavender-Bares J, Blaxter M, Chaplin-Kramer R, <strong>Daru BH</strong>, De Palma A, Eisenberg C, Elphick CS, Freckleton R, Frick WF, Gonzalez A, Greenspoon L, Grozinger CM, Hankins DL, Hazell J, Isaac NJB, Lambertini M, Lewin HA, Mac Aodha O, Madhavapeddy A, Milner-Gulland EJ, Milo R, O’Dwyer J, Purvis A, Salafsky N, Tallis H, Tanshi I, Vijay V, Wikelski M, Williams DR, Woodard SH & Robinson GE</span></div>
+    <div class="pub-meta"><span class="pub-jr">Proceedings of the National Academy of Sciences USA</span><span class="pub-vol">123: e2519345123</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1073/pnas.2519345123" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1073/pnas.2519345123" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.pnas.org/doi/pdf/10.1073/pnas.2519345123" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1073/pnas.2519345123" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2025" data-year="2025" data-reveal-children>
 <h2>2025</h2>
 
-<p>
-  56- <strong>Daru BH</strong> & Zhigila DA (2025) <a href="https://doi.org/10.1038/s44358-025-00071-8" target="_blank" style="color: black; text-decoration: none;">Unlocking historical plant interactions in herbarium collections.</a> <em><strong>Nature Reviews Biodiversity</strong></em> 1: 627–643.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1038/s44358-025-00071-8" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1038/s44358-025-00071-8" data-link-target="_blank"></a>
-  <a href="https://rdcu.be/ezrPO" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-  <a href="https://open.spotify.com/album/6gZXhtavzlP2y5SjWqBW6Z" class="btn btn--small btn--primary pub-song" style="background-color:#8C1515; color:#ffffff" target="_blank" rel="noopener" title="Listen to &ldquo;Herbarium&rdquo;, a song inspired by this paper" aria-label="Listen to Herbarium, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i></a>
-</span>
-</p>
+<article class="pub" data-song="1">
+  <div class="pub-num">56</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1038/s44358-025-00071-8" target="_blank" rel="noopener">Unlocking historical plant interactions in herbarium collections</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong> & Zhigila DA</div>
+    <div class="pub-meta"><span class="pub-jr">Nature Reviews Biodiversity</span><span class="pub-vol">1: 627–643</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1038/s44358-025-00071-8" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1038/s44358-025-00071-8" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://rdcu.be/ezrPO" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1038/s44358-025-00071-8" target="_blank" rel="noopener">DOI</a><a class="song" href="https://open.spotify.com/album/6gZXhtavzlP2y5SjWqBW6Z" target="_blank" rel="noopener" title="Listen to &ldquo;Herbarium&rdquo;, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i> Song</a></span></div>
+  </div>
+</article>
 
-<p>
-  55- Tomlinson KW, Yu F, Wang X, Yao X, Yu CC, Charles-Dominique T, Anést A, Zhao Y, Agung AP, Putra AA, Lapuz RS, Lefebvre T, Davies TJ, Hempson GP, Bezeng BS, <strong>Daru BH</strong>, Kabongo RM, Maurin O, Muasya AM, van der Bank M, Bond WJ, Arman M & Gélin U (2025) <a href="https://doi.org/10.1111/brv.70051" target="_blank" style="color: black; text-decoration: none;">The macroecology of spines on woody plants.</a> <em><strong>Biological Reviews</strong></em> 100: 2396–2419.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/brv.70051" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/brv.70051" data-link-target="_blank"></a>
-  <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/brv.70051" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">55</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/brv.70051" target="_blank" rel="noopener">The macroecology of spines on woody plants</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short">Tomlinson KW, Yu F, Wang X, Yao X, Yu CC, Charles-Dominique T, Anést A, Zhao Y, Agung AP, Putra AA, Lapuz RS, Lefebvre T, Davies TJ, Hempson GP, Bezeng BS, <strong>Daru BH</strong> … <button type="button" class="pub-more">+ 7 more</button></span><span class="pub-auth-full" hidden>Tomlinson KW, Yu F, Wang X, Yao X, Yu CC, Charles-Dominique T, Anést A, Zhao Y, Agung AP, Putra AA, Lapuz RS, Lefebvre T, Davies TJ, Hempson GP, Bezeng BS, <strong>Daru BH</strong>, Kabongo RM, Maurin O, Muasya AM, van der Bank M, Bond WJ, Arman M & Gélin U</span></div>
+    <div class="pub-meta"><span class="pub-jr">Biological Reviews</span><span class="pub-vol">100: 2396–2419</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/brv.70051" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/brv.70051" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/brv.70051" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/brv.70051" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  54- <strong>Daru BH</strong> (2025) <a href="https://doi.org/10.1111/nph.70002" target="_blank" style="color: black; text-decoration: none;">Tracking hidden dimensions of plant biogeography from herbaria.</a> <em><strong>New Phytologist</strong></em> 246: 61–77.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/nph.70002" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/nph.70002" data-link-target="_blank"></a>
-  <a href="https://nph.onlinelibrary.wiley.com/doi/pdf/10.1111/nph.70002" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-  <a href="https://open.spotify.com/album/6gZXhtavzlP2y5SjWqBW6Z" class="btn btn--small btn--primary pub-song" style="background-color:#8C1515; color:#ffffff" target="_blank" rel="noopener" title="Listen to &ldquo;Herbarium&rdquo;, a song inspired by this paper" aria-label="Listen to Herbarium, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i></a>
-</span>
-</p>
+<article class="pub" data-song="1">
+  <div class="pub-num">54</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/nph.70002" target="_blank" rel="noopener">Tracking hidden dimensions of plant biogeography from herbaria</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">New Phytologist</span><span class="pub-vol">246: 61–77</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/nph.70002" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/nph.70002" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://nph.onlinelibrary.wiley.com/doi/pdf/10.1111/nph.70002" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/nph.70002" target="_blank" rel="noopener">DOI</a><a class="song" href="https://open.spotify.com/album/6gZXhtavzlP2y5SjWqBW6Z" target="_blank" rel="noopener" title="Listen to &ldquo;Herbarium&rdquo;, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i> Song</a></span></div>
+  </div>
+</article>
 
-<p>
-  53- Gross CP, Wright AM & <strong>Daru BH</strong> (2025) <a href="https://doi.org/10.1098/rstb.2023.0211" target="_blank" style="color: black; text-decoration: none;">A global biogeographic regionalization for butterflies.</a> <em><strong>Philosophical Transactions of the Royal Society B</strong></em> 380: 20230211.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1098/rstb.2023.0211" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1098/rstb.2023.0211" data-link-target="_blank"></a>
-  <a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rstb.2023.0211" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">53</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1098/rstb.2023.0211" target="_blank" rel="noopener">A global biogeographic regionalization for butterflies</a></h3>
+    <div class="pub-auth"><u>Gross CP</u>, Wright AM & <strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Philosophical Transactions of the Royal Society B</span><span class="pub-vol">380: 20230211</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1098/rstb.2023.0211" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1098/rstb.2023.0211" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rstb.2023.0211" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1098/rstb.2023.0211" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  52- Markley PT, Gross CP & <strong>Daru BH</strong> (2025) <a href="https://doi.org/10.1002/ajb2.16466" target="_blank" style="color: black; text-decoration: none;">The changing biodiversity of the Arctic flora in the Anthropocene.</a> <em><strong>American Journal of Botany</strong></em> 111: e16466.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1002/ajb2.16466" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1002/ajb2.16466" data-link-target="_blank"></a>
-  <a href="https://bsapubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ajb2.16466" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">52</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1002/ajb2.16466" target="_blank" rel="noopener">The changing biodiversity of the Arctic flora in the Anthropocene</a></h3>
+    <div class="pub-auth"><u>Markley PT</u>, <u>Gross CP</u> & <strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">American Journal of Botany</span><span class="pub-vol">111: e16466</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1002/ajb2.16466" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1002/ajb2.16466" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://bsapubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ajb2.16466" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1002/ajb2.16466" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2024" data-year="2024" data-reveal-children>
 <h2>2024</h2>
 
-<p>
-  51- Minev-Benzecry S & <strong>Daru BH</strong> (2024) <a href="https://doi.org/10.1038/s41467-024-53860-8" target="_blank" style="color: black; text-decoration: none;">Climate change alters the future of natural floristic regions of deep evolutionary origins.</a> <em><strong>Nature Communications</strong></em> 15: 9474.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1038/s41467-024-53860-8" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1038/s41467-024-53860-8" data-link-target="_blank"></a>
-  <a href="https://www.nature.com/articles/s41467-024-53860-8.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">51</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1038/s41467-024-53860-8" target="_blank" rel="noopener">Climate change alters the future of natural floristic regions of deep evolutionary origins</a></h3>
+    <div class="pub-auth"><u>Minev-Benzecry S</u> & <strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Nature Communications</span><span class="pub-vol">15: 9474</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1038/s41467-024-53860-8" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1038/s41467-024-53860-8" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.nature.com/articles/s41467-024-53860-8.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1038/s41467-024-53860-8" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  50- <strong>Daru BH</strong> (2024) <a href="https://doi.org/10.1073/pnas.2319989121" target="_blank" style="color: black; text-decoration: none;">Predicting undetected native vascular plant diversity at a global scale.</a> <em><strong>Proceedings of the National Academy of Sciences USA</strong></em> 121: e2319989121.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1073/pnas.2319989121" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1073/pnas.2319989121" data-link-target="_blank"></a>
-  <a href="https://www.pnas.org/doi/pdf/10.1073/pnas.2319989121" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-  <a href="https://open.spotify.com/album/7qQpeDB4QtG4F7TcxQ3a4M" class="btn btn--small btn--primary pub-song" style="background-color:#8C1515; color:#ffffff" target="_blank" rel="noopener" title="Listen to &ldquo;My Plant&rdquo;, a song inspired by this paper" aria-label="Listen to My Plant, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i></a>
-</span>
-</p>
+<article class="pub" data-song="1">
+  <div class="pub-num">50</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1073/pnas.2319989121" target="_blank" rel="noopener">Predicting undetected native vascular plant diversity at a global scale</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Proceedings of the National Academy of Sciences USA</span><span class="pub-vol">121: e2319989121</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1073/pnas.2319989121" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1073/pnas.2319989121" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.pnas.org/doi/pdf/10.1073/pnas.2319989121" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1073/pnas.2319989121" target="_blank" rel="noopener">DOI</a><a class="song" href="https://open.spotify.com/album/7qQpeDB4QtG4F7TcxQ3a4M" target="_blank" rel="noopener" title="Listen to &ldquo;My Plant&rdquo;, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i> Song</a></span></div>
+  </div>
+</article>
 
-<p>
-  49- <strong>Daru BH</strong> (2024) <a href="https://doi.org/10.1002/ecy.4462" target="_blank" style="color: black; text-decoration: none;">A global database of butterfly species native distribution.</a> <em><strong>Ecology</strong></em> 106: e4462.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1002/ecy.4462" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1002/ecy.4462" data-link-target="_blank"></a>
-  <a href="https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecy.4462" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">49</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1002/ecy.4462" target="_blank" rel="noopener">A global database of butterfly species native distribution</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Ecology</span><span class="pub-vol">106: e4462</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1002/ecy.4462" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1002/ecy.4462" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecy.4462" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1002/ecy.4462" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2023" data-year="2023" data-reveal-children>
 <h2>2023</h2>
 
-<p>
-  48- <strong>Daru BH</strong> & Rodriguez J (2023) <a href="https://doi.org/10.1038/s41559-023-02047-3" target="_blank" style="color: black; text-decoration: none;">Mass production of unvouchered records fails to represent global biodiversity patterns.</a> <em><strong>Nature Ecology & Evolution</strong></em> 7: 816–831.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1038/s41559-023-02047-3" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1038/s41559-023-02047-3" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/46_Daru_Rodriguez_2023_NatEcolEvol.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">48</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1038/s41559-023-02047-3" target="_blank" rel="noopener">Mass production of unvouchered records fails to represent global biodiversity patterns</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong> & <u>Rodriguez J</u></div>
+    <div class="pub-meta"><span class="pub-jr">Nature Ecology & Evolution</span><span class="pub-vol">7: 816–831</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1038/s41559-023-02047-3" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1038/s41559-023-02047-3" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/46_Daru_Rodriguez_2023_NatEcolEvol.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1038/s41559-023-02047-3" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  47- Gumbs R, Chaudhary A, <strong>Daru BH</strong>, Faith DP, Forest F, Gray CL, Kowalska A, Lee WS, Pellens R, Pollock LJ, Rosindell J, Scherson RA & Owen NR (2023) <a href="https://doi.org/10.1111/cobi.14138" target="_blank" style="color: black; text-decoration: none;">Indicators to monitor the status of the Tree of Life.</a> <em><strong>Conservation Biology</strong></em> 37: e14138.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/cobi.14138" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/cobi.14138" data-link-target="_blank"></a>
-  <a href="https://conbio.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/cobi.14138" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">47</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/cobi.14138" target="_blank" rel="noopener">Indicators to monitor the status of the Tree of Life</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short">Gumbs R, Chaudhary A, <strong>Daru BH</strong>, Faith DP, Forest F, Gray CL … <button type="button" class="pub-more">+ 7 more</button></span><span class="pub-auth-full" hidden>Gumbs R, Chaudhary A, <strong>Daru BH</strong>, Faith DP, Forest F, Gray CL, Kowalska A, Lee WS, Pellens R, Pollock LJ, Rosindell J, Scherson RA & Owen NR</span></div>
+    <div class="pub-meta"><span class="pub-jr">Conservation Biology</span><span class="pub-vol">37: e14138</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/cobi.14138" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/cobi.14138" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://conbio.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/cobi.14138" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/cobi.14138" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  46- <strong>Daru BH</strong> & Rock BM (2023) <a href="https://doi.org/10.1038/s41477-023-01445-6" target="_blank" style="color: black; text-decoration: none;">Reorganization of seagrass communities in a changing climate.</a> <em><strong>Nature Plants</strong></em> 9: 1034–1043.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1038/s41477-023-01445-6" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1038/s41477-023-01445-6" data-link-target="_blank"></a>
-  <a href="https://www.nature.com/articles/s41477-023-01445-6.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-  <a href="https://open.spotify.com/album/5i44OGh8H9DCpwvKIWIE2L" class="btn btn--small btn--primary pub-song" style="background-color:#8C1515; color:#ffffff" target="_blank" rel="noopener" title="Listen to &ldquo;Seagrass&rdquo;, a song inspired by this paper" aria-label="Listen to Seagrass, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i></a>
-</span>
-</p>
+<article class="pub" data-song="1">
+  <div class="pub-num">46</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1038/s41477-023-01445-6" target="_blank" rel="noopener">Reorganization of seagrass communities in a changing climate</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong> & <u>Rock BM</u></div>
+    <div class="pub-meta"><span class="pub-jr">Nature Plants</span><span class="pub-vol">9: 1034–1043</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1038/s41477-023-01445-6" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1038/s41477-023-01445-6" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.nature.com/articles/s41477-023-01445-6.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1038/s41477-023-01445-6" target="_blank" rel="noopener">DOI</a><a class="song" href="https://open.spotify.com/album/5i44OGh8H9DCpwvKIWIE2L" target="_blank" rel="noopener" title="Listen to &ldquo;Seagrass&rdquo;, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i> Song</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2022" data-year="2022" data-reveal-children>
 <h2>2022</h2>
 
-<p>
-  45- Davies TJ, Maurin O, Yessoufou K, <strong>Daru BH</strong>, Bezeng BS, Mankga LT, Schaefer H, Thuiller W & van der Bank M (2022) <a href="https://doi.org/10.1111/conl.12914" target="_blank" style="color: black; text-decoration: none;">Woody plant phylogenetic diversity supports nature's contributions to people but is at risk from human population growth.</a> <em><strong>Conservation Letters</strong></em> 15: e12914.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/conl.12914" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/conl.12914" data-link-target="_blank"></a>
-  <a href="https://conbio.onlinelibrary.wiley.com/doi/pdf/10.1111/conl.12914" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">45</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/conl.12914" target="_blank" rel="noopener">Woody plant phylogenetic diversity supports nature's contributions to people but is at risk from human population growth</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short">Davies TJ, Maurin O, Yessoufou K, <strong>Daru BH</strong>, Bezeng BS, Mankga LT … <button type="button" class="pub-more">+ 3 more</button></span><span class="pub-auth-full" hidden>Davies TJ, Maurin O, Yessoufou K, <strong>Daru BH</strong>, Bezeng BS, Mankga LT, Schaefer H, Thuiller W & van der Bank M</span></div>
+    <div class="pub-meta"><span class="pub-jr">Conservation Letters</span><span class="pub-vol">15: e12914</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/conl.12914" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/conl.12914" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://conbio.onlinelibrary.wiley.com/doi/pdf/10.1111/conl.12914" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/conl.12914" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2021" data-year="2021" data-reveal-children>
 <h2>2021</h2>
 
-<p>
-  44- <strong>Daru BH</strong>, Willis CG, Meineke EK, Ronk A, Zobel M, Pärtel M, Antonelli A, Davies TJ & Davis CC (2021) <a href="https://doi.org/10.1038/s41467-021-27186-8" target="_blank" style="color: black; text-decoration: none;">Widespread homogenization of plant communities in the Anthropocene.</a> <em><strong>Nature Communications</strong></em> 12: 6983.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1038/s41467-021-27186-8" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1038/s41467-021-27186-8" data-link-target="_blank"></a>
-  <a href="https://www.nature.com/articles/s41467-021-27186-8.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">44</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1038/s41467-021-27186-8" target="_blank" rel="noopener">Widespread homogenization of plant communities in the Anthropocene</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short"><strong>Daru BH</strong>, Willis CG, Meineke EK, Ronk A, Zobel M, Pärtel M … <button type="button" class="pub-more">+ 3 more</button></span><span class="pub-auth-full" hidden><strong>Daru BH</strong>, Willis CG, Meineke EK, Ronk A, Zobel M, Pärtel M, Antonelli A, Davies TJ & Davis CC</span></div>
+    <div class="pub-meta"><span class="pub-jr">Nature Communications</span><span class="pub-vol">12: 6983</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1038/s41467-021-27186-8" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1038/s41467-021-27186-8" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.nature.com/articles/s41467-021-27186-8.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1038/s41467-021-27186-8" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  43- Meineke EK & <strong>Daru BH</strong> (co-first author) (2021) <a href="https://doi.org/10.1016/j.tree.2021.08.003" target="_blank" style="color: black; text-decoration: none;">Bias assessments to expand research harnessing biological collections.</a> <em><strong>Trends in Ecology & Evolution</strong></em> 36: 1071–1082.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1016/j.tree.2021.08.003" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1016/j.tree.2021.08.003" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/43_MeinekeDaru2021_TREE.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">43</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1016/j.tree.2021.08.003" target="_blank" rel="noopener">Bias assessments to expand research harnessing biological collections</a></h3>
+    <div class="pub-auth">Meineke EK & <strong>Daru BH</strong> (co-first author)</div>
+    <div class="pub-meta"><span class="pub-jr">Trends in Ecology & Evolution</span><span class="pub-vol">36: 1071–1082</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1016/j.tree.2021.08.003" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1016/j.tree.2021.08.003" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/43_MeinekeDaru2021_TREE.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1016/j.tree.2021.08.003" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  42- Rock BM & <strong>Daru BH</strong> (2021) <a href="https://doi.org/10.3389/fmars.2021.608867" target="_blank" style="color: black; text-decoration: none;">Impediments to understanding seagrasses' response to global change.</a> <em><strong>Frontiers in Marine Science</strong></em> 8: 608867.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.3389/fmars.2021.608867" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.3389/fmars.2021.608867" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/41_RockDaru2021fmars.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">42</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.3389/fmars.2021.608867" target="_blank" rel="noopener">Impediments to understanding seagrasses' response to global change</a></h3>
+    <div class="pub-auth"><u>Rock BM</u> & <strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Frontiers in Marine Science</span><span class="pub-vol">8: 608867</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.3389/fmars.2021.608867" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.3389/fmars.2021.608867" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/41_RockDaru2021fmars.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.3389/fmars.2021.608867" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  41- <strong>Daru BH</strong> (2021) <a href="https://doi.org/10.1038/d41586-021-01547-1" target="_blank" style="color: black; text-decoration: none;">Migratory birds aid the redistribution of plants to new climates.</a> <em><strong>Nature</strong></em> 595: 34–36.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1038/d41586-021-01547-1" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1038/d41586-021-01547-1" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/42_Daru2021_NATURE.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">41</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1038/d41586-021-01547-1" target="_blank" rel="noopener">Migratory birds aid the redistribution of plants to new climates</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Nature</span><span class="pub-vol">595: 34–36</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1038/d41586-021-01547-1" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1038/d41586-021-01547-1" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/42_Daru2021_NATURE.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1038/d41586-021-01547-1" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  40- <strong>Daru BH</strong> (2021) <a href="https://doi.org/10.7554/eLife.67422" target="_blank" style="color: black; text-decoration: none;">Exploring a new way to think about climate regions.</a> <em><strong>eLife</strong></em> 10: e67422.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.7554/eLife.67422" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.7554/eLife.67422" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/40_Daru2021_eLife.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">40</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.7554/eLife.67422" target="_blank" rel="noopener">Exploring a new way to think about climate regions</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">eLife</span><span class="pub-vol">10: e67422</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.7554/eLife.67422" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.7554/eLife.67422" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/40_Daru2021_eLife.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.7554/eLife.67422" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2020" data-year="2020" data-reveal-children>
 <h2>2020</h2>
 
-<p>
-  39- <strong>Daru BH</strong>, Farooq H, Antonelli A & Faurby S (2020) <a href="https://doi.org/10.1038/s41467-020-15921-6" target="_blank" style="color: black; text-decoration: none;">Endemism patterns are scale dependent.</a> <em><strong>Nature Communications</strong></em> 11: 2115.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1038/s41467-020-15921-6" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1038/s41467-020-15921-6" data-link-target="_blank"></a>
-  <a href="https://www.nature.com/articles/s41467-020-15921-6.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">39</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1038/s41467-020-15921-6" target="_blank" rel="noopener">Endemism patterns are scale dependent</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Farooq H, Antonelli A & Faurby S</div>
+    <div class="pub-meta"><span class="pub-jr">Nature Communications</span><span class="pub-vol">11: 2115</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1038/s41467-020-15921-6" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1038/s41467-020-15921-6" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.nature.com/articles/s41467-020-15921-6.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1038/s41467-020-15921-6" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  38- Davies TJ, <strong>Daru BH</strong>, Bezeng BS, Charles-Dominique T, Hempson GP, Kabongo RM, Maurin O, Muasya AM, van der Bank M & Bond WJ (2020) <a href="https://doi.org/10.1038/s41598-020-69378-0" target="_blank" style="color: black; text-decoration: none;">Savanna tree evolutionary ages inform the reconstruction of the paleoenvironment of our hominin ancestors.</a> <em><strong>Scientific Reports</strong></em> 10: 12430.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1038/s41598-020-69378-0" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1038/s41598-020-69378-0" data-link-target="_blank"></a>
-  <a href="https://www.nature.com/articles/s41598-020-69378-0.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">38</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1038/s41598-020-69378-0" target="_blank" rel="noopener">Savanna tree evolutionary ages inform the reconstruction of the paleoenvironment of our hominin ancestors</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short">Davies TJ, <strong>Daru BH</strong>, Bezeng BS, Charles-Dominique T, Hempson GP, Kabongo RM … <button type="button" class="pub-more">+ 4 more</button></span><span class="pub-auth-full" hidden>Davies TJ, <strong>Daru BH</strong>, Bezeng BS, Charles-Dominique T, Hempson GP, Kabongo RM, Maurin O, Muasya AM, van der Bank M & Bond WJ</span></div>
+    <div class="pub-meta"><span class="pub-jr">Scientific Reports</span><span class="pub-vol">10: 12430</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1038/s41598-020-69378-0" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1038/s41598-020-69378-0" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.nature.com/articles/s41598-020-69378-0.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1038/s41598-020-69378-0" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  37- <strong>Daru BH</strong>, Karunarathne P & Schliep K (2020) <a href="https://doi.org/10.1111/2041-210X.13478" target="_blank" style="color: black; text-decoration: none;">phyloregion: R package for biogeographic regionalization and macroecology.</a> <em><strong>Methods in Ecology and Evolution</strong></em> 11: 1483–1491.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/2041-210X.13478" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/2041-210X.13478" data-link-target="_blank"></a>
-  <a href="https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/2041-210X.13478" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">37</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/2041-210X.13478" target="_blank" rel="noopener">phyloregion: R package for biogeographic regionalization and macroecology</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, <u>Karunarathne P</u> & Schliep K</div>
+    <div class="pub-meta"><span class="pub-jr">Methods in Ecology and Evolution</span><span class="pub-vol">11: 1483–1491</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/2041-210X.13478" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/2041-210X.13478" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://besjournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/2041-210X.13478" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/2041-210X.13478" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2019" data-year="2019" data-reveal-children>
 <h2>2019</h2>
 
-<p>
-  36- <strong>Daru BH</strong>, le Roux PC, Gopalraj J, Park DS, Holt BG & Greve M (2019) <a href="https://doi.org/10.1111/geb.12888" target="_blank" style="color: black; text-decoration: none;">Spatial overlaps between the global protected areas network and terrestrial hotspots of evolutionary diversity.</a> <em><strong>Global Ecology and Biogeography</strong></em> 28: 757–766.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/geb.12888" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/geb.12888" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/36_Daru2019_GEB.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">36</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/geb.12888" target="_blank" rel="noopener">Spatial overlaps between the global protected areas network and terrestrial hotspots of evolutionary diversity</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, le Roux PC, Gopalraj J, Park DS, Holt BG & Greve M</div>
+    <div class="pub-meta"><span class="pub-jr">Global Ecology and Biogeography</span><span class="pub-vol">28: 757–766</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/geb.12888" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/geb.12888" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/36_Daru2019_GEB.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/geb.12888" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  35- Mathakutha R, Steyn C, le Roux PC, Blom IJ, Chown SL, <strong>Daru BH</strong>, Ripley BS, Louw A & Greve M (2019) <a href="https://doi.org/10.1111/jvs.12772" target="_blank" style="color: black; text-decoration: none;">Invasive species differ in key functional traits from native and non-invasive alien plant species.</a> <em><strong>Journal of Vegetation Science</strong></em> 30: 994–1006.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/jvs.12772" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/jvs.12772" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/35_Mathakutha2019_JVS.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">35</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/jvs.12772" target="_blank" rel="noopener">Invasive species differ in key functional traits from native and non-invasive alien plant species</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short">Mathakutha R, Steyn C, le Roux PC, Blom IJ, Chown SL, <strong>Daru BH</strong> … <button type="button" class="pub-more">+ 3 more</button></span><span class="pub-auth-full" hidden>Mathakutha R, Steyn C, le Roux PC, Blom IJ, Chown SL, <strong>Daru BH</strong>, Ripley BS, Louw A & Greve M</span></div>
+    <div class="pub-meta"><span class="pub-jr">Journal of Vegetation Science</span><span class="pub-vol">30: 994–1006</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/jvs.12772" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/jvs.12772" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/35_Mathakutha2019_JVS.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/jvs.12772" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  34- <strong>Daru BH</strong>, Kling MM, Meineke EK & van Wyk AE (2019) <a href="https://doi.org/10.1002/aps3.1232" target="_blank" style="color: black; text-decoration: none;">Temperature controls phenology in continuously flowering <em>Protea</em> species of subtropical Africa.</a> <em><strong>Applications in Plant Sciences</strong></em> 7: e1232.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1002/aps3.1232" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1002/aps3.1232" data-link-target="_blank"></a>
-  <a href="https://bsapubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aps3.1232" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">34</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1002/aps3.1232" target="_blank" rel="noopener">Temperature controls phenology in continuously flowering <em>Protea</em> species of subtropical Africa</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Kling MM, Meineke EK & van Wyk AE</div>
+    <div class="pub-meta"><span class="pub-jr">Applications in Plant Sciences</span><span class="pub-vol">7: e1232</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1002/aps3.1232" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1002/aps3.1232" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://bsapubs.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aps3.1232" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1002/aps3.1232" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2018" data-year="2018" data-reveal-children>
 <h2>2018</h2>
 
-<p>
-  33- <strong>Daru BH</strong>, Park DS, Primack RB, Willis CG, Barrington DS, Whitfeld TJS, Seidler TG, Sweeney PW, Foster DR, Ellison AM & Davis CC (2018) <a href="https://doi.org/10.1111/nph.14855" target="_blank" style="color: black; text-decoration: none;">Widespread sampling biases in herbaria revealed from large-scale digitization.</a> <em><strong>New Phytologist</strong></em> 217: 939–955.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/nph.14855" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/nph.14855" data-link-target="_blank"></a>
-  <a href="https://nph.onlinelibrary.wiley.com/doi/pdf/10.1111/nph.14855" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">33</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/nph.14855" target="_blank" rel="noopener">Widespread sampling biases in herbaria revealed from large-scale digitization</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short"><strong>Daru BH</strong>, Park DS, Primack RB, Willis CG, Barrington DS, Whitfeld TJS … <button type="button" class="pub-more">+ 5 more</button></span><span class="pub-auth-full" hidden><strong>Daru BH</strong>, Park DS, Primack RB, Willis CG, Barrington DS, Whitfeld TJS, Seidler TG, Sweeney PW, Foster DR, Ellison AM & Davis CC</span></div>
+    <div class="pub-meta"><span class="pub-jr">New Phytologist</span><span class="pub-vol">217: 939–955</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/nph.14855" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/nph.14855" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://nph.onlinelibrary.wiley.com/doi/pdf/10.1111/nph.14855" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/nph.14855" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  32- <strong>Daru BH</strong>, Bowman EA, Pfister DH & Arnold AE (2018) <a href="https://doi.org/10.1098/rstb.2017.0395" target="_blank" style="color: black; text-decoration: none;">A novel proof-of-concept for capturing the diversity of endophytic fungi preserved in herbarium specimens.</a> <em><strong>Philosophical Transactions of the Royal Society B</strong></em> 374: 20170395.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1098/rstb.2017.0395" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1098/rstb.2017.0395" data-link-target="_blank"></a>
-  <a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rstb.2017.0395" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">32</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1098/rstb.2017.0395" target="_blank" rel="noopener">A novel proof-of-concept for capturing the diversity of endophytic fungi preserved in herbarium specimens</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Bowman EA, Pfister DH & Arnold AE</div>
+    <div class="pub-meta"><span class="pub-jr">Philosophical Transactions of the Royal Society B</span><span class="pub-vol">374: 20170395</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1098/rstb.2017.0395" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1098/rstb.2017.0395" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://royalsocietypublishing.org/doi/pdf/10.1098/rstb.2017.0395" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1098/rstb.2017.0395" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  31- Meineke EK, Davies TJ, <strong>Daru BH</strong> & Davis CC (2018) <a href="https://doi.org/10.1098/rstb.2017.0386" target="_blank" style="color: black; text-decoration: none;">Biological collections for understanding biodiversity in the Anthropocene.</a> <em><strong>Philosophical Transactions of the Royal Society B</strong></em> 374: 20170386.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1098/rstb.2017.0386" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1098/rstb.2017.0386" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/31_Meineke2018_PTRSB.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">31</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1098/rstb.2017.0386" target="_blank" rel="noopener">Biological collections for understanding biodiversity in the Anthropocene</a></h3>
+    <div class="pub-auth">Meineke EK, Davies TJ, <strong>Daru BH</strong> & Davis CC</div>
+    <div class="pub-meta"><span class="pub-jr">Philosophical Transactions of the Royal Society B</span><span class="pub-vol">374: 20170386</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1098/rstb.2017.0386" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1098/rstb.2017.0386" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/31_Meineke2018_PTRSB.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1098/rstb.2017.0386" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  30- <strong>Daru BH</strong>, van der Bank M & Davies TJ (2018) <a href="https://doi.org/10.1111/ddi.12679" target="_blank" style="color: black; text-decoration: none;">Unravelling the evolutionary origins of biogeographic assemblages.</a> <em><strong>Diversity and Distributions</strong></em> 24: 313–324.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/ddi.12679" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/ddi.12679" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/30_Daru2018_DDI.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">30</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/ddi.12679" target="_blank" rel="noopener">Unravelling the evolutionary origins of biogeographic assemblages</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, van der Bank M & Davies TJ</div>
+    <div class="pub-meta"><span class="pub-jr">Diversity and Distributions</span><span class="pub-vol">24: 313–324</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/ddi.12679" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/ddi.12679" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/30_Daru2018_DDI.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/ddi.12679" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2017" data-year="2017" data-reveal-children>
 <h2>2017</h2>
 
-<p>
-  29- <strong>Daru BH</strong>, Elliott TL, Park DS & Davies TJ (2017) <a href="https://doi.org/10.1016/j.tree.2017.08.013" target="_blank" style="color: black; text-decoration: none;">Understanding the processes underpinning patterns of phylogenetic regionalization.</a> <em><strong>Trends in Ecology & Evolution</strong></em> 32: 845–860.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1016/j.tree.2017.08.013" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1016/j.tree.2017.08.013" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/29_Daru2017_TREE.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">29</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1016/j.tree.2017.08.013" target="_blank" rel="noopener">Understanding the processes underpinning patterns of phylogenetic regionalization</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Elliott TL, Park DS & Davies TJ</div>
+    <div class="pub-meta"><span class="pub-jr">Trends in Ecology & Evolution</span><span class="pub-vol">32: 845–860</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1016/j.tree.2017.08.013" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1016/j.tree.2017.08.013" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/29_Daru2017_TREE.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1016/j.tree.2017.08.013" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  28- <strong>Daru BH</strong>, Holt BG, Lessard JP, Yessoufou K & Davies TJ (2017) <a href="https://doi.org/10.1016/j.biocon.2016.08.022" target="_blank" style="color: black; text-decoration: none;">Phylogenetic regionalization of marine plants reveals close evolutionary affinities among disjunct temperate assemblages.</a> <em><strong>Biological Conservation</strong></em> 213: 351–356.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1016/j.biocon.2016.08.022" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1016/j.biocon.2016.08.022" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/28_Daru2017_BIOC.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">28</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1016/j.biocon.2016.08.022" target="_blank" rel="noopener">Phylogenetic regionalization of marine plants reveals close evolutionary affinities among disjunct temperate assemblages</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Holt BG, Lessard JP, Yessoufou K & Davies TJ</div>
+    <div class="pub-meta"><span class="pub-jr">Biological Conservation</span><span class="pub-vol">213: 351–356</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1016/j.biocon.2016.08.022" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1016/j.biocon.2016.08.022" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/28_Daru2017_BIOC.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1016/j.biocon.2016.08.022" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  27- <strong>Daru BH</strong>, van der Bank M, Bello A & Yessoufou K (2017) <a href="https://doi.org/10.1139/gen-2015-0183" target="_blank" style="color: black; text-decoration: none;">Testing the reliability of the standard and complementary DNA barcodes for the monocot subfamily Alooideae from South Africa.</a> <em><strong>Genome</strong></em> 60: 337–347.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1139/gen-2015-0183" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1139/gen-2015-0183" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/27_Daru2017_GEN.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">27</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1139/gen-2015-0183" target="_blank" rel="noopener">Testing the reliability of the standard and complementary DNA barcodes for the monocot subfamily Alooideae from South Africa</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, van der Bank M, Bello A & Yessoufou K</div>
+    <div class="pub-meta"><span class="pub-jr">Genome</span><span class="pub-vol">60: 337–347</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1139/gen-2015-0183" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1139/gen-2015-0183" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/27_Daru2017_GEN.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1139/gen-2015-0183" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  26- Bezeng BS, Davies TJ, <strong>Daru BH</strong>, Kabongo RM, Maurin O, Orton RD, Yessoufou K, van der Bank H & van der Bank M (2017) <a href="https://doi.org/10.1139/gen-2016-0198" target="_blank" style="color: black; text-decoration: none;">Ten years of barcoding at the African Centre for DNA barcoding.</a> <em><strong>Genome</strong></em> 60: 629–638.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1139/gen-2016-0198" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1139/gen-2016-0198" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/26_Bezeng2017_GEN.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">26</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1139/gen-2016-0198" target="_blank" rel="noopener">Ten years of barcoding at the African Centre for DNA barcoding</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short">Bezeng BS, Davies TJ, <strong>Daru BH</strong>, Kabongo RM, Maurin O, Orton RD … <button type="button" class="pub-more">+ 3 more</button></span><span class="pub-auth-full" hidden>Bezeng BS, Davies TJ, <strong>Daru BH</strong>, Kabongo RM, Maurin O, Orton RD, Yessoufou K, van der Bank H & van der Bank M</span></div>
+    <div class="pub-meta"><span class="pub-jr">Genome</span><span class="pub-vol">60: 629–638</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1139/gen-2016-0198" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1139/gen-2016-0198" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/26_Bezeng2017_GEN.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1139/gen-2016-0198" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  25- Yessoufou K, <strong>Daru BH</strong>, Tafirei R, Elansary HO & Rampedi I (2017) <a href="https://doi.org/10.1002/ece3.2660" target="_blank" style="color: black; text-decoration: none;">Integrating biogeography, threat and evolutionary data to explore extinction crisis in the taxonomic group of cycads.</a> <em><strong>Ecology and Evolution</strong></em> 7: 2735–2746.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1002/ece3.2660" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1002/ece3.2660" data-link-target="_blank"></a>
-  <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/ece3.2660" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">25</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1002/ece3.2660" target="_blank" rel="noopener">Integrating biogeography, threat and evolutionary data to explore extinction crisis in the taxonomic group of cycads</a></h3>
+    <div class="pub-auth">Yessoufou K, <strong>Daru BH</strong>, Tafirei R, Elansary HO & Rampedi I</div>
+    <div class="pub-meta"><span class="pub-jr">Ecology and Evolution</span><span class="pub-vol">7: 2735–2746</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1002/ece3.2660" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1002/ece3.2660" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/ece3.2660" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1002/ece3.2660" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  24- Bezeng BS, Morales-Castilla I, van der Bank M, Yessoufou K, <strong>Daru BH</strong> & Davies TJ (2017) <a href="https://doi.org/10.1002/ecs2.1694" target="_blank" style="color: black; text-decoration: none;">Climate change may reduce the spread of non-native species.</a> <em><strong>Ecosphere</strong></em> 8: e01694.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1002/ecs2.1694" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1002/ecs2.1694" data-link-target="_blank"></a>
-  <a href="https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecs2.1694" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">24</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1002/ecs2.1694" target="_blank" rel="noopener">Climate change may reduce the spread of non-native species</a></h3>
+    <div class="pub-auth">Bezeng BS, Morales-Castilla I, van der Bank M, Yessoufou K, <strong>Daru BH</strong> & Davies TJ</div>
+    <div class="pub-meta"><span class="pub-jr">Ecosphere</span><span class="pub-vol">8: e01694</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1002/ecs2.1694" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1002/ecs2.1694" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://esajournals.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ecs2.1694" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1002/ecs2.1694" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2016" data-year="2016" data-reveal-children>
 <h2>2016</h2>
 
-<p>
-  23- Charles-Dominique T, Davies TJ, Hempson GP, Bezeng SB, <strong>Daru BH</strong>, Kabongo RM, Maurin O, Muasya AM, van der Bank M & Bond WJ (2016) <a href="https://doi.org/10.1073/pnas.1607493113" target="_blank" style="color: black; text-decoration: none;">Spiny plants, mammal browsers and the origin of African savannas.</a> <em><strong>Proceedings of the National Academy of Sciences USA</strong></em> 113: E5572–E5579.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1073/pnas.1607493113" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1073/pnas.1607493113" data-link-target="_blank"></a>
-  <a href="https://www.pnas.org/doi/pdf/10.1073/pnas.1607493113" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">23</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1073/pnas.1607493113" target="_blank" rel="noopener">Spiny plants, mammal browsers and the origin of African savannas</a></h3>
+    <div class="pub-auth"><span class="pub-auth-short">Charles-Dominique T, Davies TJ, Hempson GP, Bezeng SB, <strong>Daru BH</strong>, Kabongo RM … <button type="button" class="pub-more">+ 4 more</button></span><span class="pub-auth-full" hidden>Charles-Dominique T, Davies TJ, Hempson GP, Bezeng SB, <strong>Daru BH</strong>, Kabongo RM, Maurin O, Muasya AM, van der Bank M & Bond WJ</span></div>
+    <div class="pub-meta"><span class="pub-jr">Proceedings of the National Academy of Sciences USA</span><span class="pub-vol">113: E5572–E5579</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1073/pnas.1607493113" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1073/pnas.1607493113" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.pnas.org/doi/pdf/10.1073/pnas.1607493113" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1073/pnas.1607493113" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  22- <strong>Daru BH</strong> & le Roux PC (2016) <a href="https://doi.org/10.1111/geb.12412" target="_blank" style="color: black; text-decoration: none;">Marine protected areas are insufficient to conserve global marine plant diversity.</a> <em><strong>Global Ecology and Biogeography</strong></em> 25: 324–334.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/geb.12412" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/geb.12412" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/22_Daru2016_GEB.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">22</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/geb.12412" target="_blank" rel="noopener">Marine protected areas are insufficient to conserve global marine plant diversity</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong> & le Roux PC</div>
+    <div class="pub-meta"><span class="pub-jr">Global Ecology and Biogeography</span><span class="pub-vol">25: 324–334</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/geb.12412" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/geb.12412" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/22_Daru2016_GEB.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/geb.12412" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  21- <strong>Daru BH</strong> & Yessoufou K (2016) <a href="https://doi.org/10.1007/978-3-319-41840-7_19" target="_blank" style="color: black; text-decoration: none;">A search for a single DNA barcode for seagrasses of the world.</a> In: <em>DNA Barcoding in Marine Perspectives: Assessment and Conservation of Biodiversity</em> (eds Trivedi S, Ansari AA, Ghosh KS & Rehman H), pp. 313–330. Springer International Publishing Switzerland.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1007/978-3-319-41840-7_19" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1007/978-3-319-41840-7_19" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/21_Daru2016.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">21</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1007/978-3-319-41840-7_19" target="_blank" rel="noopener">A search for a single DNA barcode for seagrasses of the world</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong> & Yessoufou K</div>
+    <div class="pub-meta"><span class="pub-vol">In: <em>DNA Barcoding in Marine Perspectives: Assessment and Conservation of Biodiversity</em> (eds Trivedi S, Ansari AA, Ghosh KS & Rehman H), pp. 313–330. Springer International Publishing Switzerland</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1007/978-3-319-41840-7_19" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1007/978-3-319-41840-7_19" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/21_Daru2016.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1007/978-3-319-41840-7_19" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  20- <strong>Daru BH</strong>, Berger DK & van Wyk AE (2016) <a href="https://doi.org/10.1111/nph.13826" target="_blank" style="color: black; text-decoration: none;">Opportunities for unlocking the potential of genomics for African trees.</a> <em><strong>New Phytologist</strong></em> 210: 772–778.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/nph.13826" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/nph.13826" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/20_Daru2016_NPH.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">20</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/nph.13826" target="_blank" rel="noopener">Opportunities for unlocking the potential of genomics for African trees</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Berger DK & van Wyk AE</div>
+    <div class="pub-meta"><span class="pub-jr">New Phytologist</span><span class="pub-vol">210: 772–778</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/nph.13826" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/nph.13826" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/20_Daru2016_NPH.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/nph.13826" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  19- Davies TJ, <strong>Daru BH</strong>, van der Bank M, Maurin O & Bond WJ (2016) <a href="https://doi.org/10.1111/nph.13795" target="_blank" style="color: black; text-decoration: none;">Multiple routes underground? Frost alone cannot explain the evolution of underground trees.</a> <em><strong>New Phytologist</strong></em> 209: 910–912.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/nph.13795" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/nph.13795" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/19_Davies2016_NPH.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">19</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/nph.13795" target="_blank" rel="noopener">Multiple routes underground? Frost alone cannot explain the evolution of underground trees</a></h3>
+    <div class="pub-auth">Davies TJ, <strong>Daru BH</strong>, van der Bank M, Maurin O & Bond WJ</div>
+    <div class="pub-meta"><span class="pub-jr">New Phytologist</span><span class="pub-vol">209: 910–912</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/nph.13795" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/nph.13795" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/19_Davies2016_NPH.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/nph.13795" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  18- <strong>Daru BH</strong>, van der Bank M, Maurin O, Yessoufou K, Schaefer H, Slingsby JA & Davies TJ (2016) <a href="https://doi.org/10.1111/jbi.12619" target="_blank" style="color: black; text-decoration: none;">A novel phylogenetic regionalization of the phytogeographic zones of southern Africa reveals their hidden evolutionary affinities.</a> <em><strong>Journal of Biogeography</strong></em> 43: 155–166.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/jbi.12619" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/jbi.12619" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/18_Daru2016_JBI.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">18</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/jbi.12619" target="_blank" rel="noopener">A novel phylogenetic regionalization of the phytogeographic zones of southern Africa reveals their hidden evolutionary affinities</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, van der Bank M, Maurin O, Yessoufou K, Schaefer H, Slingsby JA & Davies TJ</div>
+    <div class="pub-meta"><span class="pub-jr">Journal of Biogeography</span><span class="pub-vol">43: 155–166</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/jbi.12619" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/jbi.12619" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/18_Daru2016_JBI.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/jbi.12619" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2015" data-year="2015" data-reveal-children>
 <h2>2015</h2>
 
-<p>
-  17- <strong>Daru BH</strong>, van der Bank M & Davies TJ (2015) <a href="https://doi.org/10.1111/ddi.12290" target="_blank" style="color: black; text-decoration: none;">Spatial incongruence among hotspots and complementary areas of tree diversity in southern Africa.</a> <em><strong>Diversity and Distributions</strong></em> 21: 769–780.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/ddi.12290" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/ddi.12290" data-link-target="_blank"></a>
-  <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/ddi.12290" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">17</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/ddi.12290" target="_blank" rel="noopener">Spatial incongruence among hotspots and complementary areas of tree diversity in southern Africa</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, van der Bank M & Davies TJ</div>
+    <div class="pub-meta"><span class="pub-jr">Diversity and Distributions</span><span class="pub-vol">21: 769–780</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/ddi.12290" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/ddi.12290" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/ddi.12290" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/ddi.12290" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  16- Bello A, <strong>Daru BH</strong>, Stirton CH, Chimphango SBM, van der Bank M, Maurin O & Muasya AM (2015) <a href="https://doi.org/10.1093/aobpla/plv124" target="_blank" style="color: black; text-decoration: none;">DNA barcodes reveal microevolutionary signals in fire response trait in two legume genera.</a> <em><strong>AoB PLANTS</strong></em> 7: plv124.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1093/aobpla/plv124" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1093/aobpla/plv124" data-link-target="_blank"></a>
-  <a href="https://academic.oup.com/aobpla/article-pdf/doi/10.1093/aobpla/plv124/10689789/plv124.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">16</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1093/aobpla/plv124" target="_blank" rel="noopener">DNA barcodes reveal microevolutionary signals in fire response trait in two legume genera</a></h3>
+    <div class="pub-auth">Bello A, <strong>Daru BH</strong>, Stirton CH, Chimphango SBM, van der Bank M, Maurin O & Muasya AM</div>
+    <div class="pub-meta"><span class="pub-jr">AoB PLANTS</span><span class="pub-vol">7: plv124</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1093/aobpla/plv124" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1093/aobpla/plv124" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://academic.oup.com/aobpla/article-pdf/doi/10.1093/aobpla/plv124/10689789/plv124.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1093/aobpla/plv124" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  15- Yessoufou K, <strong>Daru BH</strong> & Muasya AM (2015) <a href="https://doi.org/10.1111/1755-0998.12310" target="_blank" style="color: black; text-decoration: none;">Phylogenetic exploration of commonly used medicinal plants in South Africa.</a> <em><strong>Molecular Ecology Resources</strong></em> 15: 405–413.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/1755-0998.12310" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/1755-0998.12310" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/15_Yessoufou2015_MER.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">15</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/1755-0998.12310" target="_blank" rel="noopener">Phylogenetic exploration of commonly used medicinal plants in South Africa</a></h3>
+    <div class="pub-auth">Yessoufou K, <strong>Daru BH</strong> & Muasya AM</div>
+    <div class="pub-meta"><span class="pub-jr">Molecular Ecology Resources</span><span class="pub-vol">15: 405–413</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/1755-0998.12310" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/1755-0998.12310" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/15_Yessoufou2015_MER.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/1755-0998.12310" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  14- <strong>Daru BH</strong>, Yessoufou K, Nuttman C & Abalaka J (2015) <a href="http://malimbus.free.fr/summarie/summ37001.htm" target="_blank" style="color: black; text-decoration: none;">A preliminary study of bird use of fig <em>Ficus</em> species in Amurum Forest Reserve, Nigeria.</a> <em><strong>Malimbus</strong></em> 37: 1–15.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a href="http://malimbus.org/en/contents/articles/V37/march/1%E2%80%9315.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">14</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="http://malimbus.free.fr/summarie/summ37001.htm" target="_blank" rel="noopener">A preliminary study of bird use of fig <em>Ficus</em> species in Amurum Forest Reserve, Nigeria</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Yessoufou K, Nuttman C & Abalaka J</div>
+    <div class="pub-meta"><span class="pub-jr">Malimbus</span><span class="pub-vol">37: 1–15</span><span class="pub-act"><a href="http://malimbus.org/en/contents/articles/V37/march/1%E2%80%9315.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2014" data-year="2014" data-reveal-children>
 <h2>2014</h2>
 
-<p>
-  13- Maurin O, Davies TJ, Burrows JE, <strong>Daru BH</strong>, Yessoufou K, Muasya AM, van der Bank M & Bond WJ (2014) <a href="https://doi.org/10.1111/nph.12936" target="_blank" style="color: black; text-decoration: none;">Savanna fire and the origins of the "underground forests" of Africa.</a> <em><strong>New Phytologist</strong></em> 204: 201–214.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/nph.12936" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/nph.12936" data-link-target="_blank"></a>
-  <a href="https://nph.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/nph.12936" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">13</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/nph.12936" target="_blank" rel="noopener">Savanna fire and the origins of the "underground forests" of Africa</a></h3>
+    <div class="pub-auth">Maurin O, Davies TJ, Burrows JE, <strong>Daru BH</strong>, Yessoufou K, Muasya AM, van der Bank M & Bond WJ</div>
+    <div class="pub-meta"><span class="pub-jr">New Phytologist</span><span class="pub-vol">204: 201–214</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/nph.12936" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/nph.12936" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://nph.onlinelibrary.wiley.com/doi/pdfdirect/10.1111/nph.12936" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/nph.12936" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  12- Yessoufou K, Bamigboye SO, <strong>Daru BH</strong> & van der Bank M (2014) <a href="https://doi.org/10.1002/ece3.880" target="_blank" style="color: black; text-decoration: none;">Evidence of constant diversification punctuated by a mass extinction in the African cycad.</a> <em><strong>Ecology and Evolution</strong></em> 4: 50–58.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1002/ece3.880" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1002/ece3.880" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/12_Yessoufou2014_ECE.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">12</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1002/ece3.880" target="_blank" rel="noopener">Evidence of constant diversification punctuated by a mass extinction in the African cycad</a></h3>
+    <div class="pub-auth">Yessoufou K, Bamigboye SO, <strong>Daru BH</strong> & van der Bank M</div>
+    <div class="pub-meta"><span class="pub-jr">Ecology and Evolution</span><span class="pub-vol">4: 50–58</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1002/ece3.880" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1002/ece3.880" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/12_Yessoufou2014_ECE.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1002/ece3.880" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  11- Manning JC, Boatwright JS, <strong>Daru BH</strong>, Maurin O & van der Bank M (2014) <a href="https://doi.org/10.1600/036364414X678044" target="_blank" style="color: black; text-decoration: none;">A molecular phylogeny and generic classification of Asphodelaceae subfamily Alooideae: A final resolution of the prickly issue of polyphyly in the Alooids?</a> <em><strong>Systematic Botany</strong></em> 39: 55–74.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1600/036364414X678044" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1600/036364414X678044" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/11_Manning2014_SYS.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">11</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1600/036364414X678044" target="_blank" rel="noopener">A molecular phylogeny and generic classification of Asphodelaceae subfamily Alooideae: A final resolution of the prickly issue of polyphyly in the Alooids?</a></h3>
+    <div class="pub-auth">Manning JC, Boatwright JS, <strong>Daru BH</strong>, Maurin O & van der Bank M</div>
+    <div class="pub-meta"><span class="pub-jr">Systematic Botany</span><span class="pub-vol">39: 55–74</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1600/036364414X678044" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1600/036364414X678044" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/11_Manning2014_SYS.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1600/036364414X678044" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  10- Yessoufou K, Gere J, <strong>Daru BH</strong> & van der Bank M (2014) <a href="https://doi.org/10.1002/ece3.1031" target="_blank" style="color: black; text-decoration: none;">Differences in evolutionary history translate into differences in invasion success of alien mammals in South Africa.</a> <em><strong>Ecology and Evolution</strong></em> 4: 2115–2123.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1002/ece3.1031" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1002/ece3.1031" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/10_Yessoufou2014_ECE.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">10</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1002/ece3.1031" target="_blank" rel="noopener">Differences in evolutionary history translate into differences in invasion success of alien mammals in South Africa</a></h3>
+    <div class="pub-auth">Yessoufou K, Gere J, <strong>Daru BH</strong> & van der Bank M</div>
+    <div class="pub-meta"><span class="pub-jr">Ecology and Evolution</span><span class="pub-vol">4: 2115–2123</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1002/ece3.1031" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1002/ece3.1031" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/10_Yessoufou2014_ECE.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1002/ece3.1031" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  9- Iheanacho HE, Njobeh PB, Dutton FM, Steenkamp PA, Steenkamp L, Mthombeni JQ, <strong>Daru BH</strong> & Makun AH (2014) <a href="https://doi.org/10.1016/j.fm.2014.05.019" target="_blank" style="color: black; text-decoration: none;">Morphological and molecular identification of filamentous <em>Aspergillus flavus</em> and <em>A. parasiticus</em> isolated from compound feeds in South Africa.</a> <em><strong>Food Microbiology</strong></em> 44: 180–184.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1016/j.fm.2014.05.019" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1016/j.fm.2014.05.019" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/09_Iheanacho2014.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">9</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1016/j.fm.2014.05.019" target="_blank" rel="noopener">Morphological and molecular identification of filamentous <em>Aspergillus flavus</em> and <em>A. parasiticus</em> isolated from compound feeds in South Africa</a></h3>
+    <div class="pub-auth">Iheanacho HE, Njobeh PB, Dutton FM, Steenkamp PA, Steenkamp L, Mthombeni JQ, <strong>Daru BH</strong> & Makun AH</div>
+    <div class="pub-meta"><span class="pub-jr">Food Microbiology</span><span class="pub-vol">44: 180–184</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1016/j.fm.2014.05.019" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1016/j.fm.2014.05.019" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/09_Iheanacho2014.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1016/j.fm.2014.05.019" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2013" data-year="2013" data-reveal-children>
 <h2>2013</h2>
 
-<p>
-  8- <strong>Daru BH</strong>, Yessoufou K, Mankga LT & Davies TJ (2013) <a href="https://doi.org/10.1371/journal.pone.0066686" target="_blank" style="color: black; text-decoration: none;">A global trend towards the loss of evolutionarily unique species in mangrove ecosystems.</a> <em><strong>PLoS ONE</strong></em> 8: e66686.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1371/journal.pone.0066686" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1371/journal.pone.0066686" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/08_Daru2013_PNE.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">8</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1371/journal.pone.0066686" target="_blank" rel="noopener">A global trend towards the loss of evolutionarily unique species in mangrove ecosystems</a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Yessoufou K, Mankga LT & Davies TJ</div>
+    <div class="pub-meta"><span class="pub-jr">PLoS ONE</span><span class="pub-vol">8: e66686</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1371/journal.pone.0066686" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1371/journal.pone.0066686" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/08_Daru2013_PNE.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1371/journal.pone.0066686" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  7- <strong>Daru BH</strong>, Manning JC, Boatwright JS, Maurin O, Maclean N, Schaefer H, Kuzmina M & van der Bank M (2013) <a href="https://doi.org/10.1002/tax.621006" target="_blank" style="color: black; text-decoration: none;">Molecular and morphological analysis of subfamily Alooideae (Asphodelaceae) and the inclusion of <em>Chortolirion</em> in <em>Aloe</em>.</a> <em><strong>Taxon</strong></em> 62: 62–76.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1002/tax.621006" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1002/tax.621006" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/07_Daru2013_TAX.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">7</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1002/tax.621006" target="_blank" rel="noopener">Molecular and morphological analysis of subfamily Alooideae (Asphodelaceae) and the inclusion of <em>Chortolirion</em> in <em>Aloe</em></a></h3>
+    <div class="pub-auth"><strong>Daru BH</strong>, Manning JC, Boatwright JS, Maurin O, Maclean N, Schaefer H, Kuzmina M & van der Bank M</div>
+    <div class="pub-meta"><span class="pub-jr">Taxon</span><span class="pub-vol">62: 62–76</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1002/tax.621006" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1002/tax.621006" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/07_Daru2013_TAX.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1002/tax.621006" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  6- Kyalangalilwa B, Boatwright JS, <strong>Daru BH</strong>, Maurin O & van der Bank M (2013) <a href="https://doi.org/10.1111/boj.12047" target="_blank" style="color: black; text-decoration: none;">Phylogenetic position and revised classification of <em>Acacia</em> s.l. (Fabaceae: Mimosoideae) in Africa, including new combinations <em>Vachellia</em> and <em>Senegalia</em>.</a> <em><strong>Botanical Journal of the Linnean Society</strong></em> 172: 500–523.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1111/boj.12047" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1111/boj.12047" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/06_Kyalangalilwa2013_BJLS.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">6</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1111/boj.12047" target="_blank" rel="noopener">Phylogenetic position and revised classification of <em>Acacia</em> s.l. (Fabaceae: Mimosoideae) in Africa, including new combinations <em>Vachellia</em> and <em>Senegalia</em></a></h3>
+    <div class="pub-auth">Kyalangalilwa B, Boatwright JS, <strong>Daru BH</strong>, Maurin O & van der Bank M</div>
+    <div class="pub-meta"><span class="pub-jr">Botanical Journal of the Linnean Society</span><span class="pub-vol">172: 500–523</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1111/boj.12047" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1111/boj.12047" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/06_Kyalangalilwa2013_BJLS.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1111/boj.12047" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  5- Gere J, Yessoufou K, <strong>Daru BH</strong>, Maurin O, Mankga LT & van der Bank M (2013) <a href="https://doi.org/10.3897/zookeys.365.5728" target="_blank" style="color: black; text-decoration: none;">Incorporating <em>trnH-psbA</em> to core DNA barcodes improves discrimination of species within southern African Combretaceae.</a> <em><strong>ZooKeys</strong></em> 365: 127–147.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.3897/zookeys.365.5728" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.3897/zookeys.365.5728" data-link-target="_blank"></a>
-  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3890675/pdf/ZooKeys-365-129.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">5</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.3897/zookeys.365.5728" target="_blank" rel="noopener">Incorporating <em>trnH-psbA</em> to core DNA barcodes improves discrimination of species within southern African Combretaceae</a></h3>
+    <div class="pub-auth">Gere J, Yessoufou K, <strong>Daru BH</strong>, Maurin O, Mankga LT & van der Bank M</div>
+    <div class="pub-meta"><span class="pub-jr">ZooKeys</span><span class="pub-vol">365: 127–147</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.3897/zookeys.365.5728" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.3897/zookeys.365.5728" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3890675/pdf/ZooKeys-365-129.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.3897/zookeys.365.5728" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  4- Mankga LT, Yessoufou K, Moteetee AM, <strong>Daru BH</strong> & van der Bank M (2013) <a href="https://doi.org/10.3897/zookeys.365.5730" target="_blank" style="color: black; text-decoration: none;">Efficacy of the core DNA barcodes in identifying processed and poorly conserved plant materials commonly used in South African traditional medicine.</a> <em><strong>ZooKeys</strong></em> 365: 215–233.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.3897/zookeys.365.5730" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.3897/zookeys.365.5730" data-link-target="_blank"></a>
-  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3890679/pdf/ZooKeys-365-215.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">4</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.3897/zookeys.365.5730" target="_blank" rel="noopener">Efficacy of the core DNA barcodes in identifying processed and poorly conserved plant materials commonly used in South African traditional medicine</a></h3>
+    <div class="pub-auth">Mankga LT, Yessoufou K, Moteetee AM, <strong>Daru BH</strong> & van der Bank M</div>
+    <div class="pub-meta"><span class="pub-jr">ZooKeys</span><span class="pub-vol">365: 215–233</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.3897/zookeys.365.5730" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.3897/zookeys.365.5730" data-link-target="_blank"></a></span><span class="pub-act"><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3890679/pdf/ZooKeys-365-215.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.3897/zookeys.365.5730" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 <div class="pub-year" id="y2012" data-year="2012" data-reveal-children>
 <h2>2012</h2>
 
-<p>
-  3- Yessoufou K, <strong>Daru BH</strong> & Davies TJ (2012) <a href="https://doi.org/10.1371/journal.pone.0047082" target="_blank" style="color: black; text-decoration: none;">Phylogenetic patterns of extinction risk in the Eastern Arc ecosystems, an African biodiversity hotspot.</a> <em><strong>PLoS ONE</strong></em> 7: e47082.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1371/journal.pone.0047082" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1371/journal.pone.0047082" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/03_Yessoufou2012_PONE.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">3</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1371/journal.pone.0047082" target="_blank" rel="noopener">Phylogenetic patterns of extinction risk in the Eastern Arc ecosystems, an African biodiversity hotspot</a></h3>
+    <div class="pub-auth">Yessoufou K, <strong>Daru BH</strong> & Davies TJ</div>
+    <div class="pub-meta"><span class="pub-jr">PLoS ONE</span><span class="pub-vol">7: e47082</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1371/journal.pone.0047082" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1371/journal.pone.0047082" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/03_Yessoufou2012_PONE.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1371/journal.pone.0047082" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  2- Yessoufou K, Abalaka J, van der Bank M & <strong>Daru BH</strong> (2012) <a href="https://doi.org/10.1560/IJEE.58.1.39" target="_blank" style="color: black; text-decoration: none;">Fig-frugivore interactions follow a constrained Brownian motion model of evolution in an Important Bird Area, West Africa.</a> <em><strong>Israel Journal of Ecology and Evolution</strong></em> 58: 39–51.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.1560/IJEE.58.1.39" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.1560/IJEE.58.1.39" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/02_Yessoufou2012_IJEE.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">2</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.1560/IJEE.58.1.39" target="_blank" rel="noopener">Fig-frugivore interactions follow a constrained Brownian motion model of evolution in an Important Bird Area, West Africa</a></h3>
+    <div class="pub-auth">Yessoufou K, Abalaka J, van der Bank M & <strong>Daru BH</strong></div>
+    <div class="pub-meta"><span class="pub-jr">Israel Journal of Ecology and Evolution</span><span class="pub-vol">58: 39–51</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.1560/IJEE.58.1.39" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.1560/IJEE.58.1.39" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/02_Yessoufou2012_IJEE.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.1560/IJEE.58.1.39" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 
-<p>
-  1- Van der Bank HF, Greenfield R, <strong>Daru BH</strong> & Yessoufou K (2012) <a href="https://doi.org/10.3750/AIP2012.42.4.04" target="_blank" style="color: black; text-decoration: none;">DNA barcoding reveals micro-evolutionary changes and river system-level phylogeographic resolution of seven populations of African silver catfish, <em>Schilbe intermedius</em> (Siluriformes, Schilbeidae).</a> <em><strong>Acta Ichthyologica et Piscatoria</strong></em> 42: 307–320.
-<br>
-<span style="display: inline-flex; align-items: center; gap: 10px; margin-top: 0;">
-  <a class="__dimensions_badge_embed__" data-doi="10.3750/AIP2012.42.4.04" data-legend="hover-bottom" data-style="large_rectangle" data-link-target="_blank"></a>
-  <a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="1" data-doi="10.3750/AIP2012.42.4.04" data-link-target="_blank"></a>
-  <a href="{{ site.baseurl}}/docs/01_VanderBank2012.pdf" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff" target="_blank">
-    <i class="fa fa-download" aria-hidden="true"></i> PDF file
-  </a>
-</span>
-</p>
+<article class="pub">
+  <div class="pub-num">1</div>
+  <div class="pub-body">
+    <h3 class="pub-title"><a href="https://doi.org/10.3750/AIP2012.42.4.04" target="_blank" rel="noopener">DNA barcoding reveals micro-evolutionary changes and river system-level phylogeographic resolution of seven populations of African silver catfish, <em>Schilbe intermedius</em> (Siluriformes, Schilbeidae)</a></h3>
+    <div class="pub-auth">Van der Bank HF, Greenfield R, <strong>Daru BH</strong> & Yessoufou K</div>
+    <div class="pub-meta"><span class="pub-jr">Acta Ichthyologica et Piscatoria</span><span class="pub-vol">42: 307–320</span><span class="pub-badges"><a class="__dimensions_badge_embed__" data-doi="10.3750/AIP2012.42.4.04" data-legend="hover-bottom" data-style="small_rectangle" data-link-target="_blank"></a><a class="altmetric-embed" data-badge-popover="bottom" data-badge-type="2" data-doi="10.3750/AIP2012.42.4.04" data-link-target="_blank"></a></span><span class="pub-act"><a href="{{ site.baseurl}}/docs/01_VanderBank2012.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a><a href="https://doi.org/10.3750/AIP2012.42.4.04" target="_blank" rel="noopener">DOI</a></span></div>
+  </div>
+</article>
 </div>
 
 
+
+<p class="pub-empty" id="pubEmpty" hidden>No publications match your search.</p>
+<script>
+(function () {
+  var q = document.getElementById("pubSearch"), sb = document.getElementById("pubSongBtn"), cnt = document.getElementById("pubCount") || {},  empty = document.getElementById("pubEmpty");
+  var pubs = [].slice.call(document.querySelectorAll(".pub")), songOnly = false;
+  pubs.forEach(function (p) { p._txt = p.textContent.toLowerCase(); });
+  function apply() {
+    var t = q.value.trim().toLowerCase(), shown = 0;
+    pubs.forEach(function (p) { var ok = (!t || p._txt.indexOf(t) > -1) && (!songOnly || p.hasAttribute("data-song")); p.hidden = !ok; if (ok) shown++; });
+    document.querySelectorAll(".pub-year").forEach(function (y) { var h = y.querySelector("h2"); if (h) h.hidden = !y.querySelector(".pub:not([hidden])"); });
+    var active = t || songOnly;
+    cnt.textContent = active ? shown + " of " + pubs.length : pubs.length + " publications";
+    empty.hidden = shown > 0;
+    if (active) { var all = document.querySelector('.pub-year-btn[data-year="all"]'); if (all && !all.classList.contains("active")) all.click(); }
+  }
+  q.addEventListener("input", apply);
+  sb.addEventListener("click", function () { songOnly = !songOnly; sb.classList.toggle("on", songOnly); sb.setAttribute("aria-pressed", songOnly); apply(); });
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".pub-more"); if (!b) return;
+    var wrap = b.closest(".pub-auth"); wrap.querySelector(".pub-auth-short").hidden = true; wrap.querySelector(".pub-auth-full").hidden = false;
+  });
+  var ew = document.querySelector(".pub-earlier"), eb = ew.querySelector(".pub-earlier-btn"), em = ew.querySelector(".pub-earlier-menu");
+  eb.addEventListener("click", function (e) { e.stopPropagation(); em.hidden = !em.hidden; eb.setAttribute("aria-expanded", !em.hidden); });
+  document.addEventListener("click", function (e) {
+    if (!ew.contains(e.target)) em.hidden = true;
+    var yb = e.target.closest && e.target.closest(".pub-year-btn");
+    if (yb) { setTimeout(function () { ew.classList.toggle("has-active", !!em.querySelector(".pub-year-btn.active")); eb.firstChild.nodeValue = em.contains(yb) ? yb.getAttribute("data-year") + " " : "Earlier "; em.hidden = true; }, 0); }
+  });
+  apply();
+})();
+</script>
+
+
+<script>
+// Citation count (Dimensions) and attention score (Altmetric) for every paper, always shown.
+// Both start at 0 and update from the official badges (kept on the page, hidden) as soon as they report a number,
+// so new citations and attention appear automatically. No Altmetric record = score 0.
+(function () {
+  var tries = 0;
+  function stat(meta, cls, icon, title) {
+    var a = meta.querySelector(".pub-stat." + cls);
+    if (!a) { a = document.createElement("a"); a.className = "pub-stat " + cls; a.target = "_blank"; a.rel = "noopener";
+      a.innerHTML = '<i class="fas ' + icon + '" aria-hidden="true"></i> <span>0</span>'; a.title = title + " 0";
+      meta.insertBefore(a, meta.querySelector(".pub-badges")); }
+    return a;
+  }
+  function fill() {
+    var pending = 0;
+    document.querySelectorAll(".pub-badges").forEach(function (b) {
+      var meta = b.parentNode, doi = (b.querySelector("[data-doi]") || {}).getAttribute ? b.querySelector("[data-doi]").getAttribute("data-doi") : "";
+      var c = stat(meta, "cites", "fa-quote-right", "Citations (Dimensions):"), s = stat(meta, "attn", "fa-chart-line", "Altmetric attention score:");
+      if (!c._href) { c.href = "https://badge.dimensions.ai/details/doi/" + doi; s.href = "https://www.altmetric.com/details/doi/" + doi; c._href = 1; }
+      if (b._done) return;
+      var dl = b.querySelector("a.__dimensions_Link"), ai = b.querySelector(".altmetric-embed img"), al = b.querySelector(".altmetric-embed > a");
+      var dn = dl && (dl.getAttribute("aria-label") || "").match(/(\d[\d,]*)\s+total citation/);
+      var an = ai && (ai.getAttribute("alt") || "").match(/score of (\d+)/);
+      if (dn) { c.querySelector("span").textContent = dn[1]; c.title = "Citations (Dimensions): " + dn[1]; c.href = dl.href; }
+      if (an) { s.querySelector("span").textContent = an[1]; s.title = "Altmetric attention score: " + an[1]; if (al) s.href = al.href; }
+      if (dn && an) b._done = true; else pending++;
+    });
+    if (pending && tries++ < 80) setTimeout(fill, 750);
+  }
+  fill();
+  window.addEventListener("load", function () { setTimeout(fill, 800); });
+  var st; window.addEventListener("scroll", function () { clearTimeout(st); st = setTimeout(function () { tries = 0; fill(); }, 300); }, { passive: true });
+})();
+</script>
 <script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
 <script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>

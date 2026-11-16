@@ -10,53 +10,71 @@ published: true
 reveal: true
 ---
 
-Welcome! The Daru lab studies why plant species are distributed the way they are, how they achieved these present-day distributions and how to set conservation priorities to safeguard their future. We do this through integrated approaches from the fields of biodiversity informatics (methods and tools development), herbarium collections, phylogenetics and genomics. We work in the field, herbarium, wet lab, and on high-performance computing clusters.
+<style>
+.hm { max-width: 1100px; margin: 0 auto; }
+.hm-intro { margin: .4em 0 2.4em; }
+.page__content p.hm-kick, .hm-kick { font-size: .72em !important; letter-spacing: .12em; text-transform: uppercase; color: #8C1515; font-weight: 700; margin: 0 0 .5em; }
+.hm-intro h1 { font-size: 2.1em; line-height: 1.12; letter-spacing: -.01em; margin: 0 0 .45em; max-width: 760px; }
+.hm-intro p { font-size: 1.02em; line-height: 1.6; color: #5a5852; max-width: 760px; margin: 0 0 1.2em; }
+.hm-btn { display: inline-flex; align-items: center; gap: 8px; padding: .55em 1.15em; border-radius: 24px; font-weight: 600; font-size: .9em; text-decoration: none !important; margin: 0 6px 6px 0; transition: box-shadow .3s ease, filter .3s ease; }
+.hm-btn.p { background: #8C1515; color: #fff !important; }
+.hm-btn.p:hover { box-shadow: 0 6px 14px -6px rgba(140,21,21,.7); filter: brightness(1.1); }
+.hm-btn.g { border: 1.5px solid #8C1515; color: #8C1515 !important; background: #fff; }
+.hm h2.hm-sec { font-size: .78em; letter-spacing: .1em; text-transform: uppercase; color: #8C1515; border: 0; display: flex; align-items: center; gap: 12px; margin: 0 0 1em; }
+.hm h2.hm-sec:after { content: ""; flex: 1; height: 1px; background: var(--fluid-line, #e4e0d8); }
+.hm-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 2.6em; }
+.hm-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.hm-card { display: flex; flex-direction: column; border: 1px solid var(--fluid-line, #e4e0d8); border-radius: 12px; overflow: hidden; background: #fff; text-decoration: none !important; color: #2e2d29 !important; transition: box-shadow .3s ease, border-color .3s ease; }
+.hm-card:hover { border-color: rgba(140,21,21,.35); box-shadow: 0 10px 24px -14px rgba(46,45,41,.4); }
+.hm-card .ph { aspect-ratio: 4 / 3; background: #f3efe6 center / cover no-repeat; }
+.hm-card .bd { padding: .85em 1em 1em; }
+.hm-card .meta { font-size: .72em; color: #8C1515; margin: 0 0 .3em; }
+.hm-card h3 { font-size: .98em; line-height: 1.3; margin: 0 0 .3em; }
+.hm-card p { font-size: .82em; line-height: 1.45; color: #5a5852; margin: 0; }
+.hm-join { display: grid; grid-template-columns: 1.4fr auto; gap: 1.2em; align-items: center; border-radius: 14px; background: linear-gradient(135deg, #fbf6f2, #f3efe6); border: 1px solid var(--fluid-line, #e4e0d8); padding: 1.4em 1.6em; margin-bottom: 1em; }
+.hm-join h3 { font-size: 1.25em; margin: 0 0 .3em; }
+.hm-join p { font-size: .88em; color: #5a5852; margin: 0; line-height: 1.55; }
+.hm-join p a { color: #8C1515; }
+.hm-store { display: block; text-align: right; font-size: .8em; color: #5a5852 !important; margin: .2em 0 1.5em; }
+.hm-store b { color: #8C1515; }
+@media (max-width: 47.99em) {
+  .hm-intro h1 { font-size: 1.55em; }
+  .hm-grid, .hm-grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .hm-grid.three .hm-card:last-child { grid-column: span 2; }
+  .hm-card p { display: none; }
+  .hm-join { grid-template-columns: 1fr; }
+  .hm-store { text-align: left; }
+}
+</style>
 
-<div class="span7">
-						 <p></p>
-						<ul class="list list-chevron-sign-right bigger">
-							<li>Our lab is located on the third floor of <a href="https://biology.stanford.edu/contact-and-location" target="_blank">Gilbert Biological Sciences Building </a> </li>
+<div class="hm">
 
-<a href="mailto:bdaru@stanford.edu" class="btn btn-primary" style="font-size: 20px;">Contact Us</a>
-<a href="https://darulab.org/projects" class="btn btn-secondary" style="font-size: 20px;">Explore Our Research</a>
+<section class="hm-intro">
+  <p class="hm-kick">Evolutionary biogeography and ecology · Stanford</p>
+  <h1>Why plants live where they do, and how to protect them.</h1>
+  <p>We combine herbarium collections, phylogenetics, genomics and biodiversity informatics to explain plant distributions and set conservation priorities, working in the field, the herbarium, the wet lab and on high-performance computing clusters.</p>
+  <a class="hm-btn p" href="/projects/">Explore our research <i class="fas fa-arrow-right" aria-hidden="true"></i></a><a class="hm-btn g" href="/people/#you">Join the lab</a>
+</section>
 
+<h2 class="hm-sec">What we study</h2>
+<div class="hm-grid">
+  <a class="hm-card" href="/projects/"><div class="ph" style="background-image:url(/assets/images/home/forest.jpg)"></div><div class="bd"><h3>Global patterns of plant diversity</h3><p>How floras, regions and transition zones formed.</p></div></a>
+  <a class="hm-card" href="/projects/"><div class="ph" style="background-image:url(/assets/images/home/herbarium.jpg)"></div><div class="bd"><h3>Herbarium science</h3><p>Specimens as a record of microbes, pollinators and traits.</p></div></a>
+  <a class="hm-card" href="/publications/"><div class="ph" style="background-image:url(/assets/images/home/arcticwhite.jpg)"></div><div class="bd"><h3>Ranges on the move</h3><p>How plant ranges shift as the climate changes.</p></div></a>
+  <a class="hm-card" href="/publications/"><div class="ph" style="background-image:url(/assets/images/home/seagrass.jpg)"></div><div class="bd"><h3>Seagrasses and the sea</h3><p>The origins and future of marine biodiversity.</p></div></a>
+</div>
 
-<p>New paper in <b><i>Science!</i></b>
-<p><hr>
+<h2 class="hm-sec">Latest</h2>
+<div class="hm-grid three">
+  <a class="hm-card" href="https://doi.org/10.1126/science.adv6172" target="_blank" rel="noopener"><div class="ph" style="background-image:url(/assets/images/slide_science_2026.jpg);background-position:right center"></div><div class="bd"><div class="meta">New paper · Science, 2026</div><h3>Biogeographic processes underlying global patterns of plant diversity</h3></div></a>
+  <a class="hm-card" href="https://www.botany.one/herbarium-collections-can-offer-exciting-new-career-paths-far-beyond-taxonomy-an-interview-with-dr-barnabas-daru/" target="_blank" rel="noopener"><div class="ph" style="background-image:url(https://storage.ghost.io/c/2e/eb/2eeb2fa9-78ad-4718-9c6b-8b5b05545bf6/content/images/2026/06/compressed-original-q16-1781292908767-1.jpg)"></div><div class="bd"><div class="meta">Interview · Botany One, June 2026</div><h3>Herbarium collections can offer exciting new career paths</h3></div></a>
+  <a class="hm-card" href="/media/"><div class="ph" style="background-image:url(https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ff/95/be/ff95be76-a1e5-7ed6-fcae-967368bc3190/885000708169.png/600x600bb.jpg);background-position:center 75%"></div><div class="bd"><div class="meta">New song · October 2026</div><h3>Christmas Plant</h3></div></a>
+</div>
 
-<strong>Daru BH</strong>, Nichodemus CO & Henao-Diaz LF (2026) <a href="https://doi.org/10.1126/science.adv6172" target="_blank" style="color: black; text-decoration: none;">Biogeographic processes underlying global patterns of plant diversity.</a> <em><strong>Science</strong></em> 392: 845–849.
-<a href="https://open.spotify.com/album/13igdfIuzLE6gwLllsDkPO" class="btn btn--small btn--primary" style="background-color:#8C1515; color:#ffffff; display:inline-block; width:2.3em; height:2.3em; line-height:2.3em; padding:0; text-align:center; border-radius:50%; margin-left:6px; vertical-align:middle" target="_blank" rel="noopener" title="Listen to &ldquo;Plant Cradle&rdquo;, a song inspired by this paper" aria-label="Listen to Plant Cradle, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i></a>
-
-<p><a href="https://darulab.org/publications/">More publications››</a><p>
-
-<p><hr>
-
-<p><b>New Song Release</b></p>
-
-<div style="max-width:700px; margin:0; background:#f8f8f8; padding:18px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-
-  <div style="font-size:0.9em; color:#666;">October 6, 2026</div>
-
-  <h4 style="margin:6px 0 12px 0;">Christmas Plant — Barnabas Daru</h4>
-
-  <!-- Spotify -->
-  <iframe
-    style="border-radius:12px; margin-bottom:12px;"
-    src="https://open.spotify.com/embed/album/2Zswoll4UdFjCVtSK8aTWt"
-    width="100%"
-    height="152"
-    frameborder="0"
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    loading="lazy">
-  </iframe>
-
-  <!-- Apple Music -->
-  <iframe allow="autoplay *; encrypted-media *;"
-    frameborder="0"
-    height="175"
-    style="width:100%; overflow:hidden; background:transparent;"
-    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-    src="https://embed.music.apple.com/us/album/christmas-plant/6823824007?i=6823824428">
-  </iframe>
+<section class="hm-join">
+  <div><h3>Join the Daru Lab</h3><p>We welcome students, postdocs and visitors curious about plant diversity. Find us on the third floor of the <a href="https://biology.stanford.edu/contact-and-location" target="_blank" rel="noopener">Gilbert Biological Sciences Building</a>.</p></div>
+  <div><a class="hm-btn p" href="mailto:bdaru@stanford.edu">Contact us</a><a class="hm-btn g" href="/people/">Meet the team</a></div>
+</section>
+<a class="hm-store" href="/store/"><b>Wear the science:</b> lab merch supports GreenMaps ›</a>
 
 </div>

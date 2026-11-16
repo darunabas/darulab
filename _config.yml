@@ -21,6 +21,9 @@ url: https://darulab.org/
 twitter_username: Barnabas_Daru
 github_username: darunabas
 minimal_mistakes_skin: dark
+# Contact form (People > "You"): the Google Apps Script web app /exec URL; empty shows a "coming soon" notice.
+# Setup: tools/contact_form_apps_script.gs and README ("Contact form").
+contact_form_endpoint: ""
 search: # true
 
 # Build settings
@@ -115,6 +118,7 @@ exclude:
   - config
   - Gemfile
   - Gruntfile.js
+  - tools # Apps Script source for the contact form; not part of the site
   - bin # local tooling (Bundler binstubs, preview shim); not part of the site
   - gulpfile.js
   - LICENSE

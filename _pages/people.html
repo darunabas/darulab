@@ -57,6 +57,31 @@ tags: []
   border-top: none;
   border-radius: 0 10px 10px 10px;
 }
+
+/* consistent member profiles (content loaded from _pages/<Name>.html) */
+.member { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 1.6em; align-items: start; padding: 1.2em .4em .6em; }
+.tabcontent .member-photo { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; object-position: 50% 25%; display: block; margin: 0; border: 4px solid #fff; box-shadow: 0 0 0 1px var(--fluid-line, #e4e0d8), 0 10px 24px -14px rgba(46,45,41,.45); }
+.member-main { min-width: 0; }
+.tabcontent .member-name { margin: .1em 0 .1em; font-size: 1.5em; line-height: 1.15; }
+.member-role { display: inline-block; color: #8C1515; font-size: .72em; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; background: rgba(140,21,21,.08); border-radius: 12px; padding: 3px 10px; margin-bottom: .9em; }
+.member-bio p { font-size: .92em; line-height: 1.6; color: #2e2d29; margin: 0 0 .8em; }
+.member-pubs { margin-top: 1.2em; padding-top: .9em; border-top: 1px solid var(--fluid-line, #e4e0d8); }
+.tabcontent .member-pubs h4 { margin: 0 0 .6em; font-size: .78em; letter-spacing: .06em; text-transform: uppercase; color: #5a5852; }
+.member-pubs ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .55em; }
+.member-pubs li { font-size: .84em; line-height: 1.5; color: #2e2d29; padding: .55em .8em; border-left: 3px solid #8C1515; background: #faf8f4; border-radius: 0 8px 8px 0; margin: 0; }
+.member-pubs li a { color: #8C1515; }
+.member-pubs li a.pdf { display: inline-block; margin-left: .4em; font-size: .85em; font-weight: 600; border: 1px solid rgba(140,21,21,.4); border-radius: 10px; padding: 0 7px; text-decoration: none; }
+.member-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.1em; }
+.tabcontent .member-link { display: inline-flex; align-items: center; gap: 6px; background: #8C1515; color: #fff !important; text-decoration: none !important; font-size: .82em; padding: .38em .95em; border-radius: 18px; transition: box-shadow .3s ease, filter .3s ease; }
+.tabcontent .member-link:hover { box-shadow: 0 6px 14px -6px rgba(140,21,21,.7); filter: brightness(1.1); }
+@media (max-width: 47.99em) {
+  .member { grid-template-columns: 1fr; gap: .9em; justify-items: center; text-align: center; }
+  .tabcontent .member-photo { width: 160px; height: 160px; }
+  .member-main { text-align: left; width: 100%; }
+  .tabcontent .member-name, .member-role { text-align: center; }
+  .member-main > .member-name { display: block; }
+  .member-role { display: table; margin-left: auto; margin-right: auto; }
+}
 </style>
 <div class="tab tab--binder tab--people" role="tablist" aria-label="Lab members">
   <button class="tablinks active" onclick="openTab(event, 'home')" role="tab" id="tabbtn-home" aria-controls="home" aria-selected="true" title="Barnabas Daru" aria-label="Barnabas Daru" data-full-name="Barnabas Daru">Barnabas</button>
@@ -187,97 +212,173 @@ tags: []
   <h3>This could be you!</h3>
   <img src="/assets/images/you.png" alt="Barnabas-Daru" class="img-responsive" style="float:left; padding-right:10px; border-radius:50%; width:300px; height:300px; object-fit:cover;">
   <p>We're currently looking for candidates at all levels to join our team at the Daru lab. If you're interested in joining us, please get in touch by emailing us at <a href="mailto:bdaru@stanford.edu">bdaru[at]stanford.edu</a>.</p>
+{% endraw %}{% include contact-form.html email="bdaru@stanford.edu" %}{% raw %}
   </div>
 
 <div id="tab9" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab9">
+<style>
+.alum-filter { display: flex; flex-wrap: wrap; gap: 6px; margin: .4em 0 1.1em; }
+.alum-filter button { border: 1.5px solid var(--fluid-accent, #8C1515); background: #fff; color: var(--fluid-accent, #8C1515); border-radius: 16px; padding: 3px 13px; font-size: .85em; cursor: pointer; transition: background-color .3s ease, color .3s ease; }
+.alum-filter button:hover { background: rgba(140,21,21,.1); }
+.alum-filter button.active { background: var(--fluid-accent, #8C1515); color: #fff; }
+.alum-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.1em; margin-bottom: 1em; }
+.alum-grid > * { min-width: 0; }
+.alum-card { position: relative; display: flex; flex-direction: column; border: 1px solid var(--fluid-line, #e4e0d8); border-radius: 12px; background: #fff; overflow: hidden; transition: box-shadow .3s ease, border-color .3s ease; }
+.alum-card:hover { border-color: rgba(140,21,21,.35); box-shadow: 0 10px 24px -14px rgba(46,45,41,.35); }
+.alum-card.is-hidden { display: none; }
+.alum-card .ph { aspect-ratio: 1 / 1; background: #f3efe6; overflow: hidden; }
+.alum-card .ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.alum-card .bd { padding: .8em 1em 1em; display: flex; flex-direction: column; flex: 1; }
+.alum-card h3 { margin: 0 0 .2em; font-size: 1.02em; }
+.alum-card p { margin: 0 0 .35em; font-size: .8em; color: #5a5852; }
+.alum-card p.role { color: #2e2d29; font-size: .85em; }
+.alum-card p.next { color: #2e2d29; }
+.alum-card p.pubs { margin-top: auto; padding-top: .5em; border-top: 1px solid var(--fluid-line, #e4e0d8); }
+.alum-card p.pubs a, .alum-card p a { color: var(--fluid-accent, #8C1515); }
+.alum-badge { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,.92); color: var(--fluid-accent, #8C1515); font-size: .7em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 9px; border-radius: 12px; }
+@media (max-width: 47.99em) {
+  .alum-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .alum-filter button { flex: 0 0 auto; }
+  .alum-grid { grid-template-columns: repeat(2, 1fr); gap: .7em; }
+  .alum-card .bd { padding: .6em .7em .8em; }
+}
+</style>
   <h3>Former lab members</h3>
-  <div style="display:flex; flex-wrap:wrap; justify-content:center;" data-reveal-children>
-    <div style="width:250px; margin:10px;">
-        <img src="https://lh3.googleusercontent.com/pw/AP1GczNrSHnvQa9mHnIPX5GJ_WTvozIp1pC7SJQuqHndq-Y1H2p7dqFA8dJC4uXm5SrxrHdJQjceS03vrOJ1rLXOYnfoVqVYvgRe1Cn5tTXJC2kxbiFO9TbQdRxE2X7H0CW-r2EyvZUHSr3wDdGkrlzPP7EHtQ=w1596-h1596-s-no-gm?authuser=1" alt="Collin Gross" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Collin Gross</h4>
-            <p style="font-size:12pt;">Former postdoc in the Daru Lab</p>
-            <p style="font-size:10pt;">Now Peter Buck Postdoctoral Fellow, Smithsonian National Museum of Natural History</p>
-            <p style="font-size:10pt;">Publications: <a href="https://doi.org/10.1038/s41467-026-73236-4" target="_blank">Diet specialization in caterpillars</a> — <em>Nat. Commun.</em> 2026, <a href="https://doi.org/10.1098/rstb.2023.0211" target="_blank">Butterfly biogeographic regions</a> — <em>Phil. Trans. R. Soc. B</em> 2025, <a href="https://doi.org/10.1002/ajb2.16466" target="_blank">Changing Arctic flora</a> — <em>Am. J. Bot.</em> 2025</p>
+  <div class="alum-filter" role="group" aria-label="Filter alumni">
+    <button class="active" data-f="all">All</button>
+    <button data-f="postdoc">Postdocs</button>
+    <button data-f="grad">Graduate students</button>
+    <button data-f="ug">Undergraduates</button>
+    <button data-f="staff">Staff</button>
+  </div>
+<div class="alum-grid" data-reveal-children>
+  <article class="alum-card" data-cat="postdoc">
+    <span class="alum-badge">Postdoc</span>
+    <div class="ph"><img src="https://lh3.googleusercontent.com/pw/AP1GczNrSHnvQa9mHnIPX5GJ_WTvozIp1pC7SJQuqHndq-Y1H2p7dqFA8dJC4uXm5SrxrHdJQjceS03vrOJ1rLXOYnfoVqVYvgRe1Cn5tTXJC2kxbiFO9TbQdRxE2X7H0CW-r2EyvZUHSr3wDdGkrlzPP7EHtQ=w1596-h1596-s-no-gm?authuser=1" alt="Collin Gross" loading="lazy"></div>
+    <div class="bd"><h3>Collin Gross</h3>
+      <p class="role">Former postdoc in the Daru Lab</p>
+      <p class="next">Now Peter Buck Postdoctoral Fellow, Smithsonian National Museum of Natural History</p>
+      <p class="pubs">Publications: <a href="https://doi.org/10.1038/s41467-026-73236-4" target="_blank">Diet specialization in caterpillars</a> — <em>Nat. Commun.</em> 2026, <a href="https://doi.org/10.1098/rstb.2023.0211" target="_blank">Butterfly biogeographic regions</a> — <em>Phil. Trans. R. Soc. B</em> 2025, <a href="https://doi.org/10.1002/ajb2.16466" target="_blank">Changing Arctic flora</a> — <em>Am. J. Bot.</em> 2025</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="https://lh3.googleusercontent.com/pw/AP1GczPE6ZnmllpKrWHWnzpgG7tODgH6ZFWevfJaRlIN-EvcR4QejG2k_131k5FaUZSbFe1KIxHa54rJFq8QFe71WwflKNFViJtcfBfLeMwgFPftUURsXX_wR5vJlobSP8-GoII1JCyYFMaT7JJaOcS_B4B3Uw=w1596-h1596-s-no-gm?authuser=1" alt="Weston Kirk" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Weston Kirk</h4>
-            <p style="font-size:12pt;">Former BSURP student in the Daru Lab</p>
-            <p style="font-size:10pt;">B.S. Earth Systems, Stanford University</p>
+  </article>
+  <article class="alum-card" data-cat="ug">
+    <span class="alum-badge">Undergraduate</span>
+    <div class="ph"><img src="https://lh3.googleusercontent.com/pw/AP1GczPE6ZnmllpKrWHWnzpgG7tODgH6ZFWevfJaRlIN-EvcR4QejG2k_131k5FaUZSbFe1KIxHa54rJFq8QFe71WwflKNFViJtcfBfLeMwgFPftUURsXX_wR5vJlobSP8-GoII1JCyYFMaT7JJaOcS_B4B3Uw=w1596-h1596-s-no-gm?authuser=1" alt="Weston Kirk" loading="lazy"></div>
+    <div class="bd"><h3>Weston Kirk</h3>
+      <p class="role">Former BSURP student in the Daru Lab</p>
+      <p class="deg">B.S. Earth Systems, Stanford University</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="https://lh3.googleusercontent.com/pw/AP1GczOAKKYJu9ZPJC5ddIFVWzwc19PqkQvAF86OfK1fsAISjc99_i7EY-rYsLx1r5Pp5UfyuccXDiuf5Oa-gQps5f7_gsTOzDCXll3NUecqTJJh8_VfK3MpH4V2TMVoh3aOp2WBWUsaUiFwUfPdpFSzE3TkJw=w1596-h1596-s-no-gm?authuser=1" alt="Natalie Bai" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Natalie Bai</h4>
-            <p style="font-size:12pt;">Former BSURP student in the Daru Lab</p>
-            <p style="font-size:10pt;">B.S. Cellular, Molecular, and Organismal Biology, Stanford University</p>
+  </article>
+  <article class="alum-card" data-cat="ug">
+    <span class="alum-badge">Undergraduate</span>
+    <div class="ph"><img src="https://lh3.googleusercontent.com/pw/AP1GczOAKKYJu9ZPJC5ddIFVWzwc19PqkQvAF86OfK1fsAISjc99_i7EY-rYsLx1r5Pp5UfyuccXDiuf5Oa-gQps5f7_gsTOzDCXll3NUecqTJJh8_VfK3MpH4V2TMVoh3aOp2WBWUsaUiFwUfPdpFSzE3TkJw=w1596-h1596-s-no-gm?authuser=1" alt="Natalie Bai" loading="lazy"></div>
+    <div class="bd"><h3>Natalie Bai</h3>
+      <p class="role">Former BSURP student in the Daru Lab</p>
+      <p class="deg">B.S. Cellular, Molecular, and Organismal Biology, Stanford University</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="https://lh3.googleusercontent.com/pw/AP1GczMdNjqukwc1tF0mbcKqVCG-IyQDRc8fkkaWnn0qSOFUpFMsWmuNr2-hm3JwakTNCQzlZUJapG8rWWHGC1A50VO0TFJzdhDfPNMHhyZs6KwvSg868kb7jLgZb-FCsCi4gHvHjQSUQaOwxxbVepTymJ-Dkg=w1326-h1326-s-no-gm?authuser=1" alt="Madeline Hodge" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Madeline Hodge</h4>
-            <p style="font-size:12pt;">Former BSURP student in the Daru Lab</p>
-            <p style="font-size:10pt;">B.S., Stanford University</p>
+  </article>
+  <article class="alum-card" data-cat="ug">
+    <span class="alum-badge">Undergraduate</span>
+    <div class="ph"><img src="https://lh3.googleusercontent.com/pw/AP1GczMdNjqukwc1tF0mbcKqVCG-IyQDRc8fkkaWnn0qSOFUpFMsWmuNr2-hm3JwakTNCQzlZUJapG8rWWHGC1A50VO0TFJzdhDfPNMHhyZs6KwvSg868kb7jLgZb-FCsCi4gHvHjQSUQaOwxxbVepTymJ-Dkg=w1326-h1326-s-no-gm?authuser=1" alt="Madeline Hodge" loading="lazy"></div>
+    <div class="bd"><h3>Madeline Hodge</h3>
+      <p class="role">Former BSURP student in the Daru Lab</p>
+      <p class="deg">B.S., Stanford University</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="https://lh3.googleusercontent.com/pw/AP1GczOQpUacSr-KRt9ImUPGsa1jFYK3YVNZlRRhXySfekYJluOcg_0dak5nggi01h-0OcQt5G1_6J8qIW8tnseHJqTgKU4eDj-_Tqcrd2VOrattqMNxUp-hsftTg62HmmLTyjqzGIMBrorNmcfPM08aHyJtDQ=w1596-h1596-s-no-gm?authuser=1" alt="Samuel Benzecry" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Samuel Benzecry</h4>
-            <p style="font-size:12pt;">Former BSURP student in the Daru Lab</p>
-            <p style="font-size:10pt;">B.S. Earth Systems, Stanford University</p>
-            <p style="font-size:10pt;">Publications: <a href="https://doi.org/10.1038/s41467-024-53860-8" target="_blank">Future of floristic regions</a> — <em>Nat. Commun.</em> 2024</p>
+  </article>
+  <article class="alum-card" data-cat="ug">
+    <span class="alum-badge">Undergraduate</span>
+    <div class="ph"><img src="https://lh3.googleusercontent.com/pw/AP1GczOQpUacSr-KRt9ImUPGsa1jFYK3YVNZlRRhXySfekYJluOcg_0dak5nggi01h-0OcQt5G1_6J8qIW8tnseHJqTgKU4eDj-_Tqcrd2VOrattqMNxUp-hsftTg62HmmLTyjqzGIMBrorNmcfPM08aHyJtDQ=w1596-h1596-s-no-gm?authuser=1" alt="Samuel Benzecry" loading="lazy"></div>
+    <div class="bd"><h3>Samuel Benzecry</h3>
+      <p class="role">Former BSURP student in the Daru Lab</p>
+      <p class="deg">B.S. Earth Systems, Stanford University</p>
+      <p class="pubs">Publications: <a href="https://doi.org/10.1038/s41467-024-53860-8" target="_blank">Future of floristic regions</a> — <em>Nat. Commun.</em> 2024</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="https://lh3.googleusercontent.com/pw/AP1GczP98iIJ4uT2YGQ5oUeOewQ_1eX5eUbSgsm7wcS0XTGVir9B1RW7k2cUaAT37Jz9X41oFyPLi88WFQYZrsombNVg76uouUNZ9EpngpVTcF-YUkVDp_AtHbyauvig3aUXhGc2DurqVRUkJ2djcqOEmW_w0w=w737-h737-s-no-gm?authuser=1" alt="Jeline Buron" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Jeline Buron</h4>
-            <p style="font-size:12pt;">Former lab technician in the Daru Lab</p>
-            <p style="font-size:10pt;">B.S. Microb., San José State University</p>
+  </article>
+  <article class="alum-card" data-cat="staff">
+    <span class="alum-badge">Staff</span>
+    <div class="ph"><img src="https://lh3.googleusercontent.com/pw/AP1GczP98iIJ4uT2YGQ5oUeOewQ_1eX5eUbSgsm7wcS0XTGVir9B1RW7k2cUaAT37Jz9X41oFyPLi88WFQYZrsombNVg76uouUNZ9EpngpVTcF-YUkVDp_AtHbyauvig3aUXhGc2DurqVRUkJ2djcqOEmW_w0w=w737-h737-s-no-gm?authuser=1" alt="Jeline Buron" loading="lazy"></div>
+    <div class="bd"><h3>Jeline Buron</h3>
+      <p class="role">Former lab technician in the Daru Lab</p>
+      <p class="deg">B.S. Microb., San José State University</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="https://lh3.googleusercontent.com/pw/AP1GczPX988tHEbVMa893yy0jZlr7b6fr9oxhcdsvo8sp7RRHzZEOP7JaPOCxdOcCqJMllfnSmwl-1_cMXbYVIK-TtIgKLWTP350pZm26pjydv0E6tSZ_wQ41SHDTrAqO1xJzQGhOlD8Sfv3kVrGEnAiSFkmMA=w238-h238-s-no-gm?authuser=1" alt="Sophie Meunier" style="width:100%;" class="img-responsive">
- <h4 style="margin-top: 0;">Sophie Meunier</h4>
-            <p style="font-size:12pt;">Former BSURP student in the Daru Lab</p>
-            <p style="font-size:10pt;">B.S. Human Biology, Stanford University</p>
+  </article>
+  <article class="alum-card" data-cat="ug">
+    <span class="alum-badge">Undergraduate</span>
+    <div class="ph"><img src="https://lh3.googleusercontent.com/pw/AP1GczPX988tHEbVMa893yy0jZlr7b6fr9oxhcdsvo8sp7RRHzZEOP7JaPOCxdOcCqJMllfnSmwl-1_cMXbYVIK-TtIgKLWTP350pZm26pjydv0E6tSZ_wQ41SHDTrAqO1xJzQGhOlD8Sfv3kVrGEnAiSFkmMA=w238-h238-s-no-gm?authuser=1" alt="Sophie Meunier" loading="lazy"></div>
+    <div class="bd"><h3>Sophie Meunier</h3>
+      <p class="role">Former BSURP student in the Daru Lab</p>
+      <p class="deg">B.S. Human Biology, Stanford University</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="/assets/images/jordan.png" alt="Jordan Rodriguez" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Jordan Rodriguez</h4>
-            <p style="font-size:12pt;">Jordan was in the Daru Lab as undergrad intern</p>
-            <p style="font-size:10pt;">B.S., Plant Biology, Texas A&amp;M University-Corpus Christi, 2021</p>
-            <p style="font-size:10pt;">First position after Daru Lab: Ph.D. student, University of Oregon</p>
-            <p style="font-size:10pt;">Publications: <a href="https://doi.org/10.1038/s41559-023-02047-3" target="_blank">Unvouchered records and biodiversity</a> — <em>Nat. Ecol. Evol.</em> 2023</p>
+  </article>
+  <article class="alum-card" data-cat="ug">
+    <span class="alum-badge">Undergraduate</span>
+    <div class="ph"><img src="/assets/images/jordan.png" alt="Jordan Rodriguez" loading="lazy"></div>
+    <div class="bd"><h3>Jordan Rodriguez</h3>
+      <p class="role">Jordan was in the Daru Lab as undergrad intern</p>
+      <p class="deg">B.S., Plant Biology, Texas A&amp;M University-Corpus Christi, 2021</p>
+      <p class="next">First position after Daru Lab: Ph.D. student, University of Oregon</p>
+      <p class="pubs">Publications: <a href="https://doi.org/10.1038/s41559-023-02047-3" target="_blank">Unvouchered records and biodiversity</a> — <em>Nat. Ecol. Evol.</em> 2023</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="/assets/images/arras.png" alt="Arras Wiedorn" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Arras Wiedorn</h4>
-            <p style="font-size:12pt;">Arras was in the Daru Lab as MS student</p>
-            <p style="font-size:10pt;">M.S., Biology, Texas A&amp;M University-Corpus Christi, 2021</p>
-            <p style="font-size:10pt;">B.S., Zoology, Washington State University</p>
-            <p style="font-size:10pt;">First position after Daru Lab: Texas State Aquarium</p>
+  </article>
+  <article class="alum-card" data-cat="grad">
+    <span class="alum-badge">MS student</span>
+    <div class="ph"><img src="/assets/images/arras.png" alt="Arras Wiedorn" loading="lazy"></div>
+    <div class="bd"><h3>Arras Wiedorn</h3>
+      <p class="role">Arras was in the Daru Lab as MS student</p>
+      <p class="deg">M.S., Biology, Texas A&amp;M University-Corpus Christi, 2021</p>
+      <p class="deg">B.S., Zoology, Washington State University</p>
+      <p class="next">First position after Daru Lab: Texas State Aquarium</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="/assets/images/lauren.png" alt="Lauren Snyder" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Lauren Snyder</h4>
-            <p style="font-size:12pt;">Lauren was in the Daru Lab as Herbarium Student Worker</p>
-            <p style="font-size:10pt;">B.S., Biology, Texas A&amp;M University-Corpus Christi, 2021</p>
-            <p style="font-size:10pt;">First position after Daru Lab: Assistant monitoring invasive species, USDA, Houston, TX</p>
+  </article>
+  <article class="alum-card" data-cat="ug">
+    <span class="alum-badge">Student worker</span>
+    <div class="ph"><img src="/assets/images/lauren.png" alt="Lauren Snyder" loading="lazy"></div>
+    <div class="bd"><h3>Lauren Snyder</h3>
+      <p class="role">Lauren was in the Daru Lab as Herbarium Student Worker</p>
+      <p class="deg">B.S., Biology, Texas A&amp;M University-Corpus Christi, 2021</p>
+      <p class="next">First position after Daru Lab: Assistant monitoring invasive species, USDA, Houston, TX</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="/assets/images/brianna.png" alt="Brianna Rock" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Brianna Rock</h4>
-            <p style="font-size:12pt;">Former MS student in the Daru Lab</p>
-            <p style="font-size:10pt;">M.S., Marine Biology, Texas A&amp;M University-Corpus Christi, 2020</p>
-            <p style="font-size:10pt;">B.S., Biology, University of Charleston-Charleston, West Virginia, 2019</p>
-            <p style="font-size:10pt;">First position after Daru Lab: Associate Aquarist, SeaWorld Parks &amp; Entertainment, Orlando, Florida</p>
-            <p style="font-size:10pt;">Publications: <a href="https://doi.org/10.1038/s41477-023-01445-6" target="_blank">Seagrass communities in a changing climate</a> — <em>Nat. Plants</em> 2023 <a href="https://open.spotify.com/album/5i44OGh8H9DCpwvKIWIE2L" target="_blank" rel="noopener" style="color:#8C1515" title="Listen to &ldquo;Seagrass&rdquo;, a song inspired by this paper" aria-label="Listen to Seagrass, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i></a>, <a href="https://doi.org/10.3389/fmars.2021.608867" target="_blank">Seagrass responses to global change</a> — <em>Front. Mar. Sci.</em> 2021</p>
+  </article>
+  <article class="alum-card" data-cat="grad">
+    <span class="alum-badge">MS student</span>
+    <div class="ph"><img src="/assets/images/brianna.png" alt="Brianna Rock" loading="lazy"></div>
+    <div class="bd"><h3>Brianna Rock</h3>
+      <p class="role">Former MS student in the Daru Lab</p>
+      <p class="deg">M.S., Marine Biology, Texas A&amp;M University-Corpus Christi, 2020</p>
+      <p class="deg">B.S., Biology, University of Charleston-Charleston, West Virginia, 2019</p>
+      <p class="next">First position after Daru Lab: Associate Aquarist, SeaWorld Parks &amp; Entertainment, Orlando, Florida</p>
+      <p class="pubs">Publications: <a href="https://doi.org/10.1038/s41477-023-01445-6" target="_blank">Seagrass communities in a changing climate</a> — <em>Nat. Plants</em> 2023 <a href="https://open.spotify.com/album/5i44OGh8H9DCpwvKIWIE2L" target="_blank" rel="noopener" style="color:#8C1515" title="Listen to &ldquo;Seagrass&rdquo;, a song inspired by this paper" aria-label="Listen to Seagrass, a song inspired by this paper"><i class="fas fa-music" aria-hidden="true"></i></a>, <a href="https://doi.org/10.3389/fmars.2021.608867" target="_blank">Seagrass responses to global change</a> — <em>Front. Mar. Sci.</em> 2021</p>
     </div>
-    <div style="width:250px; margin:10px;">
-        <img src="/assets/images/piyal.png" alt="Piyal Karunarathne" style="width:100%;" class="img-responsive">
-<h4 style="margin-top: 0;">Piyal Karunarathne</h4>
-            <p style="font-size:12pt;">Former postdoc in the Daru Lab</p>
-            <p style="font-size:10pt;">Ph.D., Evolutionary Biology, University of Göttingen, Germany, 2019</p>
-            <p style="font-size:10pt;">Piyal research was on methods and tools development for macroecology and biogeography</p>
-            <p style="font-size:10pt;">First position after Daru Lab: Postdoc, Uppsala University, Sweden</p>
-            <p style="font-size:10pt;">Publications: <a href="https://doi.org/10.1111/2041-210X.13478" target="_blank">phyloregion R package</a> — <em>Methods Ecol. Evol.</em> 2020</p>
+  </article>
+  <article class="alum-card" data-cat="postdoc">
+    <span class="alum-badge">Postdoc</span>
+    <div class="ph"><img src="/assets/images/piyal.png" alt="Piyal Karunarathne" loading="lazy"></div>
+    <div class="bd"><h3>Piyal Karunarathne</h3>
+      <p class="role">Former postdoc in the Daru Lab</p>
+      <p class="deg">Ph.D., Evolutionary Biology, University of Göttingen, Germany, 2019</p>
+      <p class="deg">Piyal research was on methods and tools development for macroecology and biogeography</p>
+      <p class="next">First position after Daru Lab: Postdoc, Uppsala University, Sweden</p>
+      <p class="pubs">Publications: <a href="https://doi.org/10.1111/2041-210X.13478" target="_blank">phyloregion R package</a> — <em>Methods Ecol. Evol.</em> 2020</p>
     </div>
-<div>
+  </article>
+</div>
+<script>
+(function () {
+  var btns = document.querySelectorAll('.alum-filter button'), cards = document.querySelectorAll('.alum-card'), grid = document.querySelector('.alum-grid');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      btns.forEach(function (x) { x.classList.toggle('active', x === b); });
+      var f = b.getAttribute('data-f');
+      grid.style.transition = 'opacity .2s ease'; grid.style.opacity = 0;
+      setTimeout(function () {
+        cards.forEach(function (c) { c.classList.toggle('is-hidden', f !== 'all' && c.getAttribute('data-cat') !== f); });
+        grid.style.opacity = 1;
+      }, 200);
+    });
+  });
+})();
+</script>
+</div>
 
 <script>
 function openTab(evt, tabName) {
@@ -296,7 +397,9 @@ function openTab(evt, tabName) {
 
 // Add this code to set the home tab as default on page load
 window.onload = function() {
-  document.getElementsByClassName("tablinks")[0].click();
+  // /people/#you opens the "You" tab (contact form); otherwise the first tab
+  var you = location.hash === "#you" && document.getElementById("tabbtn-tab8");
+  (you || document.getElementsByClassName("tablinks")[0]).click();
 }
 </script>
 

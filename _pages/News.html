@@ -1,198 +1,165 @@
+<style>
+.news-filter { display: flex; flex-wrap: wrap; gap: 6px; margin: .4em 0 1.1em; }
+.news-filter button { border: 1.5px solid #8C1515; background: #fff; color: #8C1515; border-radius: 16px; padding: 3px 13px; font-size: .85em; cursor: pointer; transition: background-color .3s ease, color .3s ease; }
+.news-filter button:hover { background: rgba(140,21,21,.1); }
+.news-filter button.active { background: #8C1515; color: #fff; }
+.news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.1em; margin-bottom: 1em; }
+.news-grid > * { min-width: 0; }
+.news-card { position: relative; display: flex; flex-direction: column; border: 1px solid var(--fluid-line, #e4e0d8); border-radius: 12px; background: #fff; overflow: hidden; transition: box-shadow .3s ease, border-color .3s ease; }
+.news-card:hover { border-color: rgba(140,21,21,.35); box-shadow: 0 10px 24px -14px rgba(46,45,41,.35); }
+.news-card.is-hidden { display: none; }
+.news-card .ph { display: block; aspect-ratio: 4 / 3; background: #f3efe6; overflow: hidden; }
+.tabcontent .news-card .ph img { width: 100%; height: 100%; object-fit: cover; display: block; margin: 0; transition: opacity .3s ease; }
+.news-card .ph.noimg { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #8C1515, #5e0f0f); }
+.news-card .ph.noimg::after { content: "\f1ea"; font-family: "Font Awesome 5 Free"; font-weight: 900; color: rgba(255,255,255,.85); font-size: 2.6em; }
+.news-card:hover .ph img { opacity: .88; }
+.news-card .bd { padding: .8em 1em 1em; display: flex; flex-direction: column; flex: 1; }
+.tabcontent .news-card .news-date { font-size: .75em; color: #8C1515; margin: 0 0 .3em; }
+.tabcontent .news-card h3 { margin: 0 0 .35em; font-size: 1em; line-height: 1.3; }
+.tabcontent .news-card h3 a { color: #2e2d29; text-decoration: none; }
+.tabcontent .news-card h3 a:hover { color: #8C1515; }
+.news-card .story { font-size: .8em; color: #5a5852; margin: 0 0 .8em; flex: 1; }
+.news-card .row { display: flex; justify-content: space-between; align-items: center; font-size: .85em; gap: .5em; }
+.news-card .src { font-weight: 600; color: #2e2d29; }
+.tabcontent .news-card .read { color: #8C1515; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.news-badge { position: absolute; top: 10px; left: 10px; max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: rgba(255,255,255,.92); color: #8C1515; font-size: .7em; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 9px; border-radius: 12px; pointer-events: none; }
+@media (max-width: 47.99em) {
+  .news-filter { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .news-filter button { flex: 0 0 auto; }
+  .news-grid { grid-template-columns: repeat(2, 1fr); gap: .7em; }
+  .news-card .story { display: none; }
+  .news-card .bd { padding: .6em .7em .8em; }
+}
+</style>
 <h3>NEWS ARTICLES</h3>
-  <div style="display:flex; flex-wrap:wrap; justify-content:center;">
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">June 15, 2026</div>
-      <h3 style="margin-top: 0;">
-    <a href="https://au.news.yahoo.com/global-study-finds-butterfly-caterpillars-044500714.html" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Yahoo News</a>
-</h3>
-        <a href="https://au.news.yahoo.com/global-study-finds-butterfly-caterpillars-044500714.html" target="_blank" rel="noopener noreferrer">
-    <img src="https://s.yimg.com/lo/mysterio/api/30cd4ab317ae01081c4ff71998169eae0500f8a194f0e08e9611c0c61a70abdd/lightyear_networkapi/resizefill_w1200;quality_80;format_webp/https:%2F%2Fmedia.zenfs.com%2Fen%2Fthe_cool_down_737%2Ffbf6cd1c07fc20462296a86e5ad7005e" alt="Turtle" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-</a>
-<h6 style="margin-top: 0;">
-    <a href="https://au.news.yahoo.com/global-study-finds-butterfly-caterpillars-044500714.html" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Global study finds butterfly caterpillars are pickiest where plants are richest</a>
-</h6>
-            <p style="font-size:12pt;">Butterfly caterpillars may be more selective in their food choices than researchers once thought, and their picky diets may show ... <a href="https://au.news.yahoo.com/global-study-finds-butterfly-caterpillars-044500714.html" target="_blank">[read more]</a></p>
-    </div>
-
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">June 15, 2026</div>
-      <h3 style="margin-top: 0;">
-    <a href="https://www.botany.one/herbarium-collections-can-offer-exciting-new-career-paths-far-beyond-taxonomy-an-interview-with-dr-barnabas-daru/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Botany One</a>
-</h3>
-        <a href="https://www.botany.one/herbarium-collections-can-offer-exciting-new-career-paths-far-beyond-taxonomy-an-interview-with-dr-barnabas-daru/" target="_blank" rel="noopener noreferrer">
-    <img src="https://storage.ghost.io/c/2e/eb/2eeb2fa9-78ad-4718-9c6b-8b5b05545bf6/content/images/2026/06/compressed-original-q16-1781292908767-1.jpg" alt="Turtle" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-</a>
-<h6 style="margin-top: 0;">
-    <a href="https://www.botany.one/herbarium-collections-can-offer-exciting-new-career-paths-far-beyond-taxonomy-an-interview-with-dr-barnabas-daru/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Herbarium Collections Can Offer Exciting New Career Paths Far Beyond Taxonomy</a>
-</h6>
-            <p style="font-size:12pt;">Digital botany is changing what we can ask of old collections. Herbarium specimens, once used mainly for taxonomy and identification, are now ... <a href="https://www.botany.one/herbarium-collections-can-offer-exciting-new-career-paths-far-beyond-taxonomy-an-interview-with-dr-barnabas-daru/" target="_blank">[read more]</a></p>
-    </div>
-
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">May 21, 2026</div>
-      <h3 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/stories/2026/05/stanford-plant-diversity-homegrown-evolution-study?mkt_tok=NjYwLVRKQy05ODQAAAGiEswzcct1EhnyoCLvkRIydVdmwvIvLW4MVRWWnRpXZq9drQ3naQCQfLMBYeZqD6JFSovwduEKHmC-POpO166N0bMDjFhfZkzGP5HCL00" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Stanford | News</a>
-</h3>
-        <a href="https://news.stanford.edu/stories/2026/05/stanford-plant-diversity-homegrown-evolution-study?mkt_tok=NjYwLVRKQy05ODQAAAGiEswzcct1EhnyoCLvkRIydVdmwvIvLW4MVRWWnRpXZq9drQ3naQCQfLMBYeZqD6JFSovwduEKHmC-POpO166N0bMDjFhfZkzGP5HCL00" target="_blank" rel="noopener noreferrer">
-    <img src="https://news.stanford.edu/__data/assets/image/0029/188129/GettyImages-1431002925.jpg" alt="Turtle" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-</a>
-<h6 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/stories/2026/05/stanford-plant-diversity-homegrown-evolution-study?mkt_tok=NjYwLVRKQy05ODQAAAGiEswzcct1EhnyoCLvkRIydVdmwvIvLW4MVRWWnRpXZq9drQ3naQCQfLMBYeZqD6JFSovwduEKHmC-POpO166N0bMDjFhfZkzGP5HCL00" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Plant diversity is mostly homegrown, new research reveals</a>
-</h6>
-            <p style="font-size:12pt;">A Stanford study finds that more than three quarters of plant species diversified primarily by thriving in their original environments ... <a href="https://news.stanford.edu/stories/2026/05/stanford-plant-diversity-homegrown-evolution-study?mkt_tok=NjYwLVRKQy05ODQAAAGiEswzcct1EhnyoCLvkRIydVdmwvIvLW4MVRWWnRpXZq9drQ3naQCQfLMBYeZqD6JFSovwduEKHmC-POpO166N0bMDjFhfZkzGP5HCL00" target="_blank">[read more]</a></p>
-    </div>
-
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">August 26, 2025</div>
-      <h3 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/stories/2025/08/plant-samples-herbaria-research-technology" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Stanford | News</a>
-</h3>
-        <a href="https://news.stanford.edu/stories/2025/08/plant-samples-herbaria-research-technology" target="_blank" rel="noopener noreferrer">
-    <img src="https://news.stanford.edu/__data/assets/image/0022/175126/herbarium.jpg" alt="Turtle" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-</a>
-<h6 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/stories/2025/08/plant-samples-herbaria-research-technology" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Plant samples preserved in museums may hold key to advancing biodiversity</a>
-</h6>
-            <p style="font-size:12pt;">Herbaria, or “museums for plants,” house millions of samples collected over centuries ... <a href="https://news.stanford.edu/stories/2025/08/plant-samples-herbaria-research-technology" target="_blank">[read more]</a></p>
-    </div>
-
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">February 18, 2025</div>
-      <h3 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/stories/2025/02/four-stanford-faculty-named-sloan-research-fellows" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Stanford | News</a>
-</h3>
-        <a href="https://news.stanford.edu/stories/2025/02/four-stanford-faculty-named-sloan-research-fellows" target="_blank" rel="noopener noreferrer">
-    <img src="https://news.stanford.edu/__data/assets/image/0024/165714/Sloan2025_1500x1000.jpg" alt="Turtle" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-</a>
-<h6 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/stories/2025/02/four-stanford-faculty-named-sloan-research-fellows" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Four Stanford faculty named Sloan Research Fellows</a>
-</h6>
-            <p style="font-size:12pt;">The award recognizes early-career scientists whose accomplishments mark them as the next generation of leaders ... <a href="https://news.stanford.edu/stories/2025/02/four-stanford-faculty-named-sloan-research-fellows" target="_blank">[read more]</a></p>
-    </div>
-
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">September 4, 2024</div>
-      <h3 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/stories/2024/09/study-finds-a-majority-of-plant-diversity-hotspots-are-outside-protected-areas" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Stanford | News</a>
-</h3>
-        <a href="https://news.stanford.edu/stories/2024/09/study-finds-a-majority-of-plant-diversity-hotspots-are-outside-protected-areas" target="_blank" rel="noopener noreferrer">
-    <img src="https://humsci.stanford.edu/sites/default/files/styles/embed_350w_medium_1x/public/daru_lab-12.png?itok=Oyrr8ihu" alt="Turtle" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-</a>
-<h6 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/stories/2024/09/study-finds-a-majority-of-plant-diversity-hotspots-are-outside-protected-areas" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">A majority of plant diversity hotspots are outside of protected areas</a>
-</h6>
-            <p style="font-size:12pt;">A new study creates more accurate estimates for over 200,000 native plant species worldwide ... <a href="https://news.stanford.edu/stories/2024/09/study-finds-a-majority-of-plant-diversity-hotspots-are-outside-protected-areas" target="_blank">[read more]</a></p>
-    </div>
-
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">June 20, 2023</div>
-      <h3 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/2023/06/20/study-explores-climate-change-impacts-seagrass-meadows/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Stanford | News</a>
-</h3>
-        <a href="https://news.stanford.edu/2023/06/20/study-explores-climate-change-impacts-seagrass-meadows/" target="_blank" rel="noopener noreferrer">
-    <img src="https://news.stanford.edu/__data/assets/image/0016/35233/Green_sea_turtle_grazing_seagrass.jpeg" alt="Turtle" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-</a>
-<h6 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/2023/06/20/study-explores-climate-change-impacts-seagrass-meadows/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Seagrasses could suffer range and species loss in future new model predicts</a>
-</h6>
-            <p style="font-size:12pt;">Climate change is expected to deal a heavy blow to marine species ... <a href="https://news.stanford.edu/2023/06/20/study-explores-climate-change-impacts-seagrass-meadows/" target="_blank">[read more]</a></p>
-    </div>
-
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">May 1, 2023</div>
-      <h3 style="margin-top: 0;">Stanford | News</h3>
-      <a href="https://news.stanford.edu/2023/05/01/study-examines-biases-coverage-gaps-biodiversity-data/" target="_blank" rel="noopener noreferrer">
-        <img src="https://news.stanford.edu/__data/assets/image/0022/35590/varieties/705w_custom.jpg" alt="Guardian" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-        </a>
-<h6 style="margin-top: 0;">
-    <a href="https://news.stanford.edu/2023/05/01/study-examines-biases-coverage-gaps-biodiversity-data/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Study examines biases and coverage gaps in biodiversity data</a>
-</h6>
-            <p style="font-size:12pt;">Natural history collections of plants, animals, and other organisms are becoming a thing of the past with the rise of biodiversity apps and digital tools ... <a href="https://news.stanford.edu/2023/05/01/study-examines-biases-coverage-gaps-biodiversity-data/" target="_blank">[read more]</a></p>
-    </div>
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">March 10, 2022</div>
-      <h3 style="margin-top: 0;">The Guardian</h3>
-      <a href="https://www.theguardian.com/environment/2022/mar/10/plants-humans-dont-need-extinction-biodiversity-study" target="_blank" rel="noopener noreferrer">
-        <img src="https://i.guim.co.uk/img/media/339ae5a34bd9dc226252985d36f97a0ccad98da0/0_29_2048_1229/master/2048.jpg?width=620&quality=45&dpr=2&s=none" alt="Guardian" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-        </a>
-<h6 style="margin-top: 0;">
-    <a href="https://www.theguardian.com/environment/2022/mar/10/plants-humans-dont-need-extinction-biodiversity-study" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Plants humans don’t need are heading for extinction, study finds</a>
-</h6>
-            <p style="font-size:12pt;">Bleak picture for biodiversity as analysis of over 80,000 species forecasts more losers than winners ... <a href="https://www.theguardian.com/environment/2022/mar/10/plants-humans-dont-need-extinction-biodiversity-study" target="_blank">[read more]</a></p>
-    </div>
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">February 2, 2022</div>
-      <h3 style="margin-top: 0;">TEXAS STANDARD</h3>
-      <a href="https://www.texasstandard.org/stories/study-shows-plant-diversity-declining-due-to-invasive-species-success/" target="_blank" rel="noopener noreferrer">
-        <img src="https://www.texasstandard.org/wp-content/uploads/2022/02/1024px-Tree_of_heaven_Ailanthus_altissima_15632767210.jpg" alt="Guardian" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-        </a>
-<h6 style="margin-top: 0;">
-    <a href="https://www.texasstandard.org/stories/study-shows-plant-diversity-declining-due-to-invasive-species-success/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Study shows plant diversity declining due to invasive species’ success</a>
-</h6>
-            <p style="font-size:12pt;">Globalization means it’s easier than ever before for plants to move outside their native habitat ... <a href="https://www.texasstandard.org/stories/study-shows-plant-diversity-declining-due-to-invasive-species-success/" target="_blank">[read more]</a></p>
-    </div>
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">December 6, 2021</div>
-      <h3 style="margin-top: 0;">EurekAlert</h3>
-        <img src="https://earimediaprodweb.azurewebsites.net/Api/v1/Multimedia/35adcec2-f165-45ed-8cbd-5d5f04d5460b/Rendition/low-res/Content/Public" alt="EurekAlert" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-        </a>
-<h6 style="margin-top: 0;">
-    <a href="https://www.eurekalert.org/news-releases/936979" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Global database of plants reveals human activity biggest driver of homogenization of plant communities</a>
-</h6>
-            <p style="font-size:12pt;">Species extinction, the introduction of non-native plants, climate change, and pollution are all major drivers of changes in biological communities due to human activity ... <a href="https://www.eurekalert.org/news-releases/936979" target="_blank">[read more]</a></p>
-    </div>
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">November 19, 2020</div>
-      <h3 style="margin-top: 0;">IUCN Phylodiversity</h3>
-      <a href="https://www.pdtf.org/news/endemism-patterns-are-scale-dependent" target="_blank" rel="noopener noreferrer">
-        <img src="https://lh3.googleusercontent.com/pw/AIL4fc9gtKW97x45me3uy9QGESiAStVPnnIMqm-9_vUMHGzW_STduXW7YX7TvoCavlHwfxAuns6Rfi5KJEBTy1inWxuca2W66fjiHMyMT2sZMpWhECjituf09-mEVBRq4UeBgwDeP91q1PW_BIl420Y4JWwtYA=w1688-h1125-s-no?authuser=0" alt="EurekAlert" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-        </a>
-<h6 style="margin-top: 0;">
-    <a href="https://www.pdtf.org/news/endemism-patterns-are-scale-dependent" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Endemism patterns are scale dependent</a>
-</h6>
-            <p style="font-size:12pt;">The spatial variation of biodiversity patterns has for long fascinated biologists, yet little is known about how patterns of endemism vary with scale ... <a href="https://www.pdtf.org/news/endemism-patterns-are-scale-dependent" target="_blank">[read more]</a></p>
-    </div>
-    <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">December 22, 2017</div>
-      <h3 style="margin-top: 0;">Harvard Gazette</h3>
-      <a href="https://news.harvard.edu/gazette/story/2017/12/harvard-study-illuminates-botanical-bias/" target="_blank" rel="noopener noreferrer">
-        <img src="https://news.harvard.edu/wp-content/uploads/2017/12/120617_herbarium_067_2500-1.jpg" alt="EurekAlert" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-        </a>
-<h6 style="margin-top: 0;">
-    <a href="https://news.harvard.edu/gazette/story/2017/12/harvard-study-illuminates-botanical-bias/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Study uncovers botanical bias</a>
-</h6>
-            <p style="font-size:12pt;">Findings seen as a wrinkle for researchers who rely on herbarium collections in climate change work ... <a href="https://news.harvard.edu/gazette/story/2017/12/harvard-study-illuminates-botanical-bias/" target="_blank">[read more]</a></p>
-    </div>
-  <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">May 11, 2017</div>
-      <h3 style="margin-top: 0;">WOODZ</h3>
-        <img src="https://www.woodz.co/wp-content/uploads/2015/10/Upland_South_Africa_Savanna-e1445082315270.jpg" alt="EurekAlert" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-        </a>
-<h6 style="margin-top: 0;">
-    <a href="https://www.woodz.co/journal/science-why-some-trees-evolved-to-live-underground/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Why Some Trees Evolved to Live Underground</a>
-</h6>
-            <p style="font-size:12pt;">With the exception of wildlife film makers, arboriculturalists and a few scientists, most of us don’t spend much time in the leafy upper reaches of tree canopies. But in the underground forests beneath the savannahs of southern Africa ... <a href="https://www.woodz.co/journal/science-why-some-trees-evolved-to-live-underground/" target="_blank">[read more]</a></p>
-            </div>
- <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">September 15, 2016</div>
-      <h3 style="margin-top: 0;">Harvard Gazette</h3>
-        <img src="https://news.harvard.edu/wp-content/uploads/2016/09/seagrass605.jpg" alt="EurekAlert" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-        </a>
-<h6 style="margin-top: 0;">
-    <a href="https://news.harvard.edu/gazette/story/2016/09/strong-case-for-seagrass-in-biodiversity-analysis/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Strong case for seagrass</a>
-</h6>
-            <p style="font-size:12pt;">Researcher behind biodiversity analysis cites key role in food chain ... <a href="https://news.harvard.edu/gazette/story/2016/09/strong-case-for-seagrass-in-biodiversity-analysis/" target="_blank">[read more]</a></p>
-            </div>
-  <div style="width:250px; margin:10px;">
-      <div class="date" style="margin-bottom: 5px; color: #8C1515;">September 6, 2016</div>
-      <h3 style="margin-top: 0;">ScienceDaily</h3>
-        <img src="https://scx1.b-cdn.net/csz/news/800a/2016/57cea64edc203.jpg" alt="EurekAlert" style="width:250px; height:250px; object-fit:cover;" class="img-responsive">
-                </a>
-<h6 style="margin-top: 0;">
-    <a href="https://www.sciencedaily.com/releases/2016/09/160906103156.htm" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">Browsing antelope turned ancient African forests into grassy savanna ecosystems</a>
-</h6>
-            <p style="font-size:12pt;">Millions of years ago, Africa's savannas were covered with thick, ancient forests, which disappeared and turned into the grassy ecosystems that they are today ... <a href="https://www.sciencedaily.com/releases/2016/09/160906103156.htm" target="_blank">[read more]</a></p>
-        </div>
-    </div>
-  </div>
+<div class="news-filter" role="group" aria-label="Filter news by year"><button class="active" data-f="all">All</button><button data-f="2026">2026</button><button data-f="2025">2025</button><button data-f="2024">2024</button><button data-f="2023">2023</button><button data-f="earlier">Earlier</button></div>
+<div class="news-grid">
+  <article class="news-card" data-cat="2026">
+    <span class="news-badge">Yahoo News</span>
+    <a class="ph" href="https://au.news.yahoo.com/global-study-finds-butterfly-caterpillars-044500714.html" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://s.yimg.com/lo/mysterio/api/30cd4ab317ae01081c4ff71998169eae0500f8a194f0e08e9611c0c61a70abdd/lightyear_networkapi/resizefill_w1200;quality_80;format_webp/https:%2F%2Fmedia.zenfs.com%2Fen%2Fthe_cool_down_737%2Ffbf6cd1c07fc20462296a86e5ad7005e" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">June 15, 2026</div>
+      <h3><a href="https://au.news.yahoo.com/global-study-finds-butterfly-caterpillars-044500714.html" target="_blank" rel="noopener noreferrer">Global study finds butterfly caterpillars are pickiest where plants are richest</a></h3>
+      <p class="story">Butterfly caterpillars may be more selective in their food choices than researchers once thought, and their picky diets may show ...</p>
+      <div class="row"><span class="src">Yahoo News</span><a class="read" href="https://au.news.yahoo.com/global-study-finds-butterfly-caterpillars-044500714.html" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="2026">
+    <span class="news-badge">Botany One</span>
+    <a class="ph" href="https://www.botany.one/herbarium-collections-can-offer-exciting-new-career-paths-far-beyond-taxonomy-an-interview-with-dr-barnabas-daru/" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://storage.ghost.io/c/2e/eb/2eeb2fa9-78ad-4718-9c6b-8b5b05545bf6/content/images/2026/06/compressed-original-q16-1781292908767-1.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">June 15, 2026</div>
+      <h3><a href="https://www.botany.one/herbarium-collections-can-offer-exciting-new-career-paths-far-beyond-taxonomy-an-interview-with-dr-barnabas-daru/" target="_blank" rel="noopener noreferrer">Herbarium Collections Can Offer Exciting New Career Paths Far Beyond Taxonomy</a></h3>
+      <p class="story">Digital botany is changing what we can ask of old collections. Herbarium specimens, once used mainly for taxonomy and identification, are now ...</p>
+      <div class="row"><span class="src">Botany One</span><a class="read" href="https://www.botany.one/herbarium-collections-can-offer-exciting-new-career-paths-far-beyond-taxonomy-an-interview-with-dr-barnabas-daru/" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="2026">
+    <span class="news-badge">Stanford | News</span>
+    <a class="ph" href="https://news.stanford.edu/stories/2026/05/stanford-plant-diversity-homegrown-evolution-study?mkt_tok=NjYwLVRKQy05ODQAAAGiEswzcct1EhnyoCLvkRIydVdmwvIvLW4MVRWWnRpXZq9drQ3naQCQfLMBYeZqD6JFSovwduEKHmC-POpO166N0bMDjFhfZkzGP5HCL00" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://news.stanford.edu/__data/assets/image/0029/188129/GettyImages-1431002925.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">May 21, 2026</div>
+      <h3><a href="https://news.stanford.edu/stories/2026/05/stanford-plant-diversity-homegrown-evolution-study?mkt_tok=NjYwLVRKQy05ODQAAAGiEswzcct1EhnyoCLvkRIydVdmwvIvLW4MVRWWnRpXZq9drQ3naQCQfLMBYeZqD6JFSovwduEKHmC-POpO166N0bMDjFhfZkzGP5HCL00" target="_blank" rel="noopener noreferrer">Plant diversity is mostly homegrown, new research reveals</a></h3>
+      <p class="story">A Stanford study finds that more than three quarters of plant species diversified primarily by thriving in their original environments ...</p>
+      <div class="row"><span class="src">Stanford | News</span><a class="read" href="https://news.stanford.edu/stories/2026/05/stanford-plant-diversity-homegrown-evolution-study?mkt_tok=NjYwLVRKQy05ODQAAAGiEswzcct1EhnyoCLvkRIydVdmwvIvLW4MVRWWnRpXZq9drQ3naQCQfLMBYeZqD6JFSovwduEKHmC-POpO166N0bMDjFhfZkzGP5HCL00" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="2025">
+    <span class="news-badge">Stanford | News</span>
+    <a class="ph" href="https://news.stanford.edu/stories/2025/08/plant-samples-herbaria-research-technology" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://news.stanford.edu/__data/assets/image/0022/175126/herbarium.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">August 26, 2025</div>
+      <h3><a href="https://news.stanford.edu/stories/2025/08/plant-samples-herbaria-research-technology" target="_blank" rel="noopener noreferrer">Plant samples preserved in museums may hold key to advancing biodiversity</a></h3>
+      <p class="story">Herbaria, or “museums for plants,” house millions of samples collected over centuries ...</p>
+      <div class="row"><span class="src">Stanford | News</span><a class="read" href="https://news.stanford.edu/stories/2025/08/plant-samples-herbaria-research-technology" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="2025">
+    <span class="news-badge">Stanford | News</span>
+    <a class="ph" href="https://news.stanford.edu/stories/2025/02/four-stanford-faculty-named-sloan-research-fellows" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://news.stanford.edu/__data/assets/image/0024/165714/Sloan2025_1500x1000.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">February 18, 2025</div>
+      <h3><a href="https://news.stanford.edu/stories/2025/02/four-stanford-faculty-named-sloan-research-fellows" target="_blank" rel="noopener noreferrer">Four Stanford faculty named Sloan Research Fellows</a></h3>
+      <p class="story">The award recognizes early-career scientists whose accomplishments mark them as the next generation of leaders ...</p>
+      <div class="row"><span class="src">Stanford | News</span><a class="read" href="https://news.stanford.edu/stories/2025/02/four-stanford-faculty-named-sloan-research-fellows" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="2024">
+    <span class="news-badge">Stanford | News</span>
+    <a class="ph" href="https://news.stanford.edu/stories/2024/09/study-finds-a-majority-of-plant-diversity-hotspots-are-outside-protected-areas" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://humsci.stanford.edu/sites/default/files/styles/embed_350w_medium_1x/public/daru_lab-12.png?itok=Oyrr8ihu" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">September 4, 2024</div>
+      <h3><a href="https://news.stanford.edu/stories/2024/09/study-finds-a-majority-of-plant-diversity-hotspots-are-outside-protected-areas" target="_blank" rel="noopener noreferrer">A majority of plant diversity hotspots are outside of protected areas</a></h3>
+      <p class="story">A new study creates more accurate estimates for over 200,000 native plant species worldwide ...</p>
+      <div class="row"><span class="src">Stanford | News</span><a class="read" href="https://news.stanford.edu/stories/2024/09/study-finds-a-majority-of-plant-diversity-hotspots-are-outside-protected-areas" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="2023">
+    <span class="news-badge">Stanford | News</span>
+    <a class="ph" href="https://news.stanford.edu/2023/06/20/study-explores-climate-change-impacts-seagrass-meadows/" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://news.stanford.edu/__data/assets/image/0016/35233/Green_sea_turtle_grazing_seagrass.jpeg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">June 20, 2023</div>
+      <h3><a href="https://news.stanford.edu/2023/06/20/study-explores-climate-change-impacts-seagrass-meadows/" target="_blank" rel="noopener noreferrer">Seagrasses could suffer range and species loss in future new model predicts</a></h3>
+      <p class="story">Climate change is expected to deal a heavy blow to marine species ...</p>
+      <div class="row"><span class="src">Stanford | News</span><a class="read" href="https://news.stanford.edu/2023/06/20/study-explores-climate-change-impacts-seagrass-meadows/" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="2023">
+    <span class="news-badge">Stanford | News</span>
+    <a class="ph" href="https://news.stanford.edu/2023/05/01/study-examines-biases-coverage-gaps-biodiversity-data/" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://news.stanford.edu/__data/assets/image/0022/35590/varieties/705w_custom.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">May 1, 2023</div>
+      <h3><a href="https://news.stanford.edu/2023/05/01/study-examines-biases-coverage-gaps-biodiversity-data/" target="_blank" rel="noopener noreferrer">Study examines biases and coverage gaps in biodiversity data</a></h3>
+      <p class="story">Natural history collections of plants, animals, and other organisms are becoming a thing of the past with the rise of biodiversity apps and digital tools ...</p>
+      <div class="row"><span class="src">Stanford | News</span><a class="read" href="https://news.stanford.edu/2023/05/01/study-examines-biases-coverage-gaps-biodiversity-data/" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="earlier">
+    <span class="news-badge">The Guardian</span>
+    <a class="ph" href="https://www.theguardian.com/environment/2022/mar/10/plants-humans-dont-need-extinction-biodiversity-study" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://i.guim.co.uk/img/media/339ae5a34bd9dc226252985d36f97a0ccad98da0/0_29_2048_1229/master/2048.jpg?width=620&quality=45&dpr=2&s=none" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">March 10, 2022</div>
+      <h3><a href="https://www.theguardian.com/environment/2022/mar/10/plants-humans-dont-need-extinction-biodiversity-study" target="_blank" rel="noopener noreferrer">Plants humans don’t need are heading for extinction, study finds</a></h3>
+      <p class="story">Bleak picture for biodiversity as analysis of over 80,000 species forecasts more losers than winners ...</p>
+      <div class="row"><span class="src">The Guardian</span><a class="read" href="https://www.theguardian.com/environment/2022/mar/10/plants-humans-dont-need-extinction-biodiversity-study" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="earlier">
+    <span class="news-badge">TEXAS STANDARD</span>
+    <a class="ph" href="https://www.texasstandard.org/stories/study-shows-plant-diversity-declining-due-to-invasive-species-success/" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://www.texasstandard.org/wp-content/uploads/2022/02/1024px-Tree_of_heaven_Ailanthus_altissima_15632767210.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">February 2, 2022</div>
+      <h3><a href="https://www.texasstandard.org/stories/study-shows-plant-diversity-declining-due-to-invasive-species-success/" target="_blank" rel="noopener noreferrer">Study shows plant diversity declining due to invasive species’ success</a></h3>
+      <p class="story">Globalization means it’s easier than ever before for plants to move outside their native habitat ...</p>
+      <div class="row"><span class="src">TEXAS STANDARD</span><a class="read" href="https://www.texasstandard.org/stories/study-shows-plant-diversity-declining-due-to-invasive-species-success/" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="earlier">
+    <span class="news-badge">EurekAlert</span>
+    <a class="ph" href="https://www.eurekalert.org/news-releases/936979" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://earimediaprodweb.azurewebsites.net/Api/v1/Multimedia/35adcec2-f165-45ed-8cbd-5d5f04d5460b/Rendition/low-res/Content/Public" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">December 6, 2021</div>
+      <h3><a href="https://www.eurekalert.org/news-releases/936979" target="_blank" rel="noopener noreferrer">Global database of plants reveals human activity biggest driver of homogenization of plant communities</a></h3>
+      <p class="story">Species extinction, the introduction of non-native plants, climate change, and pollution are all major drivers of changes in biological communities due to human activity ...</p>
+      <div class="row"><span class="src">EurekAlert</span><a class="read" href="https://www.eurekalert.org/news-releases/936979" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="earlier">
+    <span class="news-badge">IUCN Phylodiversity</span>
+    <a class="ph" href="https://www.pdtf.org/news/endemism-patterns-are-scale-dependent" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://lh3.googleusercontent.com/pw/AIL4fc9gtKW97x45me3uy9QGESiAStVPnnIMqm-9_vUMHGzW_STduXW7YX7TvoCavlHwfxAuns6Rfi5KJEBTy1inWxuca2W66fjiHMyMT2sZMpWhECjituf09-mEVBRq4UeBgwDeP91q1PW_BIl420Y4JWwtYA=w1688-h1125-s-no?authuser=0" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">November 19, 2020</div>
+      <h3><a href="https://www.pdtf.org/news/endemism-patterns-are-scale-dependent" target="_blank" rel="noopener noreferrer">Endemism patterns are scale dependent</a></h3>
+      <p class="story">The spatial variation of biodiversity patterns has for long fascinated biologists, yet little is known about how patterns of endemism vary with scale ...</p>
+      <div class="row"><span class="src">IUCN Phylodiversity</span><a class="read" href="https://www.pdtf.org/news/endemism-patterns-are-scale-dependent" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="earlier">
+    <span class="news-badge">Harvard Gazette</span>
+    <a class="ph" href="https://news.harvard.edu/gazette/story/2017/12/harvard-study-illuminates-botanical-bias/" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://news.harvard.edu/wp-content/uploads/2017/12/120617_herbarium_067_2500-1.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">December 22, 2017</div>
+      <h3><a href="https://news.harvard.edu/gazette/story/2017/12/harvard-study-illuminates-botanical-bias/" target="_blank" rel="noopener noreferrer">Study uncovers botanical bias</a></h3>
+      <p class="story">Findings seen as a wrinkle for researchers who rely on herbarium collections in climate change work ...</p>
+      <div class="row"><span class="src">Harvard Gazette</span><a class="read" href="https://news.harvard.edu/gazette/story/2017/12/harvard-study-illuminates-botanical-bias/" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="earlier">
+    <span class="news-badge">WOODZ</span>
+    <a class="ph" href="https://www.woodz.co/journal/science-why-some-trees-evolved-to-live-underground/" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://www.woodz.co/wp-content/uploads/2015/10/Upland_South_Africa_Savanna-e1445082315270.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">May 11, 2017</div>
+      <h3><a href="https://www.woodz.co/journal/science-why-some-trees-evolved-to-live-underground/" target="_blank" rel="noopener noreferrer">Why Some Trees Evolved to Live Underground</a></h3>
+      <p class="story">With the exception of wildlife film makers, arboriculturalists and a few scientists, most of us don’t spend much time in the leafy upper reaches of tree canopies. But in the underground forests beneath the savannahs of southern Africa ...</p>
+      <div class="row"><span class="src">WOODZ</span><a class="read" href="https://www.woodz.co/journal/science-why-some-trees-evolved-to-live-underground/" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="earlier">
+    <span class="news-badge">Harvard Gazette</span>
+    <a class="ph" href="https://news.harvard.edu/gazette/story/2016/09/strong-case-for-seagrass-in-biodiversity-analysis/" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://news.harvard.edu/wp-content/uploads/2016/09/seagrass605.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">September 15, 2016</div>
+      <h3><a href="https://news.harvard.edu/gazette/story/2016/09/strong-case-for-seagrass-in-biodiversity-analysis/" target="_blank" rel="noopener noreferrer">Strong case for seagrass</a></h3>
+      <p class="story">Researcher behind biodiversity analysis cites key role in food chain ...</p>
+      <div class="row"><span class="src">Harvard Gazette</span><a class="read" href="https://news.harvard.edu/gazette/story/2016/09/strong-case-for-seagrass-in-biodiversity-analysis/" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
+  <article class="news-card" data-cat="earlier">
+    <span class="news-badge">ScienceDaily</span>
+    <a class="ph" href="https://www.sciencedaily.com/releases/2016/09/160906103156.htm" target="_blank" rel="noopener noreferrer"><img onerror="this.parentNode.classList.add('noimg');this.remove()" src="https://scx1.b-cdn.net/csz/news/800a/2016/57cea64edc203.jpg" alt="" loading="lazy"></a>
+    <div class="bd"><div class="news-date">September 6, 2016</div>
+      <h3><a href="https://www.sciencedaily.com/releases/2016/09/160906103156.htm" target="_blank" rel="noopener noreferrer">Browsing antelope turned ancient African forests into grassy savanna ecosystems</a></h3>
+      <p class="story">Millions of years ago, Africa's savannas were covered with thick, ancient forests, which disappeared and turned into the grassy ecosystems that they are today ...</p>
+      <div class="row"><span class="src">ScienceDaily</span><a class="read" href="https://www.sciencedaily.com/releases/2016/09/160906103156.htm" target="_blank" rel="noopener noreferrer">Read →</a></div></div>
+  </article>
 </div>

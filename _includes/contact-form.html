@@ -1,0 +1,160 @@
+{%- comment -%}
+  Contact form (People > "You"). Posts to a Google Apps Script web app that appends to a Google Sheet
+  and emails the lab: see tools/contact_form_apps_script.gs and README ("Contact form").
+  Endpoint: contact_form_endpoint in _config.yml. Empty endpoint = "coming soon" notice with email.
+  Usage: {% include contact-form.html email="someone@example.org" %}
+{%- endcomment -%}
+{%- assign contact_email = include.email -%}
+{%- assign endpoint = site.contact_form_endpoint | strip -%}
+<section class="contact-form" aria-labelledby="contact-form-title">
+  <h4 id="contact-form-title">Contact us</h4>
+{%- if endpoint == "" %}
+  <p class="contact-form__notice">Contact form coming soon. In the meantime, email us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p>
+{%- else %}
+  <noscript><p class="contact-form__notice">Please email us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p></noscript>
+  <form class="contact-form__form" data-endpoint="{{ endpoint | escape }}" data-email="{{ contact_email | escape }}" novalidate hidden>
+    <div class="contact-form__row">
+      <div class="contact-form__field">
+        <label for="cf-name">Name <span aria-hidden="true">*</span></label>
+        <input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="200" aria-describedby="cf-name-err">
+        <span class="contact-form__err" id="cf-name-err"></span>
+      </div>
+      <div class="contact-form__field">
+        <label for="cf-email">Email <span aria-hidden="true">*</span></label>
+        <input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="320" aria-describedby="cf-email-err">
+        <span class="contact-form__err" id="cf-email-err"></span>
+      </div>
+    </div>
+    <div class="contact-form__row">
+      <div class="contact-form__field">
+        <label for="cf-role">I am a…</label>
+        <select id="cf-role" name="role">
+          <option>Prospective PhD student</option>
+          <option>Prospective postdoc</option>
+          <option>Undergraduate</option>
+          <option>Collaborator</option>
+          <option>Supporter / merch</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="contact-form__field">
+        <label for="cf-subject">Subject</label>
+        <input id="cf-subject" name="subject" type="text" maxlength="200">
+      </div>
+    </div>
+    <div class="contact-form__field">
+      <label for="cf-message">Message <span aria-hidden="true">*</span></label>
+      <textarea id="cf-message" name="message" rows="6" required maxlength="3000" aria-describedby="cf-message-err cf-message-count"></textarea>
+      <span class="contact-form__hint" id="cf-message-count">0 / 3000</span>
+      <span class="contact-form__err" id="cf-message-err"></span>
+    </div>
+    <!-- Honeypot: people never see or fill this; bots often do. -->
+    <div class="contact-form__hp" aria-hidden="true">
+      <label for="cf-website">Website</label>
+      <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
+    </div>
+    <p class="contact-form__required"><span aria-hidden="true">*</span> Required</p>
+    <button type="submit" class="btn btn--primary contact-form__submit">Send message</button>
+    <p class="contact-form__status" role="status" aria-live="polite"></p>
+  </form>
+  <div class="contact-form__done" tabindex="-1" hidden>
+    <p><strong>Thanks, your message was sent.</strong> We'll get back to you soon.</p>
+  </div>
+  <script>
+  (function () {
+    var form = document.querySelector('.contact-form__form');
+    if (!form) return;
+    var started = Date.now();
+    var MIN_MS = 3000, MAX_LEN = 3000;
+    var done = document.querySelector('.contact-form__done');
+    var status = form.querySelector('.contact-form__status');
+    var button = form.querySelector('.contact-form__submit');
+    var msg = form.elements.message, count = document.getElementById('cf-message-count');
+    var email = form.getAttribute('data-email');
+    form.hidden = false;
+    // Prefill from links such as /people/?subject=Notify%20me%3A%20Tote#you (Store page)
+    var qs = new URLSearchParams(location.search), sub = qs.get('subject');
+    if (sub) {
+      form.elements.subject.value = sub.slice(0, 200);
+      if (/notify|merch|bulk|photo/i.test(sub)) form.elements.role.value = 'Supporter / merch';
+    }
+
+    msg.addEventListener('input', function () { count.textContent = msg.value.length + ' / ' + MAX_LEN; });
+
+    function setError(field, text) {
+      var err = document.getElementById(field.id + '-err');
+      if (err) err.textContent = text || '';
+      if (text) field.setAttribute('aria-invalid', 'true'); else field.removeAttribute('aria-invalid');
+    }
+    function validate() {
+      var bad = [];
+      var name = form.elements.name, mail = form.elements.email;
+      setError(name, name.value.trim() ? '' : 'Please enter your name.');
+      if (!name.value.trim()) bad.push(name);
+      var okMail = mail.value.trim() && mail.checkValidity();
+      setError(mail, okMail ? '' : (mail.value.trim() ? 'Please enter a valid email address.' : 'Please enter your email.'));
+      if (!okMail) bad.push(mail);
+      var m = msg.value.trim();
+      var mErr = !m ? 'Please write a message.' : (msg.value.length > MAX_LEN ? 'Please keep your message under ' + MAX_LEN + ' characters.' : '');
+      setError(msg, mErr);
+      if (mErr) bad.push(msg);
+      return bad;
+    }
+    function fail(text) {
+      status.innerHTML = '';
+      status.className = 'contact-form__status is-error';
+      status.appendChild(document.createTextNode(text + ' You can also email us at '));
+      var a = document.createElement('a');
+      a.href = 'mailto:' + email; a.textContent = email;
+      status.appendChild(a);
+      status.appendChild(document.createTextNode('.'));
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      status.className = 'contact-form__status';
+      status.textContent = '';
+      var bad = validate();
+      if (bad.length) {
+        status.textContent = bad.length === 1 ? 'Please fix the highlighted field.' : 'Please fix the ' + bad.length + ' highlighted fields.';
+        bad[0].focus();
+        return;
+      }
+      var elapsed = Date.now() - started;
+      if (form.elements.website.value) { fail('Sorry, your message could not be sent.'); return; }
+      if (elapsed < MIN_MS) { status.textContent = 'One moment, please try again in a few seconds.'; return; }
+
+      var body = new URLSearchParams();
+      ['name', 'email', 'role', 'subject', 'message', 'website'].forEach(function (k) { body.append(k, form.elements[k].value); });
+      body.append('elapsed_ms', String(elapsed));
+      body.append('page', location.href);
+      body.append('ua', navigator.userAgent);
+
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      var ctrl = 'AbortController' in window ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
+      // no-cors: Apps Script replies via a redirect without CORS headers, so the response is opaque.
+      // A resolved fetch means the request reached Google; a network failure rejects.
+      fetch(form.getAttribute('data-endpoint'), { method: 'POST', mode: 'no-cors', body: body, signal: ctrl ? ctrl.signal : undefined })
+        .then(function () {
+          clearTimeout(timer);
+          form.classList.add('is-leaving');
+          setTimeout(function () {
+            form.hidden = true;
+            done.hidden = false;
+            done.classList.add('is-arriving');
+            done.focus();
+          }, 250);
+        })
+        .catch(function () {
+          clearTimeout(timer);
+          button.disabled = false;
+          button.textContent = 'Send message';
+          fail('Sorry, something went wrong and your message was not sent.');
+        });
+    });
+  })();
+  </script>
+{%- endif %}
+</section>
