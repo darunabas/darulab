@@ -317,7 +317,18 @@ a {
 
 
 /* ---- Contact form (People > "You"; markup in _includes/contact-form.html) ---- */
-.contact-form { clear: both; margin-top: 1.5em; padding-top: 1em; border-top: 1px solid var(--fluid-line); }
+.contact-form { clear: both; margin-top: 0; padding-top: 1.1em; border-top: 1px solid var(--fluid-line); }
+.contact-form .cf-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* "You" tab intro: small round photo beside a short welcome */
+.join-hero { display: flex; align-items: center; gap: 1.2em; margin: .2em 0 1.1em; }
+.tab--people ~ .tabcontent img.join-hero__img { float: none; flex: 0 0 auto; width: 132px; height: 132px; margin: 0; padding: 0; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px #fff, 0 0 0 4px rgba(140,21,21,.35); }
+.join-hero__text h3 { margin: 0 0 .3em; }
+.join-hero__text p { margin: 0; color: #4a4944; line-height: 1.5; }
+@media (max-width: 47.99em) {
+  .join-hero { gap: .9em; align-items: flex-start; }
+  .tab--people ~ .tabcontent img.join-hero__img { width: 84px; height: 84px; }
+  .join-hero__text p { font-size: .92em; }
+}
 .contact-form h4 { margin-top: 0; }
 .contact-form__row { display: flex; flex-wrap: wrap; gap: 0 1em; }
 .contact-form__row > .contact-form__field { flex: 1 1 14em; }
@@ -354,7 +365,7 @@ a {
 .contact-form .cf-chips input:checked + span { background: var(--fluid-accent); border-color: var(--fluid-accent); color: #fff; }
 .contact-form .cf-chips input:focus-visible + span { outline: 2px solid var(--fluid-accent); outline-offset: 2px; }
 .contact-form fieldset.cf-chips[aria-invalid="true"] label > span { border-color: #b3261e; }
-.contact-form .cf-join { margin: 0 0 .4em; padding: .9em 1em .2em; background: #faf7f2; border: 1px solid var(--fluid-line); border-radius: 10px; animation: fluid-fade-in .35s ease both; }
+.contact-form .cf-join { margin: 0 0 1.1em; padding: .9em 1em .2em; background: #faf7f2; border: 1px solid var(--fluid-line); border-radius: 10px; animation: fluid-fade-in .35s ease both; }
 .contact-form .cf-join[hidden] { display: none; }
 .contact-form .cf-join #cf-position-err:not(:empty) { margin: -.5em 0 .7em; }
 .contact-form .cf-label { display: block; margin-bottom: .25em; font-weight: 600; font-size: .9em; }

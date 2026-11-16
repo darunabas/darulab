@@ -8,7 +8,7 @@
 {%- assign contact_email = include.email -%}
 {%- assign endpoint = site.contact_form_endpoint | strip -%}
 <section class="contact-form" aria-labelledby="contact-form-title">
-  <h4 id="contact-form-title">Get in touch</h4>
+  <h4 id="contact-form-title" class="cf-sr">Contact form</h4>
 {%- if endpoint == "" %}
   <p class="contact-form__notice">Contact form coming soon. In the meantime, email us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p>
 {%- else %}
