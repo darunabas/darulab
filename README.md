@@ -17,11 +17,11 @@ Then open http://127.0.0.1:4000/.
 
 ## Contact form
 
-The "Contact us" form on People > "You" sends each message to a Google Sheet in the lab's Google Drive and emails it to the account that deployed the script. The backend is `tools/contact_form_apps_script.gs` (not published with the site).
+The "Get in touch" form on People > "You" sends each message to a Google Sheet in the lab's Google Drive and emails it to the account that deployed the script. Visitors choose what they are writing about (joining the lab, collaboration, media, supporter, other); for "joining the lab" they also choose a position (PhD student, postdoc, research intern, undergraduate researcher, visiting student/scholar, research staff) and can give their institution, start date, funding, interests and links. Up to 3 attachments (PDF, Word, PNG, JPEG; 5 MB each) are saved to a private Drive folder, "Daru Lab contact form uploads", linked in the sheet and attached to the email. The backend is `tools/contact_form_apps_script.gs` (not published with the site).
 
 1. Create a Google Sheet in your Drive (e.g. "Daru Lab contact form").
 2. In the sheet: **Extensions → Apps Script**, replace the sample code with the contents of `tools/contact_form_apps_script.gs`, and save.
-3. **Deploy → New deployment → Web app**: *Execute as* **Me**, *Who has access* **Anyone**. Deploy and approve the permissions.
+3. **Deploy → New deployment → Web app**: *Execute as* **Me**, *Who has access* **Anyone**. Deploy and approve the permissions (Sheets, Drive and email).
 4. Copy the web app URL (ending in `/exec`) into `_config.yml` as `contact_form_endpoint: "https://script.google.com/macros/s/…/exec"`, then push.
 
 While `contact_form_endpoint` is empty, the page shows a "Contact form coming soon" notice with the lab email instead of the form. After editing the script, use **Deploy → Manage deployments → Edit → New version** so the same URL keeps working.

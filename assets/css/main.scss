@@ -344,6 +344,38 @@ a {
 .contact-form__status { min-height: 1.5em; margin: .6em 0 0; font-size: .9em; }
 .contact-form__status.is-error { color: #b3261e; }
 .contact-form__notice { padding: .75em 1em; background: #f8f3f3; border-left: 3px solid var(--fluid-accent); border-radius: 4px; }
+/* choice chips (interest, position) */
+.contact-form fieldset.cf-chips { border: 0; margin: 0 0 .9em; padding: 0; display: flex; flex-wrap: wrap; gap: .45em; }
+.contact-form fieldset.cf-chips legend { width: 100%; padding: 0; margin-bottom: .4em; font-weight: 600; font-size: .9em; }
+.contact-form .cf-chips label { display: inline-flex; margin: 0; font-weight: 400; cursor: pointer; }
+.contact-form .cf-chips input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.contact-form .cf-chips label > span { display: inline-block; padding: .38em .95em; font-size: .88em; border: 1.5px solid rgba(46,45,41,.25); border-radius: 999px; background: #fff; transition: background-color .25s ease, border-color .25s ease, color .25s ease; }
+.contact-form .cf-chips label:hover > span { border-color: var(--fluid-accent); }
+.contact-form .cf-chips input:checked + span { background: var(--fluid-accent); border-color: var(--fluid-accent); color: #fff; }
+.contact-form .cf-chips input:focus-visible + span { outline: 2px solid var(--fluid-accent); outline-offset: 2px; }
+.contact-form fieldset.cf-chips[aria-invalid="true"] label > span { border-color: #b3261e; }
+.contact-form .cf-join { margin: 0 0 .4em; padding: .9em 1em .2em; background: #faf7f2; border: 1px solid var(--fluid-line); border-radius: 10px; animation: fluid-fade-in .35s ease both; }
+.contact-form .cf-join[hidden] { display: none; }
+.contact-form .cf-join #cf-position-err:not(:empty) { margin: -.5em 0 .7em; }
+.contact-form .cf-label { display: block; margin-bottom: .25em; font-weight: 600; font-size: .9em; }
+.contact-form .cf-optional { font-weight: 400; color: #62625f; }
+/* file drop zone */
+.contact-form .cf-drop { display: flex; flex-direction: column; align-items: center; gap: .25em; padding: 1.1em 1em; text-align: center; font-weight: 400; color: #2E2D29; border: 1.5px dashed rgba(46,45,41,.3); border-radius: 10px; background: #fff; cursor: pointer; transition: border-color .25s ease, background-color .25s ease; }
+.contact-form .cf-drop svg { color: var(--fluid-accent); }
+.contact-form .cf-drop strong { color: var(--fluid-accent); }
+.contact-form .cf-drop:hover, .contact-form .cf-drop.is-over { border-color: var(--fluid-accent); background: rgba(140,21,21,.04); }
+.contact-form .cf-drop input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.contact-form .cf-drop:focus-within { outline: 2px solid var(--fluid-accent); outline-offset: 2px; }
+.contact-form .cf-filelist { list-style: none; margin: .5em 0 0; padding: 0; }
+.contact-form .cf-filelist li { display: flex; align-items: center; justify-content: space-between; gap: .6em; margin: 0 0 .35em; padding: .4em .7em; font-size: .88em; background: #f8f3f3; border-radius: 6px; overflow-wrap: anywhere; }
+.contact-form .cf-filelist button { flex: 0 0 auto; border: 0; background: none; color: var(--fluid-accent); font-size: .9em; cursor: pointer; text-decoration: underline; }
+/* consent */
+.contact-form .cf-consent label { display: flex; align-items: flex-start; gap: .5em; font-weight: 400; font-size: .88em; }
+.contact-form .cf-consent input { width: auto; margin-top: .25em; flex: 0 0 auto; accent-color: var(--fluid-accent); }
+@media (max-width: 47.99em) {
+  .contact-form .cf-chips label > span { font-size: .85em; padding: .35em .8em; }
+  .contact-form .cf-join { padding: .8em .75em .1em; }
+}
 /* honeypot: off-screen, not display:none (some bots skip hidden fields) */
 .contact-form__hp { position: absolute !important; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 /* dissolve between the form and the thank-you note */

@@ -23,7 +23,7 @@ github_username: darunabas
 minimal_mistakes_skin: dark
 # Contact form (People > "You"): the Google Apps Script web app /exec URL; empty shows a "coming soon" notice.
 # Setup: tools/contact_form_apps_script.gs and README ("Contact form").
-contact_form_endpoint: ""
+contact_form_endpoint: "https://script.google.com/macros/s/AKfycbxqt6vHRiBR68gP16x9418R58XA_QoxSXPp3pZCcspzWT3daePnvRai3uQLke0WBzNCXg/exec"
 search: # true
 
 # Build settings

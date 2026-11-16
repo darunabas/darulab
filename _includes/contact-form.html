@@ -1,18 +1,78 @@
 {%- comment -%}
-  Contact form (People > "You"). Posts to a Google Apps Script web app that appends to a Google Sheet
-  and emails the lab: see tools/contact_form_apps_script.gs and README ("Contact form").
-  Endpoint: contact_form_endpoint in _config.yml. Empty endpoint = "coming soon" notice with email.
+  Contact form (People > "You"). Posts to a Google Apps Script web app that appends to a Google Sheet,
+  saves attachments to a private Drive folder and emails the lab: see tools/contact_form_apps_script.gs
+  and README ("Contact form"). Endpoint: contact_form_endpoint in _config.yml.
+  Empty endpoint = "coming soon" notice with email.
   Usage: {% include contact-form.html email="someone@example.org" %}
 {%- endcomment -%}
 {%- assign contact_email = include.email -%}
 {%- assign endpoint = site.contact_form_endpoint | strip -%}
 <section class="contact-form" aria-labelledby="contact-form-title">
-  <h4 id="contact-form-title">Contact us</h4>
+  <h4 id="contact-form-title">Get in touch</h4>
 {%- if endpoint == "" %}
   <p class="contact-form__notice">Contact form coming soon. In the meantime, email us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p>
 {%- else %}
   <noscript><p class="contact-form__notice">Please email us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p></noscript>
   <form class="contact-form__form" data-endpoint="{{ endpoint | escape }}" data-email="{{ contact_email | escape }}" novalidate hidden>
+
+    <fieldset class="cf-chips" id="cf-interest">
+      <legend>I'm getting in touch about <span aria-hidden="true">*</span></legend>
+      <label><input type="radio" name="interest" value="Joining the lab" checked><span>Joining the lab</span></label>
+      <label><input type="radio" name="interest" value="Collaboration"><span>Collaboration</span></label>
+      <label><input type="radio" name="interest" value="Media / outreach"><span>Media / outreach</span></label>
+      <label><input type="radio" name="interest" value="Supporter / merch"><span>Supporter / merch</span></label>
+      <label><input type="radio" name="interest" value="Other"><span>Something else</span></label>
+    </fieldset>
+
+    <div class="cf-join" id="cf-join">
+      <fieldset class="cf-chips" id="cf-position">
+        <legend>I'd like to join as a… <span aria-hidden="true">*</span></legend>
+        <label><input type="radio" name="position" value="PhD student"><span>PhD student</span></label>
+        <label><input type="radio" name="position" value="Postdoc"><span>Postdoc</span></label>
+        <label><input type="radio" name="position" value="Research intern"><span>Research intern</span></label>
+        <label><input type="radio" name="position" value="Undergraduate researcher"><span>Undergraduate researcher</span></label>
+        <label><input type="radio" name="position" value="Visiting student / scholar"><span>Visiting student / scholar</span></label>
+        <label><input type="radio" name="position" value="Research staff"><span>Research staff</span></label>
+      </fieldset>
+      <span class="contact-form__err" id="cf-position-err"></span>
+      <div class="contact-form__row">
+        <div class="contact-form__field">
+          <label for="cf-institution">Current institution and position</label>
+          <input id="cf-institution" name="institution" type="text" maxlength="200" placeholder="e.g. MSc student, University of Lagos">
+        </div>
+        <div class="contact-form__field">
+          <label for="cf-start">When would you like to start?</label>
+          <select id="cf-start" name="start">
+            <option value="">Choose…</option>
+            <option>As soon as possible</option>
+            <option>Within the next 6 months</option>
+            <option>Next academic year</option>
+            <option>More than a year from now</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+      <div class="contact-form__row">
+        <div class="contact-form__field">
+          <label for="cf-funding">Funding</label>
+          <select id="cf-funding" name="funding">
+            <option value="">Choose…</option>
+            <option>I have or am applying for my own funding (e.g. a fellowship)</option>
+            <option>I'm looking for a funded position</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="contact-form__field">
+          <label for="cf-links">Website, Google Scholar or GitHub</label>
+          <input id="cf-links" name="links" type="text" maxlength="400" placeholder="Links, separated by commas">
+        </div>
+      </div>
+      <div class="contact-form__field">
+        <label for="cf-research">Research interests</label>
+        <input id="cf-research" name="research" type="text" maxlength="300" placeholder="e.g. biogeography, herbarium data, seagrasses, macroecology">
+      </div>
+    </div>
+
     <div class="contact-form__row">
       <div class="contact-form__field">
         <label for="cf-name">Name <span aria-hidden="true">*</span></label>
@@ -25,22 +85,9 @@
         <span class="contact-form__err" id="cf-email-err"></span>
       </div>
     </div>
-    <div class="contact-form__row">
-      <div class="contact-form__field">
-        <label for="cf-role">I am a…</label>
-        <select id="cf-role" name="role">
-          <option>Prospective PhD student</option>
-          <option>Prospective postdoc</option>
-          <option>Undergraduate</option>
-          <option>Collaborator</option>
-          <option>Supporter / merch</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="contact-form__field">
-        <label for="cf-subject">Subject</label>
-        <input id="cf-subject" name="subject" type="text" maxlength="200">
-      </div>
+    <div class="contact-form__field">
+      <label for="cf-subject">Subject</label>
+      <input id="cf-subject" name="subject" type="text" maxlength="200">
     </div>
     <div class="contact-form__field">
       <label for="cf-message">Message <span aria-hidden="true">*</span></label>
@@ -48,10 +95,29 @@
       <span class="contact-form__hint" id="cf-message-count">0 / 3000</span>
       <span class="contact-form__err" id="cf-message-err"></span>
     </div>
+
+    <div class="contact-form__field">
+      <span class="cf-label" id="cf-files-label">Attachments <span class="cf-optional">(optional)</span></span>
+      <label class="cf-drop" for="cf-files" id="cf-drop">
+        <input id="cf-files" type="file" multiple accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" aria-describedby="cf-files-hint cf-files-err">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M12 3l4.5 4.5-1.4 1.4L13 6.8V15h-2V6.8L8.9 8.9 7.5 7.5 12 3zM5 17h14v2H5z"/></svg>
+        <span><strong>Choose files</strong> or drag them here</span>
+        <span class="contact-form__hint" id="cf-files-hint">CV, statement of interest or writing sample. PDF, Word or image; up to 3 files, 5 MB each.</span>
+      </label>
+      <ul class="cf-filelist" id="cf-filelist" aria-live="polite"></ul>
+      <span class="contact-form__err" id="cf-files-err"></span>
+    </div>
+
     <!-- Honeypot: people never see or fill this; bots often do. -->
     <div class="contact-form__hp" aria-hidden="true">
       <label for="cf-website">Website</label>
       <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="contact-form__field cf-consent">
+      <label><input type="checkbox" id="cf-consent" name="consent" value="yes" aria-describedby="cf-consent-err">
+        <span>I agree that the Daru Lab may keep my message and attachments in order to reply to me. <span aria-hidden="true">*</span></span></label>
+      <span class="contact-form__err" id="cf-consent-err"></span>
     </div>
     <p class="contact-form__required"><span aria-hidden="true">*</span> Required</p>
     <button type="submit" class="btn btn--primary contact-form__submit">Send message</button>
@@ -65,22 +131,71 @@
     var form = document.querySelector('.contact-form__form');
     if (!form) return;
     var started = Date.now();
-    var MIN_MS = 3000, MAX_LEN = 3000;
+    var MIN_MS = 3000, MAX_LEN = 3000, MAX_FILES = 3, MAX_BYTES = 5 * 1024 * 1024;
+    var OK_EXT = /\.(pdf|docx?|png|jpe?g)$/i;
     var done = document.querySelector('.contact-form__done');
     var status = form.querySelector('.contact-form__status');
     var button = form.querySelector('.contact-form__submit');
     var msg = form.elements.message, count = document.getElementById('cf-message-count');
+    var join = document.getElementById('cf-join');
+    var input = document.getElementById('cf-files'), drop = document.getElementById('cf-drop');
+    var list = document.getElementById('cf-filelist'), filesErr = document.getElementById('cf-files-err');
     var email = form.getAttribute('data-email');
+    var files = [];
     form.hidden = false;
+
+    function interest() { var r = form.querySelector('input[name="interest"]:checked'); return r ? r.value : ''; }
+    function position() { var r = form.querySelector('input[name="position"]:checked'); return r ? r.value : ''; }
+    function syncJoin() { join.hidden = interest() !== 'Joining the lab'; }
+    form.querySelectorAll('input[name="interest"]').forEach(function (r) { r.addEventListener('change', syncJoin); });
+
     // Prefill from links such as /people/?subject=Notify%20me%3A%20Tote#you (Store page)
     var qs = new URLSearchParams(location.search), sub = qs.get('subject');
     if (sub) {
       form.elements.subject.value = sub.slice(0, 200);
-      if (/notify|merch|bulk|photo/i.test(sub)) form.elements.role.value = 'Supporter / merch';
+      if (/notify|merch|bulk|photo/i.test(sub)) form.querySelector('input[name="interest"][value="Supporter / merch"]').checked = true;
     }
-
+    syncJoin();
     msg.addEventListener('input', function () { count.textContent = msg.value.length + ' / ' + MAX_LEN; });
 
+    // Attachments -------------------------------------------------------------
+    function size(b) { return b < 1024 * 1024 ? Math.max(1, Math.round(b / 1024)) + ' KB' : (b / 1048576).toFixed(1) + ' MB'; }
+    function render() {
+      list.innerHTML = '';
+      files.forEach(function (f, i) {
+        var li = document.createElement('li');
+        var nm = document.createElement('span'); nm.textContent = f.name + ' (' + size(f.size) + ')';
+        var rm = document.createElement('button'); rm.type = 'button'; rm.textContent = 'Remove';
+        rm.setAttribute('aria-label', 'Remove ' + f.name);
+        rm.addEventListener('click', function () { files.splice(i, 1); render(); });
+        li.appendChild(nm); li.appendChild(rm); list.appendChild(li);
+      });
+    }
+    function add(fl) {
+      var msgs = [];
+      Array.prototype.forEach.call(fl, function (f) {
+        if (files.length >= MAX_FILES) { msgs.push('Up to ' + MAX_FILES + ' files.'); return; }
+        if (!OK_EXT.test(f.name)) { msgs.push(f.name + ': please use PDF, Word or an image.'); return; }
+        if (f.size > MAX_BYTES) { msgs.push(f.name + ' is larger than 5 MB.'); return; }
+        files.push(f);
+      });
+      filesErr.textContent = msgs.filter(function (m, i, a) { return a.indexOf(m) === i; }).join(' ');
+      render();
+    }
+    input.addEventListener('change', function () { add(input.files); input.value = ''; });
+    ['dragenter', 'dragover'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('is-over'); }); });
+    ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('is-over'); }); });
+    drop.addEventListener('drop', function (e) { if (e.dataTransfer) add(e.dataTransfer.files); });
+    function read(f) {
+      return new Promise(function (ok, no) {
+        var r = new FileReader();
+        r.onload = function () { ok({ name: f.name, type: f.type || 'application/octet-stream', data: String(r.result).split(',')[1] }); };
+        r.onerror = no;
+        r.readAsDataURL(f);
+      });
+    }
+
+    // Validation ----------------------------------------------------------------
     function setError(field, text) {
       var err = document.getElementById(field.id + '-err');
       if (err) err.textContent = text || '';
@@ -88,7 +203,7 @@
     }
     function validate() {
       var bad = [];
-      var name = form.elements.name, mail = form.elements.email;
+      var name = form.elements.name, mail = form.elements.email, consent = document.getElementById('cf-consent');
       setError(name, name.value.trim() ? '' : 'Please enter your name.');
       if (!name.value.trim()) bad.push(name);
       var okMail = mail.value.trim() && mail.checkValidity();
@@ -98,6 +213,12 @@
       var mErr = !m ? 'Please write a message.' : (msg.value.length > MAX_LEN ? 'Please keep your message under ' + MAX_LEN + ' characters.' : '');
       setError(msg, mErr);
       if (mErr) bad.push(msg);
+      var pos = document.getElementById('cf-position');
+      var needPos = interest() === 'Joining the lab' && !position();
+      setError(pos, needPos ? 'Please choose a position.' : '');
+      if (needPos) bad.push(pos.querySelector('input'));
+      setError(consent, consent.checked ? '' : 'Please tick this box so we can keep your message.');
+      if (!consent.checked) bad.push(consent);
       return bad;
     }
     function fail(text) {
@@ -109,6 +230,7 @@
       status.appendChild(a);
       status.appendChild(document.createTextNode('.'));
     }
+    function reset() { button.disabled = false; button.textContent = 'Send message'; }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -124,35 +246,42 @@
       if (form.elements.website.value) { fail('Sorry, your message could not be sent.'); return; }
       if (elapsed < MIN_MS) { status.textContent = 'One moment, please try again in a few seconds.'; return; }
 
-      var body = new URLSearchParams();
-      ['name', 'email', 'role', 'subject', 'message', 'website'].forEach(function (k) { body.append(k, form.elements[k].value); });
-      body.append('elapsed_ms', String(elapsed));
-      body.append('page', location.href);
-      body.append('ua', navigator.userAgent);
-
       button.disabled = true;
-      button.textContent = 'Sending…';
-      var ctrl = 'AbortController' in window ? new AbortController() : null;
-      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
-      // no-cors: Apps Script replies via a redirect without CORS headers, so the response is opaque.
-      // A resolved fetch means the request reached Google; a network failure rejects.
-      fetch(form.getAttribute('data-endpoint'), { method: 'POST', mode: 'no-cors', body: body, signal: ctrl ? ctrl.signal : undefined })
-        .then(function () {
-          clearTimeout(timer);
-          form.classList.add('is-leaving');
-          setTimeout(function () {
-            form.hidden = true;
-            done.hidden = false;
-            done.classList.add('is-arriving');
-            done.focus();
-          }, 250);
-        })
-        .catch(function () {
-          clearTimeout(timer);
-          button.disabled = false;
-          button.textContent = 'Send message';
-          fail('Sorry, something went wrong and your message was not sent.');
+      button.textContent = files.length ? 'Uploading…' : 'Sending…';
+      Promise.all(files.map(read)).then(function (att) {
+        var join = interest() === 'Joining the lab';
+        var body = new URLSearchParams();
+        body.append('interest', interest());
+        body.append('position', join ? position() : '');
+        ['institution', 'start', 'funding', 'links', 'research'].forEach(function (k) { body.append(k, join ? form.elements[k].value : ''); });
+        ['name', 'email', 'subject', 'message', 'website'].forEach(function (k) { body.append(k, form.elements[k].value); });
+        body.append('consent', 'yes');
+        body.append('role', join ? position() : interest());          // kept for older script versions
+        body.append('elapsed_ms', String(elapsed));
+        body.append('page', location.href);
+        body.append('ua', navigator.userAgent);
+        body.append('n_files', String(att.length));
+        att.forEach(function (a, i) {
+          body.append('file' + i + '_name', a.name); body.append('file' + i + '_type', a.type); body.append('file' + i + '_data', a.data);
         });
+        var ctrl = 'AbortController' in window ? new AbortController() : null;
+        var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, att.length ? 60000 : 15000);
+        // no-cors: Apps Script replies via a redirect without CORS headers, so the response is opaque.
+        // A resolved fetch means the request reached Google; a network failure rejects.
+        return fetch(form.getAttribute('data-endpoint'), { method: 'POST', mode: 'no-cors', body: body, signal: ctrl ? ctrl.signal : undefined })
+          .then(function () { clearTimeout(timer); }, function (err) { clearTimeout(timer); throw err; });
+      }).then(function () {
+        form.classList.add('is-leaving');
+        setTimeout(function () {
+          form.hidden = true;
+          done.hidden = false;
+          done.classList.add('is-arriving');
+          done.focus();
+        }, 250);
+      }).catch(function () {
+        reset();
+        fail('Sorry, something went wrong and your message was not sent.');
+      });
     });
   })();
   </script>
