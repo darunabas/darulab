@@ -92,6 +92,7 @@ tags: []
   <button class="tablinks" onclick="openTab(event, 'tab4')" role="tab" id="tabbtn-tab4" aria-controls="tab4" aria-selected="false" title="Lauren Puleo" aria-label="Lauren Puleo" data-full-name="Lauren Puleo">Lauren</button>
   <button class="tablinks" onclick="openTab(event, 'tab5')" role="tab" id="tabbtn-tab5" aria-controls="tab5" aria-selected="false" title="Joseph Kesler" aria-label="Joseph Kesler" data-full-name="Joseph Kesler">Joseph</button>
   <button class="tablinks" onclick="openTab(event, 'tab6')" role="tab" id="tabbtn-tab6" aria-controls="tab6" aria-selected="false" title="Laís de Souza" aria-label="Laís de Souza" data-full-name="Laís de Souza">Laís</button>
+  <button class="tablinks" onclick="openTab(event, 'tab7')" role="tab" id="tabbtn-tab7" aria-controls="tab7" aria-selected="false" title="Melanie Rodriguez Fuentes" aria-label="Melanie Rodriguez Fuentes" data-full-name="Melanie Rodriguez Fuentes">Melanie</button>
   <button class="tablinks" onclick="openTab(event, 'tab8')" role="tab" id="tabbtn-tab8" aria-controls="tab8" aria-selected="false" title="You" aria-label="You" data-full-name="You">You</button>
   <button class="tablinks" onclick="openTab(event, 'tab9')" role="tab" id="tabbtn-tab9" aria-controls="tab9" aria-selected="false" title="Lab Alumni" aria-label="Lab Alumni" data-full-name="Lab Alumni">Lab Alumni</button>
 </div>
@@ -205,6 +206,20 @@ tags: []
       }
     };
     xhr6.send();
+  </script>
+</div>
+
+<div id="tab7" class="tabcontent" role="tabpanel" aria-labelledby="tabbtn-tab7">
+  <script>
+    var xhr7 = new XMLHttpRequest();
+    var url7 = "/_pages/Melanie.html";
+    xhr7.open("GET", url7, true);
+    xhr7.onreadystatechange = function() {
+      if (xhr7.readyState === 4 && xhr7.status === 200) {
+        document.getElementById("tab7").innerHTML = xhr7.responseText;
+      }
+    };
+    xhr7.send();
   </script>
 </div>
 
