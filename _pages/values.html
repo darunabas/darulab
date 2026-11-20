@@ -16,23 +16,77 @@ tags: []
 reveal: true
 ---
 
-<h1>Mission and Philosophy</h1>
+<style>
+.vl { max-width: 1100px; margin: 0 auto; color: #2e2d29; }
+.page__content p.vl-kick, .vl-kick { font-size: .72em !important; letter-spacing: .12em; text-transform: uppercase; color: #8C1515; font-weight: 700; margin: 0 0 .5em; }
+.vl-mission { position: relative; margin: .4em 0 2.2em; padding: 1.6em 1.8em 1.6em 2em; background: linear-gradient(135deg,#faf7f2,#f3eee6); border-radius: 18px; border-left: 5px solid #8C1515; }
+.vl-mission h1 { font-size: 1.9em; line-height: 1.12; margin: 0 0 .5em; }
+.page__content .vl-mission p:not(.vl-kick) { font-family: Georgia, "Times New Roman", serif; font-size: 1.12em; line-height: 1.65; color: #3f3c36; margin: 0; }
+.vl-glance { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 0 0 2.6em; }
+.vl-tile { border: 1px solid #e4ded3; border-radius: 14px; padding: 1em 1.1em; background: #fff; }
+.vl-tile b { display: block; font-size: 1.3em; color: #8C1515; line-height: 1.15; margin-bottom: .25em; }
+.vl-tile span { font-size: .78em; color: #5a5852; line-height: 1.4; display: block; }
+.vl h2 { font-size: 1.35em; margin: 0 0 .8em; border: 0; }
+.vl-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin: 0 0 2.8em; }
+.vl-card { position: relative; padding: 1.3em 1.4em 1.2em; border: 1px solid #e4ded3; border-radius: 16px; background: #fff; transition: box-shadow .3s ease, transform .3s ease; }
+.vl-card:hover { box-shadow: 0 10px 28px rgba(60,40,20,.08); transform: translateY(-2px); }
+.vl-card .n { font-size: .7em; font-weight: 700; letter-spacing: .1em; color: #8C1515; }
+.vl-card h3 { font-size: 1.05em; margin: .25em 0 .5em; }
+.page__content .vl-card p { font-size: .88em; line-height: 1.6; color: #4a4842; margin: 0; }
+.vl-pact { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid #e4ded3; border-radius: 18px; overflow: hidden; margin: 0 0 1.6em; }
+.vl-side { padding: 1.5em 1.6em; }
+.vl-side + .vl-side { background: #faf7f2; border-left: 1px solid #e4ded3; }
+.vl-side h3 { font-size: 1.1em; margin: 0 0 .2em; }
+.page__content .vl-side > p { font-size: .82em; color: #6b675f; margin: 0 0 1em; }
+.vl-side ol { list-style: none; counter-reset: c; margin: 0; padding: 0; }
+.vl-side li { counter-increment: c; position: relative; padding: 0 0 0 2.4em; margin: 0 0 .85em; font-size: .86em; line-height: 1.55; }
+.vl-side li::before { content: counter(c); position: absolute; left: 0; top: .05em; width: 1.7em; height: 1.7em; border-radius: 50%; background: #8C1515; color: #fff; font-size: .8em; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.vl-side + .vl-side li::before { background: #fff; color: #8C1515; box-shadow: inset 0 0 0 1.5px #8C1515; }
+.page__content .vl-foot { font-size: .8em; color: #6b675f; }
+@media (max-width: 900px) { .vl-glance { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 700px) { .vl-grid, .vl-pact { grid-template-columns: 1fr; } .vl-side + .vl-side { border-left: 0; border-top: 1px solid #e4ded3; } .vl-mission { padding: 1.3em 1.2em 1.3em 1.4em; } .vl-mission h1 { font-size: 1.5em; } }
+</style>
+
+<div class="vl">
+
+<section class="vl-mission">
+  <p class="vl-kick">Our values</p>
+  <h1>Mission and Philosophy</h1>
   <p>The Daru Lab's mission is to advance the understanding and preservation of biodiversity through top-quality research, information, and training. We prioritize collaborations with partners in research, education, technology, and impact to support conservation stakeholders and the scientific community, and we aim to produce accessible, impactful public products for the benefit of society. We approach ecology with an open mind, humility, and a willingness to learn through trial and error.</p>
-  <h2>Expectations for PhD Students</h2>
-  <p>As a PhD student in the Daru Lab, your primary focus is original research in ecology, biogeography, and related fields. Familiarize yourself early with the program's requirements for courses, exams, teaching, and administrative tasks so that you complete each one on time.</p>
-  <h2>Commitments to Lab Members</h2>
-  <p>My aim is to help every lab member become a skilled, independent researcher. That means gaining experience in field and lab work, taking ownership of your projects, and mastering the relevant literature. I also emphasize scientific writing, grant writing, presentation skills, networking, and clear communication. Science involves setbacks, so I also value building the resilience to work through them.</p>
-  <h2>Working Hours</h2>
-  <p>Working hours are flexible, so you can fit your schedule to your natural energy levels, although biological research sometimes needs attention at inconvenient times. Working excessive hours does not necessarily produce better science. I often work more than 40 hours a week because of my other responsibilities, but you are not expected to do the same. Unless we have agreed otherwise, please be available between 11am and 3pm, Monday to Friday.</p>
-  <h2>Email Response Time</h2>
-  <p>I may send emails on weekends or at odd hours. Please reply during your regular working hours, unless the email is marked "URGENT". Sometimes I am just sharing something interesting, and no reply is needed.</p>
-  <h2>Lab Meetings</h2>
-  <p>Our lab meetings are on Fridays from 10:00am to 12:00pm. Come prepared with a short introduction or update on your project, with a few bullet points. You are welcome to discuss interesting papers related to your project, or to share results that are not yet ready for publication. We encourage sharing raw data and having open, logical discussions.</p>
-  <h2>Data/Lab Management, Open Science, and Data Sharing</h2>
-  <p>We document our field work, lab work, and code carefully. We promote open, FAIR data sharing for biodiversity science and conservation, and we follow good practice in data licensing, attribution, and acknowledgment. Our papers aim for transparency, crediting and linking back to original data sources. We contribute to biodiversity data standards and build digital tools for data sharing, and our software, computational tools, and analysis code are open source, accessible, and reproducible.</p>
-  <h2>Commitment as Mentee (postdoc, PhD student, intern)</h2>
-  <ol>
-    <li><strong>Respect for everyone:</strong> Treat everyone with respect, and be open to different cultural backgrounds.</li>
+</section>
+
+<div class="vl-glance" aria-label="At a glance">
+  <div class="vl-tile"><b>11am–3pm</b><span>Core hours, Monday to Friday, unless agreed otherwise</span></div>
+  <div class="vl-tile"><b>Fri 10–12</b><span>Weekly lab meeting</span></div>
+  <div class="vl-tile"><b>Flexible</b><span>Work when your energy is best; no need for long hours</span></div>
+  <div class="vl-tile"><b>Open</b><span>FAIR data, open-source code, reproducible work</span></div>
+</div>
+
+<p class="vl-kick">How we work</p>
+<h2>Working in the lab</h2>
+<div class="vl-grid">
+  <div class="vl-card"><span class="n">01</span><h3>Expectations for PhD Students</h3>
+  <p>As a PhD student in the Daru Lab, your primary focus is original research in ecology, biogeography, and related fields. Familiarize yourself early with the program's requirements for courses, exams, teaching, and administrative tasks so that you complete each one on time.</p></div>
+  <div class="vl-card"><span class="n">02</span><h3>Commitments to Lab Members</h3>
+  <p>My aim is to help every lab member become a skilled, independent researcher. That means gaining experience in field and lab work, taking ownership of your projects, and mastering the relevant literature. I also emphasize scientific writing, grant writing, presentation skills, networking, and clear communication. Science involves setbacks, so I also value building the resilience to work through them.</p></div>
+  <div class="vl-card"><span class="n">03</span><h3>Working Hours</h3>
+  <p>Working hours are flexible, so you can fit your schedule to your natural energy levels, although biological research sometimes needs attention at inconvenient times. Working excessive hours does not necessarily produce better science. I often work more than 40 hours a week because of my other responsibilities, but you are not expected to do the same. Unless we have agreed otherwise, please be available between 11am and 3pm, Monday to Friday.</p></div>
+  <div class="vl-card"><span class="n">04</span><h3>Email Response Time</h3>
+  <p>I may send emails on weekends or at odd hours. Please reply during your regular working hours, unless the email is marked "URGENT". Sometimes I am just sharing something interesting, and no reply is needed.</p></div>
+  <div class="vl-card"><span class="n">05</span><h3>Lab Meetings</h3>
+  <p>Our lab meetings are on Fridays from 10:00am to 12:00pm. Come prepared with a short introduction or update on your project, with a few bullet points. You are welcome to discuss interesting papers related to your project, or to share results that are not yet ready for publication. We encourage sharing raw data and having open, logical discussions.</p></div>
+  <div class="vl-card"><span class="n">06</span><h3>Data/Lab Management, Open Science, and Data Sharing</h3>
+  <p>We document our field work, lab work, and code carefully. We promote open, FAIR data sharing for biodiversity science and conservation, and we follow good practice in data licensing, attribution, and acknowledgment. Our papers aim for transparency, crediting and linking back to original data sources. We contribute to biodiversity data standards and build digital tools for data sharing, and our software, computational tools, and analysis code are open source, accessible, and reproducible.</p></div>
+</div>
+
+<p class="vl-kick">A two-way agreement</p>
+<h2>Mentee and mentor commitments</h2>
+<div class="vl-pact">
+  <div class="vl-side">
+    <h3>Commitment as Mentee</h3>
+    <p>Postdoc, PhD student, intern</p>
+    <ol>
+      <li><strong>Respect for everyone:</strong> Treat everyone with respect, and be open to different cultural backgrounds.</li>
     <li><strong>Responsibility and professionalism:</strong> Take primary responsibility for completing your degree or research, and work toward your degree requirements in a timely manner.</li>
     <li><strong>Regular communication:</strong> Keep me updated on your research progress, coursework, and professional development.</li>
     <li><strong>Lab citizenship:</strong> Use group resources responsibly and share in general lab responsibilities, such as cleaning and maintenance in the lab and herbarium, supporting lab events, and other support work for group products beyond manuscripts.</li>
@@ -46,10 +100,12 @@ reveal: true
     <li><strong>Seeking mentorship:</strong> Seek mentorship from faculty and peers for your professional development.</li>
     <li><strong>Integrity:</strong> Demonstrate integrity in data collection, analysis, and presentation.</li>
     </ol>
-  <h2>Mentor's Responsibilities</h2>
-  <p>As a mentor, I commit to the following:</p>
-  <ol>
-    <li>Provide intellectual guidance and rigor in your educational program and research projects.</li>
+  </div>
+  <div class="vl-side">
+    <h3>Mentor's Responsibilities</h3>
+    <p>As a mentor, I commit to the following:</p>
+    <ol>
+      <li>Provide intellectual guidance and rigor in your educational program and research projects.</li>
     <li>Keep you informed about current frontiers and opportunities in your field.</li>
     <li>Offer guidance on research methods and on the historical knowledge base of the discipline.</li>
     <li>Set clear guidelines and timetables for completing research projects, respecting your interests and goals.</li>
@@ -58,7 +114,11 @@ reveal: true
     <li>Encourage scholarly activities such as conference presentations, publications, networking, and intellectual property applications.</li>
     <li>Give timely, constructive feedback on your progress and performance.</li>
     <li>Serve as your academic advisor and professional mentor, during and after your PhD, postdoctoral fellowship, or internship.</li>
-  </ol>
-  <p><em>Note: These responsibilities are subject to Stanford University policies and norms.</em></p>
+    </ol>
+  </div>
+</div>
 
-<p><em>Last Updated: <span style="color:#8c1515;">November 5, 2026</span></em></p>
+<p class="vl-foot"><em>Note: These responsibilities are subject to Stanford University policies and norms.</em><br>
+<em>Last Updated: <span style="color:#8c1515;">November 5, 2026</span></em></p>
+
+</div>
